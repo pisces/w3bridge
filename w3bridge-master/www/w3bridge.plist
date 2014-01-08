@@ -6,11 +6,13 @@
 	<array/>
 	<key>Plugins</key>
 	<dict>
-		<key>com.pisces.lib.w3bridge.notification</key>
+		<key>org.apache.cordova.debugconsole</key>
+		<string>CDVDebugConsole</string>
+		<key>org.apache.w3bridge.notification</key>
 		<string>BridgeNotification</string>
-		<key>com.pisces.lib.w3bridge.externalInterface</key>
+		<key>org.apache.w3bridge.externalInterface</key>
 		<string>BridgeExternalInterface</string>
-		<key>com.pisces.lib.w3bridge.view</key>
+		<key>org.apache.w3bridge.view</key>
 		<string>BridgeView</string>
 	</dict>
 </dict>

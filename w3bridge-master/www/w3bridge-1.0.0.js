@@ -749,12 +749,12 @@ View = function(){};
 View.prototype.close = function(animated) {
     if (Cordova.isValidPlatform()) {
     	var _animated = animated == undefined || animated == null ? 1 : animated;
-        Cordova.exec(null, null, "com.pisces.lib.w3bridge.view", "close", [_animated]);
+        Cordova.exec(null, null, "org.apache.w3bridge.view", "close", [_animated]);
     }
 };
 View.prototype.hideActivityIndicatorView = function() {
 	if (Cordova.isValidPlatform()) {
-        Cordova.exec(null, null, "com.pisces.lib.w3bridge.view", "hideActivityIndicatorView", []);
+        Cordova.exec(null, null, "org.apache.w3bridge.view", "hideActivityIndicatorView", []);
   }
 };
 View.prototype.open = function(url, method, options) {
@@ -774,14 +774,14 @@ View.prototype.open = function(url, method, options) {
 };
 View.prototype.openBrowser = function(url, options) {
     if (Cordova.isValidPlatform()) {
-        Cordova.exec(null, null, "com.pisces.lib.w3bridge.view", "openBrowser", [url, options]);
+        Cordova.exec(null, null, "org.apache.w3bridge.view", "openBrowser", [url, options]);
     } else {
     	window.location.href = url;
     }
 };
 View.prototype.openLayerBridgeWebView = function(url, options) {
     if (Cordova.isValidPlatform()) {
-        Cordova.exec(null, null, "com.pisces.lib.w3bridge.view", "openLayerBridgeWebView", [url, options]);
+        Cordova.exec(null, null, "org.apache.w3bridge.view", "openLayerBridgeWebView", [url, options]);
     }
 };
 View.prototype.pushWithURL = function(url, scrollEnabled, hidesBottomBarWhenPushed, landscape, leftBarButtonItemText, title, useReloadDisplay) {
@@ -790,7 +790,7 @@ View.prototype.pushWithURL = function(url, scrollEnabled, hidesBottomBarWhenPush
     	var _hidesBottomBarWhenPushed = hidesBottomBarWhenPushed == undefined || hidesBottomBarWhenPushed == null ? 0 : hidesBottomBarWhenPushed;
     	var _landscape = landscape == undefined || landscape == null ? 0 : landscape;
     	var _useReloadDisplay = useReloadDisplay == undefined || useReloadDisplay == null ? 1 : useReloadDisplay;
-        Cordova.exec(null, null, "com.pisces.lib.w3bridge.view", "pushWithURL",
+        Cordova.exec(null, null, "org.apache.w3bridge.view", "pushWithURL",
         	[url, _scrollEnabled, _hidesBottomBarWhenPushed, _landscape, leftBarButtonItemText, title, _useReloadDisplay]);
     } else {
     	window.location.href = url;
@@ -799,7 +799,7 @@ View.prototype.pushWithURL = function(url, scrollEnabled, hidesBottomBarWhenPush
 View.prototype.popToRootView = function(animated) {
     if (Cordova.isValidPlatform()) {
     	var _animated = animated == undefined || animated == null ? 1 : animated;
-        Cordova.exec(null, null, "com.pisces.lib.w3bridge.view", "popToRootView", [_animated]);
+        Cordova.exec(null, null, "org.apache.w3bridge.view", "popToRootView", [_animated]);
     }
 };
 View.prototype.popWithURL = function(url, scrollEnabled, landscape, leftBarButtonItemText, modalTransitionStyle, title, useReloadDisplay) {
@@ -807,7 +807,7 @@ View.prototype.popWithURL = function(url, scrollEnabled, landscape, leftBarButto
     	var _scrollEnabled = scrollEnabled == undefined || scrollEnabled == null ? 1 : scrollEnabled;
     	var _landscape = landscape == undefined || landscape == null ? 0 : landscape;
     	var _useReloadDisplay = useReloadDisplay == undefined || useReloadDisplay == null ? 1 : useReloadDisplay;
-        Cordova.exec(null, null, "com.pisces.lib.w3bridge.view", "popWithURL",
+        Cordova.exec(null, null, "org.apache.w3bridge.view", "popWithURL",
         	[url, _scrollEnabled, _landscape, leftBarButtonItemText, modalTransitionStyle, title, _useReloadDisplay]);
     } else {
     	window.location.href = url;
@@ -815,25 +815,25 @@ View.prototype.popWithURL = function(url, scrollEnabled, landscape, leftBarButto
 };
 View.prototype.setProperties = function(properties) {
 	if (Cordova.isValidPlatform()) {
-        Cordova.exec(null, null, "com.pisces.lib.w3bridge.view", "setProperty", [properties]);
+        Cordova.exec(null, null, "org.apache.w3bridge.view", "setProperty", [properties]);
 	}
 };
 View.prototype.setSize = function(width, height) {
 	if (Cordova.isValidPlatform()) {
 		var w = width == undefined || height == null ? "" : width;
 		var h = height == undefined || height == null ? "" : height;
-        Cordova.exec(null, null, "com.pisces.lib.w3bridge.view", "setSize", [w, h]);
+        Cordova.exec(null, null, "org.apache.w3bridge.view", "setSize", [w, h]);
 	}
 };
 View.prototype.setTitle = function(title) {
 	if (Cordova.isValidPlatform()) {
 		var _title = title == undefined || title == null ? "" : title;
-        Cordova.exec(null, null, "com.pisces.lib.w3bridge.view", "setTitle", [_title]);
+        Cordova.exec(null, null, "org.apache.w3bridge.view", "setTitle", [_title]);
 	}
 };
 View.prototype.showActivityIndicatorView = function() {
 	if (Cordova.isValidPlatform()) {
-        Cordova.exec(null, null, "com.pisces.lib.w3bridge.view", "showActivityIndicatorView", []);
+        Cordova.exec(null, null, "org.apache.w3bridge.view", "showActivityIndicatorView", []);
   }
 };
 
@@ -860,7 +860,7 @@ Notification = function(){};
 
 Notification.prototype.addObserver = function(name, callBack, uniqueKey) {
 	var _uniqueKey = uniqueKey == undefined || uniqueKey == null ? "" : uniqueKey;
-	Cordova.exec(null, null, "com.pisces.lib.w3bridge.notification", "addObserver", [name, callBack, _uniqueKey]);
+	Cordova.exec(null, null, "org.apache.w3bridge.notification", "addObserver", [name, callBack, _uniqueKey]);
 };
 
 Notification.prototype.postNotification = function(name, data, uniqueKey) {
@@ -871,12 +871,12 @@ Notification.prototype.postNotification = function(name, data, uniqueKey) {
 	} else {
 	  _data = {uniqueKey: _uniqueKey};  
 	}
-	Cordova.exec(null, null, "com.pisces.lib.w3bridge.notification", "postNotification", [name, _uniqueKey, _data]);
+	Cordova.exec(null, null, "org.apache.w3bridge.notification", "postNotification", [name, _uniqueKey, _data]);
 };
 
 Notification.prototype.removeObserver = function(name, callBack, uniqueKey) {
 	var _uniqueKey = uniqueKey == undefined || uniqueKey == null ? "" : uniqueKey;
-	Cordova.exec(null, null, "com.pisces.lib.w3bridge.notification", "removeObserver", [name, callBack, _uniqueKey]);
+	Cordova.exec(null, null, "org.apache.w3bridge.notification", "removeObserver", [name, callBack, _uniqueKey]);
 };
 
 Cordova.addConstructor(function(){
@@ -896,11 +896,11 @@ if (!Cordova.hasResource("externalInterface"))
 ExternalInterface = function(){};
 
 ExternalInterface.prototype.call = function(name, options, success, error) {
-	Cordova.exec(success, error, "com.pisces.lib.w3bridge.externalInterface", "call", [name, options]);
+	Cordova.exec(success, error, "org.apache.w3bridge.externalInterface", "call", [name, options]);
 };
 
 ExternalInterface.prototype.addCallback = function(name, callback) {
-	Cordova.exec(callback, null, "com.pisces.lib.w3bridge.externalInterface", "addCallback", [name]);
+	Cordova.exec(callback, null, "org.apache.w3bridge.externalInterface", "addCallback", [name]);
 };
 
 Cordova.addConstructor(function(){

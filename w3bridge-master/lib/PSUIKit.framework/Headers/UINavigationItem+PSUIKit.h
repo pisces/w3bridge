@@ -24,7 +24,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UINavigationItem (com_pisces_lib_PSUIKit)
+@interface UINavigationItem (org_apache_PSUIKit_UINavigationItem)
 - (UIBarButtonItem *)getLeftBarButtonItem;
 - (UIBarButtonItem *)getRightBarButtonItem;
 - (void)addLeftBarButtonItem:(UIBarButtonItem *)leftBarButtonItem;

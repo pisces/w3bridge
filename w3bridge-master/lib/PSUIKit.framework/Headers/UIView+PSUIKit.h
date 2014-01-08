@@ -30,7 +30,7 @@ typedef enum {
 	UIViewMatricsLanscape
 } UIViewMatrics;
 
-@interface UIView (com_pisces_lib_PSUIKit)
+@interface UIView (org_apache_PSUIKit_UIView)
 - (void)commitProperties;
 - (void)drawGradientRect:(CGFloat[])colors;
 - (void)invalidateProperties;

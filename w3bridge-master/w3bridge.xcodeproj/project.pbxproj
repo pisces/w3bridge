@@ -76,6 +76,13 @@
 		23A6DE771875145800FB9C34 /* libw3bridge-Device.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A6DE5F1875145800FB9C34 /* libw3bridge-Device.a */; };
 		23A6DE7D1875145800FB9C34 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 23A6DE7B1875145800FB9C34 /* InfoPlist.strings */; };
 		23A6DE7F1875145800FB9C34 /* w3bridgeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A6DE7E1875145800FB9C34 /* w3bridgeTests.m */; };
+		23C455A5187D351B00DCEF3C /* w3bridge-1.0.0.js in Sources */ = {isa = PBXBuildFile; fileRef = 23C455A2187D351B00DCEF3C /* w3bridge-1.0.0.js */; };
+		23C455A6187D351B00DCEF3C /* w3bridge-1.0.0.js in Sources */ = {isa = PBXBuildFile; fileRef = 23C455A2187D351B00DCEF3C /* w3bridge-1.0.0.js */; };
+		23C455A7187D351B00DCEF3C /* w3bridge-1.0.0.js in Sources */ = {isa = PBXBuildFile; fileRef = 23C455A2187D351B00DCEF3C /* w3bridge-1.0.0.js */; };
+		23C455A8187D351B00DCEF3C /* w3bridge-1.0.0.min.js in Sources */ = {isa = PBXBuildFile; fileRef = 23C455A3187D351B00DCEF3C /* w3bridge-1.0.0.min.js */; };
+		23C455A9187D351B00DCEF3C /* w3bridge-1.0.0.min.js in Sources */ = {isa = PBXBuildFile; fileRef = 23C455A3187D351B00DCEF3C /* w3bridge-1.0.0.min.js */; };
+		23C455AA187D351B00DCEF3C /* w3bridge-1.0.0.min.js in Sources */ = {isa = PBXBuildFile; fileRef = 23C455A3187D351B00DCEF3C /* w3bridge-1.0.0.min.js */; };
+		23C455AB187D351B00DCEF3C /* w3bridge.plist in Resources */ = {isa = PBXBuildFile; fileRef = 23C455A4187D351B00DCEF3C /* w3bridge.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +159,9 @@
 		23A6DE7A1875145800FB9C34 /* w3bridgeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "w3bridgeTests-Info.plist"; sourceTree = "<group>"; };
 		23A6DE7C1875145800FB9C34 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		23A6DE7E1875145800FB9C34 /* w3bridgeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = w3bridgeTests.m; sourceTree = "<group>"; };
+		23C455A2187D351B00DCEF3C /* w3bridge-1.0.0.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "w3bridge-1.0.0.js"; sourceTree = "<group>"; };
+		23C455A3187D351B00DCEF3C /* w3bridge-1.0.0.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "w3bridge-1.0.0.min.js"; sourceTree = "<group>"; };
+		23C455A4187D351B00DCEF3C /* w3bridge.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = w3bridge.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,13 +259,6 @@
 			name = controllers;
 			sourceTree = "<group>";
 		};
-		232C8BCF1875342000319D34 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		237AB008187C2B0B00BD906B /* UIDevice */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +275,7 @@
 			children = (
 				23A6DE641875145800FB9C34 /* w3bridge */,
 				23A6DE781875145800FB9C34 /* w3bridgeTests */,
+				23C455A1187D351B00DCEF3C /* www */,
 				23A6DE611875145800FB9C34 /* Frameworks */,
 				23A6DE601875145800FB9C34 /* Products */,
 			);
@@ -302,7 +306,6 @@
 			isa = PBXGroup;
 			children = (
 				232C8B931875298A00319D34 /* Classes */,
-				232C8BCF1875342000319D34 /* Resources */,
 				23A6DE651875145800FB9C34 /* Supporting Files */,
 			);
 			path = w3bridge;
@@ -332,6 +335,16 @@
 				23A6DE7B1875145800FB9C34 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		23C455A1187D351B00DCEF3C /* www */ = {
+			isa = PBXGroup;
+			children = (
+				23C455A2187D351B00DCEF3C /* w3bridge-1.0.0.js */,
+				23C455A3187D351B00DCEF3C /* w3bridge-1.0.0.min.js */,
+				23C455A4187D351B00DCEF3C /* w3bridge.plist */,
+			);
+			path = www;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -424,6 +437,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				23A6DE7D1875145800FB9C34 /* InfoPlist.strings in Resources */,
+				23C455AB187D351B00DCEF3C /* w3bridge.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +467,7 @@
 				237AB01F187C2EE200BD906B /* BridgeExternalInterface.m in Sources */,
 				237AB020187C2EE200BD906B /* BridgeNotification.m in Sources */,
 				237AB021187C2EE200BD906B /* w3bridge.m in Sources */,
+				23C455A9187D351B00DCEF3C /* w3bridge-1.0.0.min.js in Sources */,
 				237AB022187C2EE200BD906B /* UIDevice-Capabilities.m in Sources */,
 				237AB023187C2EE200BD906B /* UILayerBridgeWebViewController.m in Sources */,
 				237AB024187C2EE200BD906B /* BridgeView.m in Sources */,
@@ -461,6 +476,7 @@
 				237AB027187C2EE200BD906B /* NSDictionary+Extensions.m in Sources */,
 				237AB028187C2EE200BD906B /* UIBridgeWebViewController.m in Sources */,
 				237AB029187C2EE200BD906B /* CDVPluginResult.m in Sources */,
+				23C455A6187D351B00DCEF3C /* w3bridge-1.0.0.js in Sources */,
 				237AB02B187C2EE200BD906B /* CDVPlugin.m in Sources */,
 				237AB02C187C2EE200BD906B /* SimpleBridgeWebViewController.m in Sources */,
 				237AB02D187C2EE200BD906B /* CDVInvokedUrlCommand.m in Sources */,
@@ -474,6 +490,7 @@
 				232C8BAD1875298A00319D34 /* BridgeExternalInterface.m in Sources */,
 				232C8BAF1875298A00319D34 /* BridgeNotification.m in Sources */,
 				232C8BC11875298A00319D34 /* w3bridge.m in Sources */,
+				23C455A8187D351B00DCEF3C /* w3bridge-1.0.0.min.js in Sources */,
 				237AB011187C2B1A00BD906B /* UIDevice-Capabilities.m in Sources */,
 				232C8BBF1875298A00319D34 /* UILayerBridgeWebViewController.m in Sources */,
 				232C8BB11875298A00319D34 /* BridgeView.m in Sources */,
@@ -482,6 +499,7 @@
 				237AB01B187C2C5400BD906B /* NSDictionary+Extensions.m in Sources */,
 				232C8BBD1875298A00319D34 /* UIBridgeWebViewController.m in Sources */,
 				232C8BB91875298A00319D34 /* CDVPluginResult.m in Sources */,
+				23C455A5187D351B00DCEF3C /* w3bridge-1.0.0.js in Sources */,
 				232C8BB71875298A00319D34 /* CDVPlugin.m in Sources */,
 				232C8BBB1875298A00319D34 /* SimpleBridgeWebViewController.m in Sources */,
 				232C8BB51875298A00319D34 /* CDVInvokedUrlCommand.m in Sources */,
@@ -501,10 +519,12 @@
 				237AB01C187C2C5400BD906B /* NSDictionary+Extensions.m in Sources */,
 				232C8BB21875298A00319D34 /* BridgeView.m in Sources */,
 				232C8BB01875298A00319D34 /* BridgeNotification.m in Sources */,
+				23C455AA187D351B00DCEF3C /* w3bridge-1.0.0.min.js in Sources */,
 				232C8BC21875298A00319D34 /* w3bridge.m in Sources */,
 				237AB012187C2B1A00BD906B /* UIDevice-Capabilities.m in Sources */,
 				232C8BAE1875298A00319D34 /* BridgeExternalInterface.m in Sources */,
 				232C8BC01875298A00319D34 /* UILayerBridgeWebViewController.m in Sources */,
+				23C455A7187D351B00DCEF3C /* w3bridge-1.0.0.js in Sources */,
 				232C8BBA1875298A00319D34 /* CDVPluginResult.m in Sources */,
 				237AB014187C2B1A00BD906B /* UIDevice-Hardware.m in Sources */,
 			);

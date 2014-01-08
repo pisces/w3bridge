@@ -27,7 +27,7 @@
 #import "UIView+PSUIKit.h"
 #import "UIViewController+PSUIKit.h"
 
-@interface UIButton (com_pisces_lib_PSUIKit)
+@interface UIButton (org_apache_PSUIKit_UIButton)
 @property (nonatomic, readonly, retain) NSMutableDictionary *resourceDictionary;
 - (void)setBackgroundImage:(UIImage *)image forState:(UIControlState)state forViewMetrics:(UIViewMatrics)viewMetrics;
 - (void)setTitleColor:(UIColor *)color forState:(UIControlState)state forViewMetrics:(UIViewMatrics)viewMetrics;

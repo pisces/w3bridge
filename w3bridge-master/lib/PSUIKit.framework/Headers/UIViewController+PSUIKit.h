@@ -29,7 +29,7 @@
 
 #define willCloseViewNotification @"willCloseViewNotification"
 
-@interface UIViewController (com_pisces_lib_PSUIKit)
+@interface UIViewController (org_apache_PSUIKit_UIViewController)
 @property (nonatomic, retain) UIViewController *relativeController;
 + (UIViewController *)controllerWithViewName:(NSString *)viewName;
 + (UIViewController *)controllerWithViewName:(NSString *)viewName bundle:(NSBundle *)bundle;

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UINavigationController (com_pisces_lib_PSUIKit)
+@interface UINavigationController (org_apache_PSUIKit_UINavigationController)
 @property (nonatomic, readonly) UIViewController *previousViewController;
 @property (nonatomic, readonly) NSString *previousTitle;
 - (void)customize;

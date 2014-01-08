@@ -29,7 +29,7 @@
 #import "UIThemeBase.h"
 #import "PSUIKit.h"
 
-@interface UINavigationController (com_pisces_lib_PSUIKit_PSUINavigationController)
+@interface UINavigationController (org_apache_PSUIKit_PSUINavigationController)
 @property (nonatomic, retain) UIThemeBase *theme;
 @end
 

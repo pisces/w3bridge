@@ -24,6 +24,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSDate (com_pisces_lib_PSUIKit)
+@interface NSDate (org_apache_PSUIKit_NSDate)
 - (NSString *)kindDateString;
 @end
