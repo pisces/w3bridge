@@ -1,9 +1,9 @@
 //
-//  w3action.h
-//  w3action
+//  XCTest+Async.h
+//  AsyncXCTest
 //
-//  Created by KH Kim on 2013. 12. 31..
-//  Copyright (c) 2013 KH Kim. All rights reserved.
+//  Created by KH Kim on 2014. 1. 2..
+//  Copyright (c) 2014년 KH Kim. All rights reserved.
 //
 
 /*
@@ -22,9 +22,10 @@
  limitations under the License.
  */
 
-#import <Foundation/Foundation.h>
-#import "HTTPActionManager.h"
-#import "NSString+w3action.h"
+#import <XCTest/XCTest.h>
 
-@interface w3action : NSObject
+typedef void (^FinishBlock)(void);
+
+@interface XCTest (org_apache_w3action_XCTest)
+- (void)async:(void (^)(FinishBlock finish))execution;
 @end

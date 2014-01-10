@@ -70,6 +70,7 @@
 		237AB06C187C415100BD906B /* w3action.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 237AB068187C415100BD906B /* w3action.framework */; };
 		237AB06D187C415100BD906B /* w3action.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 237AB068187C415100BD906B /* w3action.framework */; };
 		237AB06E187C415100BD906B /* w3action.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 237AB068187C415100BD906B /* w3action.framework */; };
+		23817D56187F824C00CC031A /* XCTest+Async.m in Sources */ = {isa = PBXBuildFile; fileRef = 23817D55187F824C00CC031A /* XCTest+Async.m */; };
 		23A6DE631875145800FB9C34 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A6DE621875145800FB9C34 /* Foundation.framework */; };
 		23A6DE711875145800FB9C34 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A6DE701875145800FB9C34 /* XCTest.framework */; };
 		23A6DE721875145800FB9C34 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A6DE621875145800FB9C34 /* Foundation.framework */; };
@@ -151,6 +152,8 @@
 		237AB036187C2EE200BD906B /* libw3bridge-Simulator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libw3bridge-Simulator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		237AB067187C415100BD906B /* PSUIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PSUIKit.framework; path = lib/PSUIKit.framework; sourceTree = "<group>"; };
 		237AB068187C415100BD906B /* w3action.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = w3action.framework; path = lib/w3action.framework; sourceTree = "<group>"; };
+		23817D54187F824C00CC031A /* XCTest+Async.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTest+Async.h"; sourceTree = "<group>"; };
+		23817D55187F824C00CC031A /* XCTest+Async.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCTest+Async.m"; sourceTree = "<group>"; };
 		23A6DE5F1875145800FB9C34 /* libw3bridge-Device.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libw3bridge-Device.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		23A6DE621875145800FB9C34 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		23A6DE661875145800FB9C34 /* w3bridge-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "w3bridge-Prefix.pch"; sourceTree = "<group>"; };
@@ -270,6 +273,15 @@
 			name = UIDevice;
 			sourceTree = "<group>";
 		};
+		23817D53187F824C00CC031A /* AsyncXCTest */ = {
+			isa = PBXGroup;
+			children = (
+				23817D54187F824C00CC031A /* XCTest+Async.h */,
+				23817D55187F824C00CC031A /* XCTest+Async.m */,
+			);
+			path = AsyncXCTest;
+			sourceTree = "<group>";
+		};
 		23A6DE561875145800FB9C34 = {
 			isa = PBXGroup;
 			children = (
@@ -322,6 +334,7 @@
 		23A6DE781875145800FB9C34 /* w3bridgeTests */ = {
 			isa = PBXGroup;
 			children = (
+				23817D53187F824C00CC031A /* AsyncXCTest */,
 				23A6DE7E1875145800FB9C34 /* w3bridgeTests.m */,
 				23A6DE791875145800FB9C34 /* Supporting Files */,
 			);
@@ -513,6 +526,7 @@
 				232C8BBE1875298A00319D34 /* UIBridgeWebViewController.m in Sources */,
 				23A6DE7F1875145800FB9C34 /* w3bridgeTests.m in Sources */,
 				232C8BBC1875298A00319D34 /* SimpleBridgeWebViewController.m in Sources */,
+				23817D56187F824C00CC031A /* XCTest+Async.m in Sources */,
 				232C8BB81875298A00319D34 /* CDVPlugin.m in Sources */,
 				232C8BB41875298A00319D34 /* CDVDebugConsole.m in Sources */,
 				232C8BB61875298A00319D34 /* CDVInvokedUrlCommand.m in Sources */,
@@ -557,7 +571,10 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				DSTROOT = /tmp/w3bridge.dst;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/lib";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/lib",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "w3bridge/w3bridge-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
@@ -574,7 +591,10 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				DSTROOT = /tmp/w3bridge.dst;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/lib";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/lib",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "w3bridge/w3bridge-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
@@ -676,8 +696,8 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				DSTROOT = /tmp/w3bridge.dst;
 				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(SRCROOT)/lib",
-					"/Users/pisces/workspace/pisces/ios/frameworks/w3bridge/w3bridge-master/lib",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "w3bridge/w3bridge-Prefix.pch";
@@ -696,8 +716,8 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				DSTROOT = /tmp/w3bridge.dst;
 				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(SRCROOT)/lib",
-					"/Users/pisces/workspace/pisces/ios/frameworks/w3bridge/w3bridge-master/lib",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "w3bridge/w3bridge-Prefix.pch";
