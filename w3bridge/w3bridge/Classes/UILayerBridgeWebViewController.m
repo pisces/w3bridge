@@ -58,7 +58,7 @@ BOOL LayerOptionEquals(LayerOption layerOption1, LayerOption layerOption2)
 
 - (void)dealloc
 {
-    [self viewDidUnload];
+    [self removeSelf];
 }
 
 - (void)viewDidLoad
@@ -96,22 +96,15 @@ BOOL LayerOptionEquals(LayerOption layerOption1, LayerOption layerOption2)
     viewAppeared = NO;
 }
 
-- (void)viewDidUnload
-{
-    [self removeSelf];
-    
-    [super viewDidUnload];
-}
-
 // ================================================================================================
 //  Public
 // ================================================================================================
 
-- (void)dismissModalViewControllerAnimated:(BOOL)animated
+- (void)closeAnimated:(BOOL)animated completion:(void (^)(void))completion
 {
-    [super dismissModalViewControllerAnimated:animated];
-    
     [self removeSelf];
+    
+    [super closeAnimated:animated completion:completion];
 }
 
 - (void)setLayerOption:(LayerOption)layerOption
@@ -201,6 +194,6 @@ BOOL LayerOptionEquals(LayerOption layerOption1, LayerOption layerOption2)
 
 - (void)viewTapped
 {
-    [self dismissModalViewControllerAnimated:NO];
+    [self closeAnimated:NO];
 }
 @end

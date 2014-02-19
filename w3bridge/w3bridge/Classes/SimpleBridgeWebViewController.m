@@ -24,8 +24,6 @@
 
 #import "SimpleBridgeWebViewController.h"
 
-#define BridgeLogEnabled 1
-
 // ================================================================================================
 //
 //  SimpleBridgeWebViewController Implementation
@@ -87,6 +85,12 @@
     [super viewDidLoad];
     
     [self setCookieAcceptPolicy];
+    
+    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    if ([self respondsToSelector:@selector(setExtendedLayoutIncludesOpaqueBars:)])
+    self.extendedLayoutIncludesOpaqueBars = YES;
     
     webViewSynthesized = _webView != nil;
     if (!_webView)
@@ -288,7 +292,7 @@
 {
     copiedRequest = nil;
     
-#if BridgeLogEnabled
+#if DEBUG
     NSLog(@"Failed to load webpage with error: %@", error);
 #endif
     [[NSNotificationCenter defaultCenter] postNotificationName:webViewDidFailLoadWithErrorNotification object:self];
@@ -379,7 +383,7 @@
              [CDVInvokedUrlCommand commandFromObject:
               [commandJson mutableObjectFromJSONString]]])
 		{
-#if BridgeLogEnabled
+#if DEBUG
 			NSLog(@"FAILED pluginJSON = %@",commandJson);
 #endif
 		}
@@ -454,7 +458,7 @@
     NSArray *matches = [regex matchesInString:request.URL.absoluteString options:NSMatchingReportProgress range:(NSRange) {0, request.URL.absoluteString.length}];
     BOOL noChangeURL = (!error && matches && matches.count > 0) && (pureURLString && cachedPureURLString && [pureURLString isEqualToString:cachedPureURLString]);
     BOOL isFrameLoad = ![request.URL.absoluteString isEqual:request.mainDocumentURL.absoluteString];
-#if BridgeLogEnabled
+#if DEBUG
     NSLog(@"\nallowedPassingURLWithRequest: URL -> %@\nmainDocumentURL -> %@\nnavigationType -> %d\nisFrameLoad -> %d\nnoChangeUrl -> %d\ncachedPureURLString -> %@\npureURLString -> %@\n", request.URL, request.mainDocumentURL, navigationType, isFrameLoad, noChangeURL, cachedPureURLString, pureURLString);
 #endif
     if (noChangeURL)
@@ -476,7 +480,7 @@
 
 - (BOOL)execute:(CDVInvokedUrlCommand *)command
 {
-#if BridgeLogEnabled
+#if DEBUG
     NSLog(@"execute command from web -> %@", command.className);
 #endif
     if (command.className == nil || command.methodName == nil)
@@ -484,7 +488,7 @@
     
     CDVPlugin* obj = [_commandDelegate getCommandInstance:command.className];
     if (!([obj isKindOfClass:[CDVPlugin class]])) {
-#if BridgeLogEnabled
+#if DEBUG
         NSLog(@"ERROR: Plugin '%@' not found, or is not a CDVPlugin. Check your plugin mapping in w3bridge.plist.", command.className);
 #endif
         return NO;
@@ -494,7 +498,7 @@
     
     NSString* fullMethodName = [[NSString alloc] initWithFormat:@"%@:withDict:", command.methodName];
     
-#if BridgeLogEnabled
+#if DEBUG
     NSLog(@"fullMethodName -> %@", fullMethodName);
 #endif
     
@@ -503,7 +507,7 @@
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [obj performSelector:selector withObject:command.arguments withObject:command.options];
     } else {
-#if BridgeLogEnabled
+#if DEBUG
         NSLog(@"ERROR: Method '%@' not defined in Plugin '%@'", fullMethodName, command.className);
 #endif
         retVal = NO;
@@ -579,7 +583,7 @@
         if (obj != nil) {
             [_pluginObjects setObject:obj forKey:className];
         } else {
-#if BridgeLogEnabled
+#if DEBUG
             NSLog(@"CDVPlugin class %@ (pluginName: %@) does not exist.", className, pluginName);
 #endif
         }
@@ -625,7 +629,7 @@
     NSString* appPlistName = @"w3bridge";
     NSDictionary* bridgePlist = [[NSBundle mainBundle] dictionaryWithPlistName:appPlistName];
     if (bridgePlist == nil) {
-#if BridgeLogEnabled
+#if DEBUG
         NSLog(@"WARNING: %@.plist is missing.", appPlistName);
 #endif
 		return;
@@ -635,7 +639,7 @@
 	
     NSDictionary* pluginsDict = [_settings objectForKey:@"Plugins"];
     if (pluginsDict == nil) {
-#if BridgeLogEnabled
+#if DEBUG
         NSString* pluginsKey = @"Plugins";
         NSLog(@"WARNING: %@ key in %@.plist is missing! Cordova will not work, you need to have this key.", pluginsKey, appPlistName);
 #endif

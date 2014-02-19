@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<meta name="viewport" content="initial-scale=1,maximum-scale=2,user-scalable=yes" />
+	<meta name="viewport" content="initial-scale=1,maximum-scale=2,user-scalable=no" />
     <title>w3bridge Sample</title>
     
     <style type="text/css">
@@ -13,7 +13,6 @@
 </head>
 
 <body onload="onBodyLoad();">
-<h1 id="test-label">w3bridge Sample</h1>
 <ul>
 	<li><button onclick="openAsPush();" style="width:120px;height:30px;margin-top:30px;">open as push</button></li>
 	<li><button onclick="openAsPop();" style="width:120px;height:30px;margin-top:30px;">open as pop</button></li>
@@ -22,34 +21,34 @@
 	<li><button onclick="openLayerBridgeWebView();" style="width:120px;height:30px;margin-top:30px;">open layer bridge webview</button></li>
 </ul>
 		
-<script type="text/javascript" src="https://raw.github.com/pisces/w3bridge/master/w3bridgeDemo/www/w3bridge-1.0.0.min.js"></script>
+<script type="text/javascript" src="http://pisces.jdsn.net/w3bridgeDemo/w3bridge-1.0.0.min.js"></script>
 <script type="text/javascript">
 	
 	//--------------------------------------------------------------------------
 	// Methods
 	//--------------------------------------------------------------------------
     
-    var urlOfP1 = "https://raw.github.com/pisces/w3bridge/master/w3bridgeDemo/www/html/w3bridge-sample-p1.html";
-    var urlOfLayer = "https://raw.github.com/pisces/w3bridge/master/w3bridgeDemo/www/html/w3bridge-sample-layer.html";
+    var urlOfP1 = "http://pisces.jdsn.net/w3bridgeDemo/html/w3bridge-sample-p1.html";
+    var urlOfLayer = "http://pisces.jdsn.net/w3bridgeDemo/html/w3bridge-sample-layer.html";
     
     function multiplePopUpView(){
-    	org.apache.w3bridge.view.open(urlOfP1, "pop");
+    	navigator.bridge.view.open(urlOfP1, "pop");
     }
     
     function openAsPush(){
-    	org.apache.w3bridge.view.open(urlOfP1, "push", {closeEnabled: 0});
+    	navigator.bridge.view.open(urlOfP1, "push", {closeEnabled: 0});
     }
     
     function openAsPop(){
-    	org.apache.w3bridge.view.open(urlOfP1, "pop");
+    	navigator.bridge.view.open(urlOfP1, "pop");
     }
     
     function openLayerBridgeWebView(){
-    	org.apache.w3bridge.view.openLayerBridgeWebView(urlOfLayer, {width: 300, height: 400, modal: 1});
+    	navigator.bridge.view.openLayerBridgeWebView(urlOfLayer, {width: 300, height: 400, modal: 1});
     }
     
     function postNotification(){
-    	org.apache.w3bridge.notification.postNotification("init", {});
+    	navigator.bridge.notification.postNotification("init", {});
     }
 
 	//--------------------------------------------------------------------------
@@ -76,14 +75,14 @@
 	}
 
 	function externalInterfaceCallTest(){
-    	org.apache.w3bridge.externalInterface.call("alert", {message: "mesage", title: "ext call"}, function(result){
+    	navigator.bridge.externalInterface.call("alert", {message: "mesage", title: "ext call"}, function(result){
     		console.log("result -> " + result);
     	}, function(error){
     		console.log("error -> " + error);
     	});
     	
 
-    	org.apache.w3bridge.externalInterface.call("alert", {message: "mesage", title: "ext call"}, successHandler, function(error){
+    	navigator.bridge.externalInterface.call("alert", {message: "mesage", title: "ext call"}, successHandler, function(error){
     		console.log("error -> " + error);
     	});
 	}
@@ -94,15 +93,15 @@
 	}
 	
 	function externalInterfaceAddCallbackTest(){
-		org.apache.w3bridge.externalInterface.addCallback("rightBarButtonClick", function(result){
+		navigator.bridge.externalInterface.addCallback("rightBarButtonClick", function(result){
     		console.log("called rightBarButtonClick callback function");
 		});
 	}
 
 	function notificationTest(){
-    	org.apache.w3bridge.notification.addObserver("select", "selectHandler");
-    	org.apache.w3bridge.notification.addObserver("viewWillAppear", "viewWillAppear");
-    	org.apache.w3bridge.notification.addObserver("viewWillDisappear", "viewWillDisappear");
+    	navigator.bridge.notification.addObserver("select", "selectHandler");
+    	navigator.bridge.notification.addObserver("viewWillAppear", "viewWillAppear");
+    	navigator.bridge.notification.addObserver("viewWillDisappear", "viewWillDisappear");
 	}
   
 	//--------------------------------------------------------------------------

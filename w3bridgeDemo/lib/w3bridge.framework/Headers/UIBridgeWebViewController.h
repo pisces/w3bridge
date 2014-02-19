@@ -24,6 +24,7 @@
 
 #import <UIKit/UIKit.h>
 #import <PSUIKit/PSUIRefreshViewController.h>
+#import <PSUIKit/UIThemeDefaultStyle.h>
 #import "SimpleBridgeWebViewController.h"
 #import "UILayerBridgeWebViewController.h"
 

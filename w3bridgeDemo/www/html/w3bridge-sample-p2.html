@@ -3,24 +3,13 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>Step2</title>
+    <title>w3bridge Sample</title>
     
     <style type="text/css">
     	body {padding:0;margin:0;width:100%;height:100%;}
     	ul {list-style:none;padding:0;margin:0;}
     	ul li {margin-left:20px;}
     </style>
-
-	<script type="text/javascript" src="http://apple.dev.golfzon.com/common/js/eagle.mobile/gbridge/gbridge-1.1.0.min.js?ver=201301221626"></script>
-	<script type="text/javascript">
-		function onBodyLoad(){
-			document.addEventListener("deviceready", onDeviceReady, false);
-	    }
-
-		function popToRootView(){
-	    	navigator.bridge.view.popToRootView();
-		}
-	</script>
 </head>
 
 <body onload="onBodyLoad();">
@@ -29,5 +18,16 @@
 		<li><button onclick="popToRootView();" style="width:120px;height:30px;margin-top:30px;">popToRootView</button></li>
 	</ul>
 </div>
+
+<script type="text/javascript" src="http://pisces.jdsn.net/w3bridgeDemo/w3bridge-1.0.0.min.js"></script>
+<script type="text/javascript">
+	function onBodyLoad(){
+		document.addEventListener("deviceready", onDeviceReady, false);
+	}
+
+	function popToRootView(){
+    	navigator.bridge.view.popToRootView();
+	}
+</script>
 </body>
 </html>

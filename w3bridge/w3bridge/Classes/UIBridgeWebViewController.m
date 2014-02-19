@@ -38,7 +38,6 @@
     NSString *rightBarButtonClickCallBack;
     NSDate *updateDate;
     PSUIRefreshViewController *refreshViewController;
-    UILayerBridgeWebViewController *layerBridgeWebViewController;
 }
 
 // ================================================================================================
@@ -53,12 +52,10 @@
     [self.navigationItem removeRightBarButtonItem];
     
     [refreshViewController.view removeFromSuperview];
-    [layerBridgeWebViewController.view removeFromSuperview];
     
     rightBarButtonClickCallBack = nil;
     updateDate = nil;
     refreshViewController = nil;
-    layerBridgeWebViewController = nil;
 }
 
 - (BOOL)hidesBottomBarWhenPushed
@@ -302,20 +299,17 @@
 
 - (void)openLayerBridgeWebViewWithURL:(NSString *)url layerOption :(LayerOption)layerOption
 {
-    if (!layerBridgeWebViewController)
-        layerBridgeWebViewController = [[UILayerBridgeWebViewController alloc] init];
+    UILayerBridgeWebViewController *controller = [[UILayerBridgeWebViewController alloc] init];
+    controller.layerOption = layerOption;
+    controller.destination = [NSURL URLWithString:url];
     
-    layerBridgeWebViewController.layerOption = layerOption;
-    layerBridgeWebViewController.destination = [NSURL URLWithString:url];
-    
-    [layerBridgeWebViewController showInView:self.view.window];
+    [controller showInView:self.view.window];
 }
 
 - (void)setRightBarButtonItemWithText:(NSString *)text buttonClickCallBack:(NSString *)buttonClickCallBack
 {
     rightBarButtonClickCallBack = buttonClickCallBack;
-    id<UIThemeProtocol> currentTheme = self.navigationController.theme ? self.navigationController.theme : [UIApplication sharedApplication].theme;
-    UIBarButtonItem *rightBarButtonItem = [currentTheme rightBarButtonItemWithTitle:text target:self action:@selector(rightBarButtonItemClicked)];
+    UIBarButtonItem *rightBarButtonItem = [self.navigationController.theme rightBarButtonItemWithTitle:text target:self action:@selector(rightBarButtonItemClicked)];
     
     [self.navigationItem addRightBarButtonItem:rightBarButtonItem];
     [self.navigationItem getRightBarButtonItem].customView.alpha = 0;
@@ -346,7 +340,7 @@
     
     if ([self.navigationController respondsToSelector:@selector(previousTitle)] && self.navigationController.previousTitle)
     {
-        leftBarButtonItem = [[UIApplication sharedApplication].theme backBarButtonItemWithTitle:_leftBarButtonItemText ? _leftBarButtonItemText : @"이전" target:self action:@selector(leftBarButtonItemClicked)];
+        leftBarButtonItem = [self.navigationController.theme backBarButtonItemWithTitle:_leftBarButtonItemText ? _leftBarButtonItemText : @"이전" target:self action:@selector(leftBarButtonItemClicked)];
         
         if ([[UIDevice currentDevice].systemVersion floatValue] >= 7.0)
             self.navigationController.previousViewController.navigationItem.backBarButtonItem = leftBarButtonItem;
@@ -356,11 +350,11 @@
     else if (_leftBarButtonItemType != LeftBarButtonItemTypeNone)
     {
         if (_leftBarButtonItemType == LeftBarButtonItemTypeHome)
-            leftBarButtonItem = [[UIApplication sharedApplication].theme homeBarButtonItemWithTarget:self action:@selector(leftBarButtonItemClicked)];
+            leftBarButtonItem = [self.navigationController.theme homeBarButtonItemWithTarget:self action:@selector(leftBarButtonItemClicked)];
         else if (_leftBarButtonItemType == LeftBarButtonItemTypeClose)
-            leftBarButtonItem = [[UIApplication sharedApplication].theme closeBarButtonItemWithTarget:self action:@selector(leftBarButtonItemClicked)];
+            leftBarButtonItem = [self.navigationController.theme closeBarButtonItemWithTarget:self action:@selector(leftBarButtonItemClicked)];
         else if (_leftBarButtonItemType == LeftBarButtonItemTypeCustom)
-            leftBarButtonItem = [[UIApplication sharedApplication].theme leftBarButtonItemWithTitle:_leftBarButtonItemText target:self action:@selector(leftBarButtonItemClicked)];
+            leftBarButtonItem = [self.navigationController.theme leftBarButtonItemWithTitle:_leftBarButtonItemText target:self action:@selector(leftBarButtonItemClicked)];
         
         [self.navigationItem addLeftBarButtonItem:leftBarButtonItem];
     }

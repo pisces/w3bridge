@@ -60,6 +60,7 @@
 @end
 
 @interface UIThemeBase : NSObject <UIThemeProtocol>
++ (UIThemeBase *)sharedInstance;
 - (UIButton *)navigationButton:(NSString *)title imageName:(NSString *)imageName imageNameForLandscape:(NSString *)imageNameForLandscape textColor:(UIColor *)textColor target:(id)target action:(SEL)action;
 - (void)updateView:(UIButton *)button taget:(id)target;
 @end

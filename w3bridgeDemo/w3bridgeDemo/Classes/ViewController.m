@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-#define URLOfSample @"https://raw.github.com/pisces/w3bridge/master/w3bridgeDemo/www/html/w3bridge-sample-main.html"
+#define URLOfSample @"http://pisces.jdsn.net/w3bridgeDemo/html/w3bridge-sample-main.html"
 
 @implementation ViewController
 

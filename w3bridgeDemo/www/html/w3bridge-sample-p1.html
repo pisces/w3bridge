@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>Step1</title>
+    <title>w3bridge Sample</title>
     
     <style type="text/css">
     	body {padding:0;margin:0;width:100%;height:100%;}
@@ -12,46 +12,6 @@
     	.menu {width:320px;display:none;position:absolute;background-color:#ccc;padding:0;margin:0;}
     	.menu li {height:30px;padding:10px;border:solid 1px #fff;}
     </style>
-
-	<script type="text/javascript" src="../frontends/gbridge/gbridge-1.1.0.min.js?ver=201301221626"></script>
-	<script type="text/javascript" src="../frontends/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript">
-		function onBodyLoad(){
-			document.addEventListener("deviceready", onDeviceReady, false);
-	    }
-
-	    function onDeviceReady(){
-	    	navigator.bridge.view.showRightBarButton(1, null, "rightBarButtonClickCallBack");
-	    	navigator.bridge.notification.addObserver("didClickLeftBarButtonItem", "didClickLeftBarButtonItem");
-	    }
-		
-		function rightBarButtonClickCallBack(){
-			$(".menu").show();
-		}
-		
-		function hide(){
-			$(".menu").hide();
-		}
-		
-		function closeView(){
-	    	navigator.bridge.view.close();
-		}
-		
-		function nextStep(){
-	    	navigator.bridge.view.open("http://mui.spazon.com/resources/scripts/test/gbridgeTestStep2.html", "push");
-		}
-		
-		function postNotification(){
-	    	navigator.bridge.notification.postNotification("select", {});
-		}
-		
-		function didClickLeftBarButtonItem(){
-			console.log("didClickLeftBarButtonItem");
-			if(confirm('이전으로 이동할까?')){
-				closeView();
-			}
-		}
-	</script>
 </head>
 
 <body onload="onBodyLoad();">
@@ -71,5 +31,49 @@
 		<li><button onclick="postNotification();" style="width:120px;height:30px;margin-top:30px;">select</button></li>
 	</ul>
 </div>
+
+<script type="text/javascript" src="http://pisces.jdsn.net/w3bridgeDemo/w3bridge-1.0.0.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+	var urlOfP2 = "http://pisces.jdsn.net/w3bridgeDemo/html/w3bridge-sample-p2.html";
+    
+	function onBodyLoad(){
+		document.addEventListener("deviceready", onDeviceReady, false);
+	}
+
+	function onDeviceReady(){
+	    navigator.bridge.view.setRightBarButtonItem("menu", "rightBarButtonClickCallBack");
+	    navigator.bridge.notification.addObserver("didClickLeftBarButtonItem", "didClickLeftBarButtonItem");
+	}
+		
+	function rightBarButtonClickCallBack(){
+		if ($(".menu").css("display") == "none")
+			$(".menu").show();
+		else
+			$(".menu").hide();
+	}
+		
+	function hide(){
+		$(".menu").hide();
+	}
+		
+	function closeView(){
+	    navigator.bridge.view.close();
+	}
+		
+	function nextStep(){
+	    navigator.bridge.view.open(urlOfP2, "push");
+	}
+		
+	function postNotification(){
+	    navigator.bridge.notification.postNotification("select", {});
+	}
+		
+	function didClickLeftBarButtonItem(){
+		console.log("didClickLeftBarButtonItem");
+		if(confirm('go back?'))
+			closeView();
+	}
+</script>
 </body>
 </html>

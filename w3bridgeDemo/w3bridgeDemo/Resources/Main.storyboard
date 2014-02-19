@@ -8,7 +8,8 @@
         <!--Navigation Controller-->
         <scene sceneID="rbA-s0-Was">
             <objects>
-                <navigationController definesPresentationContext="YES" id="Co0-JA-8m6" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="Co0-JA-8m6" customClass="PSUINavigationController" sceneMemberID="viewController">
+                    <nil key="simulatedStatusBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qb9-tZ-BF6">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
