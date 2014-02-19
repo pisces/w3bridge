@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <w3bridge/w3bridge.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIBridgeWebViewController
 
 @end

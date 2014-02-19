@@ -8,22 +8,20 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
-
-@end
+#define URLOfSample @"https://raw.github.com/pisces/w3bridge/master/w3bridgeDemo/www/html/w3bridge-sample-main.html"
 
 @implementation ViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    self.destination = [NSURL URLWithString:URLOfSample];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
