@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2328AFA918B478AD00A8C85E"
-               BuildableName = "w3BridgeDemo.app"
-               BlueprintName = "w3BridgeDemo"
-               ReferencedContainer = "container:w3BridgeDemo.xcodeproj">
+               BuildableName = "w3bridgeDemo.app"
+               BlueprintName = "w3bridgeDemo"
+               ReferencedContainer = "container:w3bridgeDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,24 +28,14 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2328AFCA18B478AD00A8C85E"
-               BuildableName = "w3BridgeDemoTests.xctest"
-               BlueprintName = "w3BridgeDemoTests"
-               ReferencedContainer = "container:w3BridgeDemo.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2328AFA918B478AD00A8C85E"
-            BuildableName = "w3BridgeDemo.app"
-            BlueprintName = "w3BridgeDemo"
-            ReferencedContainer = "container:w3BridgeDemo.xcodeproj">
+            BuildableName = "w3bridgeDemo.app"
+            BlueprintName = "w3bridgeDemo"
+            ReferencedContainer = "container:w3bridgeDemo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +52,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2328AFA918B478AD00A8C85E"
-            BuildableName = "w3BridgeDemo.app"
-            BlueprintName = "w3BridgeDemo"
-            ReferencedContainer = "container:w3BridgeDemo.xcodeproj">
+            BuildableName = "w3bridgeDemo.app"
+            BlueprintName = "w3bridgeDemo"
+            ReferencedContainer = "container:w3bridgeDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -80,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2328AFA918B478AD00A8C85E"
-            BuildableName = "w3BridgeDemo.app"
-            BlueprintName = "w3BridgeDemo"
-            ReferencedContainer = "container:w3BridgeDemo.xcodeproj">
+            BuildableName = "w3bridgeDemo.app"
+            BlueprintName = "w3bridgeDemo"
+            ReferencedContainer = "container:w3bridgeDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -1,6 +1,6 @@
 //
-//  w3BridgeDemoTests.m
-//  w3BridgeDemoTests
+//  w3bridgeDemoTests.m
+//  w3bridgeDemoTests
 //
 //  Created by KH Kim on 2014. 2. 19..
 //  Copyright (c) 2014년 KH Kim. All rights reserved.
@@ -8,11 +8,11 @@
 
 #import <XCTest/XCTest.h>
 
-@interface w3BridgeDemoTests : XCTestCase
+@interface w3bridgeDemoTests : XCTestCase
 
 @end
 
-@implementation w3BridgeDemoTests
+@implementation w3bridgeDemoTests
 
 - (void)setUp
 {

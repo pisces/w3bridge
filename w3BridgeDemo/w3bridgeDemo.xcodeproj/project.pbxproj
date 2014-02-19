@@ -17,7 +17,7 @@
 		2328AFCE18B478AD00A8C85E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2328AFAD18B478AD00A8C85E /* Foundation.framework */; };
 		2328AFCF18B478AD00A8C85E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2328AFB118B478AD00A8C85E /* UIKit.framework */; };
 		2328AFD718B478AD00A8C85E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2328AFD518B478AD00A8C85E /* InfoPlist.strings */; };
-		2328AFD918B478AD00A8C85E /* w3BridgeDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2328AFD818B478AD00A8C85E /* w3BridgeDemoTests.m */; };
+		2328AFD918B478AD00A8C85E /* w3bridgeDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2328AFD818B478AD00A8C85E /* w3bridgeDemoTests.m */; };
 		2328AFE918B4791300A8C85E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2328AFE418B4791300A8C85E /* AppDelegate.m */; };
 		2328AFEA18B4791300A8C85E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2328AFE618B4791300A8C85E /* ViewController.m */; };
 		2328AFEB18B4791300A8C85E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2328AFE818B4791300A8C85E /* Main.storyboard */; };
@@ -38,20 +38,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2328AFAA18B478AD00A8C85E /* w3BridgeDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = w3BridgeDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2328AFAA18B478AD00A8C85E /* w3bridgeDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = w3bridgeDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2328AFAD18B478AD00A8C85E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2328AFAF18B478AD00A8C85E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2328AFB118B478AD00A8C85E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		2328AFB518B478AD00A8C85E /* w3BridgeDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "w3BridgeDemo-Info.plist"; sourceTree = "<group>"; };
+		2328AFB518B478AD00A8C85E /* w3bridgeDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "w3bridgeDemo-Info.plist"; sourceTree = "<group>"; };
 		2328AFB718B478AD00A8C85E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2328AFB918B478AD00A8C85E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2328AFBB18B478AD00A8C85E /* w3BridgeDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "w3BridgeDemo-Prefix.pch"; sourceTree = "<group>"; };
+		2328AFBB18B478AD00A8C85E /* w3bridgeDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "w3bridgeDemo-Prefix.pch"; sourceTree = "<group>"; };
 		2328AFC518B478AD00A8C85E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = w3BridgeDemo/Images.xcassets; sourceTree = "<group>"; };
-		2328AFCB18B478AD00A8C85E /* w3BridgeDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = w3BridgeDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2328AFCB18B478AD00A8C85E /* w3bridgeDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = w3bridgeDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2328AFCC18B478AD00A8C85E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		2328AFD418B478AD00A8C85E /* w3BridgeDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "w3BridgeDemoTests-Info.plist"; sourceTree = "<group>"; };
+		2328AFD418B478AD00A8C85E /* w3bridgeDemo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = w3bridgeDemo.plist; sourceTree = "<group>"; };
 		2328AFD618B478AD00A8C85E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2328AFD818B478AD00A8C85E /* w3BridgeDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = w3BridgeDemoTests.m; sourceTree = "<group>"; };
+		2328AFD818B478AD00A8C85E /* w3bridgeDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = w3bridgeDemoTests.m; sourceTree = "<group>"; };
 		2328AFE318B4791300A8C85E /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2328AFE418B4791300A8C85E /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2328AFE518B4791300A8C85E /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -92,9 +92,9 @@
 		2328AFA118B478AD00A8C85E = {
 			isa = PBXGroup;
 			children = (
-				2328AFB318B478AD00A8C85E /* w3BridgeDemo */,
+				2328AFB318B478AD00A8C85E /* w3bridgeDemo */,
 				2328AFC518B478AD00A8C85E /* Images.xcassets */,
-				2328AFD218B478AD00A8C85E /* w3BridgeDemoTests */,
+				2328AFD218B478AD00A8C85E /* w3bridgeDemoTests */,
 				2328AFAC18B478AD00A8C85E /* Frameworks */,
 				2328AFAB18B478AD00A8C85E /* Products */,
 			);
@@ -103,8 +103,8 @@
 		2328AFAB18B478AD00A8C85E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2328AFAA18B478AD00A8C85E /* w3BridgeDemo.app */,
-				2328AFCB18B478AD00A8C85E /* w3BridgeDemoTests.xctest */,
+				2328AFAA18B478AD00A8C85E /* w3bridgeDemo.app */,
+				2328AFCB18B478AD00A8C85E /* w3bridgeDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -121,13 +121,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2328AFB318B478AD00A8C85E /* w3BridgeDemo */ = {
+		2328AFB318B478AD00A8C85E /* w3bridgeDemo */ = {
 			isa = PBXGroup;
 			children = (
 				2328AFE218B4791300A8C85E /* Classes */,
 				2328AFE718B4791300A8C85E /* Resources */,
 				2328AFB418B478AD00A8C85E /* Supporting Files */,
 			);
+			name = w3bridgeDemo;
 			path = w3BridgeDemo;
 			sourceTree = "<group>";
 		};
@@ -135,27 +136,28 @@
 			isa = PBXGroup;
 			children = (
 				2328AFF318B479EA00A8C85E /* w3bridge.plist */,
-				2328AFB518B478AD00A8C85E /* w3BridgeDemo-Info.plist */,
+				2328AFB518B478AD00A8C85E /* w3bridgeDemo-Info.plist */,
 				2328AFB618B478AD00A8C85E /* InfoPlist.strings */,
 				2328AFB918B478AD00A8C85E /* main.m */,
-				2328AFBB18B478AD00A8C85E /* w3BridgeDemo-Prefix.pch */,
+				2328AFBB18B478AD00A8C85E /* w3bridgeDemo-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		2328AFD218B478AD00A8C85E /* w3BridgeDemoTests */ = {
+		2328AFD218B478AD00A8C85E /* w3bridgeDemoTests */ = {
 			isa = PBXGroup;
 			children = (
-				2328AFD818B478AD00A8C85E /* w3BridgeDemoTests.m */,
+				2328AFD818B478AD00A8C85E /* w3bridgeDemoTests.m */,
 				2328AFD318B478AD00A8C85E /* Supporting Files */,
 			);
+			name = w3bridgeDemoTests;
 			path = w3BridgeDemoTests;
 			sourceTree = "<group>";
 		};
 		2328AFD318B478AD00A8C85E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				2328AFD418B478AD00A8C85E /* w3BridgeDemoTests-Info.plist */,
+				2328AFD418B478AD00A8C85E /* w3bridgeDemo.plist */,
 				2328AFD518B478AD00A8C85E /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -193,9 +195,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2328AFA918B478AD00A8C85E /* w3BridgeDemo */ = {
+		2328AFA918B478AD00A8C85E /* w3bridgeDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2328AFDC18B478AD00A8C85E /* Build configuration list for PBXNativeTarget "w3BridgeDemo" */;
+			buildConfigurationList = 2328AFDC18B478AD00A8C85E /* Build configuration list for PBXNativeTarget "w3bridgeDemo" */;
 			buildPhases = (
 				2328AFA618B478AD00A8C85E /* Sources */,
 				2328AFA718B478AD00A8C85E /* Frameworks */,
@@ -205,14 +207,14 @@
 			);
 			dependencies = (
 			);
-			name = w3BridgeDemo;
+			name = w3bridgeDemo;
 			productName = w3BridgeDemo;
-			productReference = 2328AFAA18B478AD00A8C85E /* w3BridgeDemo.app */;
+			productReference = 2328AFAA18B478AD00A8C85E /* w3bridgeDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2328AFCA18B478AD00A8C85E /* w3BridgeDemoTests */ = {
+		2328AFCA18B478AD00A8C85E /* w3bridgeDemoTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2328AFDF18B478AD00A8C85E /* Build configuration list for PBXNativeTarget "w3BridgeDemoTests" */;
+			buildConfigurationList = 2328AFDF18B478AD00A8C85E /* Build configuration list for PBXNativeTarget "w3bridgeDemoTests" */;
 			buildPhases = (
 				2328AFC718B478AD00A8C85E /* Sources */,
 				2328AFC818B478AD00A8C85E /* Frameworks */,
@@ -223,9 +225,9 @@
 			dependencies = (
 				2328AFD118B478AD00A8C85E /* PBXTargetDependency */,
 			);
-			name = w3BridgeDemoTests;
+			name = w3bridgeDemoTests;
 			productName = w3BridgeDemoTests;
-			productReference = 2328AFCB18B478AD00A8C85E /* w3BridgeDemoTests.xctest */;
+			productReference = 2328AFCB18B478AD00A8C85E /* w3bridgeDemoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -242,7 +244,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2328AFA518B478AD00A8C85E /* Build configuration list for PBXProject "w3BridgeDemo" */;
+			buildConfigurationList = 2328AFA518B478AD00A8C85E /* Build configuration list for PBXProject "w3bridgeDemo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -255,8 +257,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2328AFA918B478AD00A8C85E /* w3BridgeDemo */,
-				2328AFCA18B478AD00A8C85E /* w3BridgeDemoTests */,
+				2328AFA918B478AD00A8C85E /* w3bridgeDemo */,
+				2328AFCA18B478AD00A8C85E /* w3bridgeDemoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -299,7 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2328AFD918B478AD00A8C85E /* w3BridgeDemoTests.m in Sources */,
+				2328AFD918B478AD00A8C85E /* w3bridgeDemoTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,7 +310,7 @@
 /* Begin PBXTargetDependency section */
 		2328AFD118B478AD00A8C85E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2328AFA918B478AD00A8C85E /* w3BridgeDemo */;
+			target = 2328AFA918B478AD00A8C85E /* w3bridgeDemo */;
 			targetProxy = 2328AFD018B478AD00A8C85E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -412,12 +414,13 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/pisces/workspace/pisces/ios/frameworks/w3bridge/w3BridgeDemo/lib,
+					"${SRCROOT}/lib",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "w3BridgeDemo/w3BridgeDemo-Prefix.pch";
-				INFOPLIST_FILE = "w3BridgeDemo/w3BridgeDemo-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "w3BridgeDemo/w3bridgeDemo-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/w3BridgeDemo/w3bridgeDemo-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = w3bridgeDemo;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -429,12 +432,13 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/pisces/workspace/pisces/ios/frameworks/w3bridge/w3BridgeDemo/lib,
+					"${SRCROOT}/lib",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "w3BridgeDemo/w3BridgeDemo-Prefix.pch";
-				INFOPLIST_FILE = "w3BridgeDemo/w3BridgeDemo-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "w3BridgeDemo/w3bridgeDemo-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/w3BridgeDemo/w3bridgeDemo-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = w3bridgeDemo;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -455,8 +459,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "w3BridgeDemoTests/w3BridgeDemoTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "w3BridgeDemoTests/w3bridgeDemoTests-Info.plist";
+				PRODUCT_NAME = w3bridgeDemoTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -474,8 +478,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "w3BridgeDemo/w3BridgeDemo-Prefix.pch";
-				INFOPLIST_FILE = "w3BridgeDemoTests/w3BridgeDemoTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "w3BridgeDemoTests/w3bridgeDemoTests-Info.plist";
+				PRODUCT_NAME = w3bridgeDemoTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -484,7 +488,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2328AFA518B478AD00A8C85E /* Build configuration list for PBXProject "w3BridgeDemo" */ = {
+		2328AFA518B478AD00A8C85E /* Build configuration list for PBXProject "w3bridgeDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2328AFDA18B478AD00A8C85E /* Debug */,
@@ -493,21 +497,23 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2328AFDC18B478AD00A8C85E /* Build configuration list for PBXNativeTarget "w3BridgeDemo" */ = {
+		2328AFDC18B478AD00A8C85E /* Build configuration list for PBXNativeTarget "w3bridgeDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2328AFDD18B478AD00A8C85E /* Debug */,
 				2328AFDE18B478AD00A8C85E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		2328AFDF18B478AD00A8C85E /* Build configuration list for PBXNativeTarget "w3BridgeDemoTests" */ = {
+		2328AFDF18B478AD00A8C85E /* Build configuration list for PBXNativeTarget "w3bridgeDemoTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2328AFE018B478AD00A8C85E /* Debug */,
 				2328AFE118B478AD00A8C85E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

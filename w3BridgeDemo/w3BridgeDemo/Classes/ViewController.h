@@ -1,6 +1,6 @@
 //
 //  ViewController.h
-//  w3BridgeDemo
+//  w3bridgeDemo
 //
 //  Created by KH Kim on 2014. 2. 19..
 //  Copyright (c) 2014년 KH Kim. All rights reserved.
