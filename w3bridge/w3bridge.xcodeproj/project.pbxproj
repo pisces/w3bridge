@@ -1,0 +1,806 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		237AB037187C2FE700BD906B /* w3bridge-Framework */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 237AB038187C2FE700BD906B /* Build configuration list for PBXAggregateTarget "w3bridge-Framework" */;
+			buildPhases = (
+				237AB03B187C2FF000BD906B /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "w3bridge-Framework";
+			productName = "w3bridge-Framework";
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		232C8BAD1875298A00319D34 /* BridgeExternalInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8B951875298A00319D34 /* BridgeExternalInterface.m */; };
+		232C8BAE1875298A00319D34 /* BridgeExternalInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8B951875298A00319D34 /* BridgeExternalInterface.m */; };
+		232C8BAF1875298A00319D34 /* BridgeNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8B981875298A00319D34 /* BridgeNotification.m */; };
+		232C8BB01875298A00319D34 /* BridgeNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8B981875298A00319D34 /* BridgeNotification.m */; };
+		232C8BB11875298A00319D34 /* BridgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8B9B1875298A00319D34 /* BridgeView.m */; };
+		232C8BB21875298A00319D34 /* BridgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8B9B1875298A00319D34 /* BridgeView.m */; };
+		232C8BB31875298A00319D34 /* CDVDebugConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8B9E1875298A00319D34 /* CDVDebugConsole.m */; };
+		232C8BB41875298A00319D34 /* CDVDebugConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8B9E1875298A00319D34 /* CDVDebugConsole.m */; };
+		232C8BB51875298A00319D34 /* CDVInvokedUrlCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BA01875298A00319D34 /* CDVInvokedUrlCommand.m */; };
+		232C8BB61875298A00319D34 /* CDVInvokedUrlCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BA01875298A00319D34 /* CDVInvokedUrlCommand.m */; };
+		232C8BB71875298A00319D34 /* CDVPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BA21875298A00319D34 /* CDVPlugin.m */; };
+		232C8BB81875298A00319D34 /* CDVPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BA21875298A00319D34 /* CDVPlugin.m */; };
+		232C8BB91875298A00319D34 /* CDVPluginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BA41875298A00319D34 /* CDVPluginResult.m */; };
+		232C8BBA1875298A00319D34 /* CDVPluginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BA41875298A00319D34 /* CDVPluginResult.m */; };
+		232C8BBB1875298A00319D34 /* SimpleBridgeWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BA61875298A00319D34 /* SimpleBridgeWebViewController.m */; };
+		232C8BBC1875298A00319D34 /* SimpleBridgeWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BA61875298A00319D34 /* SimpleBridgeWebViewController.m */; };
+		232C8BBD1875298A00319D34 /* UIBridgeWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BA81875298A00319D34 /* UIBridgeWebViewController.m */; };
+		232C8BBE1875298A00319D34 /* UIBridgeWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BA81875298A00319D34 /* UIBridgeWebViewController.m */; };
+		232C8BBF1875298A00319D34 /* UILayerBridgeWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BAA1875298A00319D34 /* UILayerBridgeWebViewController.m */; };
+		232C8BC01875298A00319D34 /* UILayerBridgeWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BAA1875298A00319D34 /* UILayerBridgeWebViewController.m */; };
+		232C8BC11875298A00319D34 /* w3bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BAC1875298A00319D34 /* w3bridge.m */; };
+		232C8BC21875298A00319D34 /* w3bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BAC1875298A00319D34 /* w3bridge.m */; };
+		237AB011187C2B1A00BD906B /* UIDevice-Capabilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 237AB00A187C2B1A00BD906B /* UIDevice-Capabilities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		237AB012187C2B1A00BD906B /* UIDevice-Capabilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 237AB00A187C2B1A00BD906B /* UIDevice-Capabilities.m */; };
+		237AB013187C2B1A00BD906B /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 237AB00C187C2B1A00BD906B /* UIDevice-Hardware.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		237AB014187C2B1A00BD906B /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 237AB00C187C2B1A00BD906B /* UIDevice-Hardware.m */; };
+		237AB01B187C2C5400BD906B /* NSDictionary+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 237AB01A187C2C5400BD906B /* NSDictionary+Extensions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		237AB01C187C2C5400BD906B /* NSDictionary+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 237AB01A187C2C5400BD906B /* NSDictionary+Extensions.m */; };
+		237AB01F187C2EE200BD906B /* BridgeExternalInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8B951875298A00319D34 /* BridgeExternalInterface.m */; };
+		237AB020187C2EE200BD906B /* BridgeNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8B981875298A00319D34 /* BridgeNotification.m */; };
+		237AB021187C2EE200BD906B /* w3bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BAC1875298A00319D34 /* w3bridge.m */; };
+		237AB022187C2EE200BD906B /* UIDevice-Capabilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 237AB00A187C2B1A00BD906B /* UIDevice-Capabilities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		237AB023187C2EE200BD906B /* UILayerBridgeWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BAA1875298A00319D34 /* UILayerBridgeWebViewController.m */; };
+		237AB024187C2EE200BD906B /* BridgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8B9B1875298A00319D34 /* BridgeView.m */; };
+		237AB025187C2EE200BD906B /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 237AB00C187C2B1A00BD906B /* UIDevice-Hardware.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		237AB026187C2EE200BD906B /* CDVDebugConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8B9E1875298A00319D34 /* CDVDebugConsole.m */; };
+		237AB027187C2EE200BD906B /* NSDictionary+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 237AB01A187C2C5400BD906B /* NSDictionary+Extensions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		237AB028187C2EE200BD906B /* UIBridgeWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BA81875298A00319D34 /* UIBridgeWebViewController.m */; };
+		237AB029187C2EE200BD906B /* CDVPluginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BA41875298A00319D34 /* CDVPluginResult.m */; };
+		237AB02B187C2EE200BD906B /* CDVPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BA21875298A00319D34 /* CDVPlugin.m */; };
+		237AB02C187C2EE200BD906B /* SimpleBridgeWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BA61875298A00319D34 /* SimpleBridgeWebViewController.m */; };
+		237AB02D187C2EE200BD906B /* CDVInvokedUrlCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BA01875298A00319D34 /* CDVInvokedUrlCommand.m */; };
+		237AB02F187C2EE200BD906B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A6DE621875145800FB9C34 /* Foundation.framework */; };
+		237AB069187C415100BD906B /* PSUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 237AB067187C415100BD906B /* PSUIKit.framework */; };
+		237AB06A187C415100BD906B /* PSUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 237AB067187C415100BD906B /* PSUIKit.framework */; };
+		237AB06B187C415100BD906B /* PSUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 237AB067187C415100BD906B /* PSUIKit.framework */; };
+		237AB06C187C415100BD906B /* w3action.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 237AB068187C415100BD906B /* w3action.framework */; };
+		237AB06D187C415100BD906B /* w3action.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 237AB068187C415100BD906B /* w3action.framework */; };
+		237AB06E187C415100BD906B /* w3action.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 237AB068187C415100BD906B /* w3action.framework */; };
+		23A6DE631875145800FB9C34 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A6DE621875145800FB9C34 /* Foundation.framework */; };
+		23A6DE711875145800FB9C34 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A6DE701875145800FB9C34 /* XCTest.framework */; };
+		23A6DE721875145800FB9C34 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A6DE621875145800FB9C34 /* Foundation.framework */; };
+		23A6DE771875145800FB9C34 /* libw3bridge-Device.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A6DE5F1875145800FB9C34 /* libw3bridge-Device.a */; };
+		23A6DE7D1875145800FB9C34 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 23A6DE7B1875145800FB9C34 /* InfoPlist.strings */; };
+		23A6DE7F1875145800FB9C34 /* w3bridgeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A6DE7E1875145800FB9C34 /* w3bridgeTests.m */; };
+		23C455A7187D351B00DCEF3C /* w3bridge-1.0.0.js in Sources */ = {isa = PBXBuildFile; fileRef = 23C455A2187D351B00DCEF3C /* w3bridge-1.0.0.js */; };
+		23C455AA187D351B00DCEF3C /* w3bridge-1.0.0.min.js in Sources */ = {isa = PBXBuildFile; fileRef = 23C455A3187D351B00DCEF3C /* w3bridge-1.0.0.min.js */; };
+		23C455AB187D351B00DCEF3C /* w3bridge.plist in Resources */ = {isa = PBXBuildFile; fileRef = 23C455A4187D351B00DCEF3C /* w3bridge.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		23A6DE751875145800FB9C34 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 23A6DE571875145800FB9C34 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 23A6DE5E1875145800FB9C34;
+			remoteInfo = w3bridge;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		237AB032187C2EE200BD906B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23A6DE5D1875145800FB9C34 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		232C8B941875298A00319D34 /* BridgeExternalInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeExternalInterface.h; sourceTree = "<group>"; };
+		232C8B951875298A00319D34 /* BridgeExternalInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BridgeExternalInterface.m; sourceTree = "<group>"; };
+		232C8B961875298A00319D34 /* BridgeExternalInterfaceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeExternalInterfaceDelegate.h; sourceTree = "<group>"; };
+		232C8B971875298A00319D34 /* BridgeNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeNotification.h; sourceTree = "<group>"; };
+		232C8B981875298A00319D34 /* BridgeNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BridgeNotification.m; sourceTree = "<group>"; };
+		232C8B991875298A00319D34 /* BridgeNotificationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeNotificationDelegate.h; sourceTree = "<group>"; };
+		232C8B9A1875298A00319D34 /* BridgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeView.h; sourceTree = "<group>"; };
+		232C8B9B1875298A00319D34 /* BridgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BridgeView.m; sourceTree = "<group>"; };
+		232C8B9C1875298A00319D34 /* CDVCommandDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVCommandDelegate.h; sourceTree = "<group>"; };
+		232C8B9D1875298A00319D34 /* CDVDebugConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVDebugConsole.h; sourceTree = "<group>"; };
+		232C8B9E1875298A00319D34 /* CDVDebugConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVDebugConsole.m; sourceTree = "<group>"; };
+		232C8B9F1875298A00319D34 /* CDVInvokedUrlCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVInvokedUrlCommand.h; sourceTree = "<group>"; };
+		232C8BA01875298A00319D34 /* CDVInvokedUrlCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVInvokedUrlCommand.m; sourceTree = "<group>"; };
+		232C8BA11875298A00319D34 /* CDVPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVPlugin.h; sourceTree = "<group>"; };
+		232C8BA21875298A00319D34 /* CDVPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVPlugin.m; sourceTree = "<group>"; };
+		232C8BA31875298A00319D34 /* CDVPluginResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVPluginResult.h; sourceTree = "<group>"; };
+		232C8BA41875298A00319D34 /* CDVPluginResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVPluginResult.m; sourceTree = "<group>"; };
+		232C8BA51875298A00319D34 /* SimpleBridgeWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleBridgeWebViewController.h; sourceTree = "<group>"; };
+		232C8BA61875298A00319D34 /* SimpleBridgeWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleBridgeWebViewController.m; sourceTree = "<group>"; };
+		232C8BA71875298A00319D34 /* UIBridgeWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBridgeWebViewController.h; sourceTree = "<group>"; };
+		232C8BA81875298A00319D34 /* UIBridgeWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBridgeWebViewController.m; sourceTree = "<group>"; };
+		232C8BA91875298A00319D34 /* UILayerBridgeWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILayerBridgeWebViewController.h; sourceTree = "<group>"; };
+		232C8BAA1875298A00319D34 /* UILayerBridgeWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILayerBridgeWebViewController.m; sourceTree = "<group>"; };
+		232C8BAB1875298A00319D34 /* w3bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = w3bridge.h; sourceTree = "<group>"; };
+		232C8BAC1875298A00319D34 /* w3bridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = w3bridge.m; sourceTree = "<group>"; };
+		237AB009187C2B1A00BD906B /* UIDevice-Capabilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice-Capabilities.h"; sourceTree = "<group>"; };
+		237AB00A187C2B1A00BD906B /* UIDevice-Capabilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice-Capabilities.m"; sourceTree = "<group>"; };
+		237AB00B187C2B1A00BD906B /* UIDevice-Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice-Hardware.h"; sourceTree = "<group>"; };
+		237AB00C187C2B1A00BD906B /* UIDevice-Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice-Hardware.m"; sourceTree = "<group>"; };
+		237AB019187C2C5400BD906B /* NSDictionary+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Extensions.h"; sourceTree = "<group>"; };
+		237AB01A187C2C5400BD906B /* NSDictionary+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Extensions.m"; sourceTree = "<group>"; };
+		237AB036187C2EE200BD906B /* libw3bridge-Simulator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libw3bridge-Simulator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		237AB067187C415100BD906B /* PSUIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PSUIKit.framework; path = lib/PSUIKit.framework; sourceTree = "<group>"; };
+		237AB068187C415100BD906B /* w3action.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = w3action.framework; path = lib/w3action.framework; sourceTree = "<group>"; };
+		23A6DE5F1875145800FB9C34 /* libw3bridge-Device.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libw3bridge-Device.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		23A6DE621875145800FB9C34 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		23A6DE661875145800FB9C34 /* w3bridge-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "w3bridge-Prefix.pch"; sourceTree = "<group>"; };
+		23A6DE6F1875145800FB9C34 /* w3bridgeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = w3bridgeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		23A6DE701875145800FB9C34 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		23A6DE7A1875145800FB9C34 /* w3bridgeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "w3bridgeTests-Info.plist"; sourceTree = "<group>"; };
+		23A6DE7C1875145800FB9C34 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		23A6DE7E1875145800FB9C34 /* w3bridgeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = w3bridgeTests.m; sourceTree = "<group>"; };
+		23C455A2187D351B00DCEF3C /* w3bridge-1.0.0.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "w3bridge-1.0.0.js"; sourceTree = "<group>"; };
+		23C455A3187D351B00DCEF3C /* w3bridge-1.0.0.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "w3bridge-1.0.0.min.js"; sourceTree = "<group>"; };
+		23C455A4187D351B00DCEF3C /* w3bridge.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = w3bridge.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		237AB02E187C2EE200BD906B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				237AB06D187C415100BD906B /* w3action.framework in Frameworks */,
+				237AB06A187C415100BD906B /* PSUIKit.framework in Frameworks */,
+				237AB02F187C2EE200BD906B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23A6DE5C1875145800FB9C34 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				237AB06C187C415100BD906B /* w3action.framework in Frameworks */,
+				237AB069187C415100BD906B /* PSUIKit.framework in Frameworks */,
+				23A6DE631875145800FB9C34 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23A6DE6C1875145800FB9C34 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23A6DE711875145800FB9C34 /* XCTest.framework in Frameworks */,
+				23A6DE771875145800FB9C34 /* libw3bridge-Device.a in Frameworks */,
+				237AB06B187C415100BD906B /* PSUIKit.framework in Frameworks */,
+				23A6DE721875145800FB9C34 /* Foundation.framework in Frameworks */,
+				237AB06E187C415100BD906B /* w3action.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		232C8B931875298A00319D34 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				232C8BC318752B9200319D34 /* Cordova */,
+				237AB008187C2B0B00BD906B /* UIDevice */,
+				232C8BC5187531B600319D34 /* controllers */,
+				232C8BC418752BAE00319D34 /* plugin */,
+				232C8BAB1875298A00319D34 /* w3bridge.h */,
+				232C8BAC1875298A00319D34 /* w3bridge.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		232C8BC318752B9200319D34 /* Cordova */ = {
+			isa = PBXGroup;
+			children = (
+				232C8B9C1875298A00319D34 /* CDVCommandDelegate.h */,
+				232C8B9D1875298A00319D34 /* CDVDebugConsole.h */,
+				232C8B9E1875298A00319D34 /* CDVDebugConsole.m */,
+				232C8B9F1875298A00319D34 /* CDVInvokedUrlCommand.h */,
+				232C8BA01875298A00319D34 /* CDVInvokedUrlCommand.m */,
+				232C8BA11875298A00319D34 /* CDVPlugin.h */,
+				232C8BA21875298A00319D34 /* CDVPlugin.m */,
+				232C8BA31875298A00319D34 /* CDVPluginResult.h */,
+				232C8BA41875298A00319D34 /* CDVPluginResult.m */,
+				237AB019187C2C5400BD906B /* NSDictionary+Extensions.h */,
+				237AB01A187C2C5400BD906B /* NSDictionary+Extensions.m */,
+			);
+			name = Cordova;
+			sourceTree = "<group>";
+		};
+		232C8BC418752BAE00319D34 /* plugin */ = {
+			isa = PBXGroup;
+			children = (
+				232C8B941875298A00319D34 /* BridgeExternalInterface.h */,
+				232C8B951875298A00319D34 /* BridgeExternalInterface.m */,
+				232C8B961875298A00319D34 /* BridgeExternalInterfaceDelegate.h */,
+				232C8B971875298A00319D34 /* BridgeNotification.h */,
+				232C8B981875298A00319D34 /* BridgeNotification.m */,
+				232C8B991875298A00319D34 /* BridgeNotificationDelegate.h */,
+				232C8B9A1875298A00319D34 /* BridgeView.h */,
+				232C8B9B1875298A00319D34 /* BridgeView.m */,
+			);
+			name = plugin;
+			sourceTree = "<group>";
+		};
+		232C8BC5187531B600319D34 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				232C8BA51875298A00319D34 /* SimpleBridgeWebViewController.h */,
+				232C8BA61875298A00319D34 /* SimpleBridgeWebViewController.m */,
+				232C8BA71875298A00319D34 /* UIBridgeWebViewController.h */,
+				232C8BA81875298A00319D34 /* UIBridgeWebViewController.m */,
+				232C8BA91875298A00319D34 /* UILayerBridgeWebViewController.h */,
+				232C8BAA1875298A00319D34 /* UILayerBridgeWebViewController.m */,
+			);
+			name = controllers;
+			sourceTree = "<group>";
+		};
+		237AB008187C2B0B00BD906B /* UIDevice */ = {
+			isa = PBXGroup;
+			children = (
+				237AB009187C2B1A00BD906B /* UIDevice-Capabilities.h */,
+				237AB00A187C2B1A00BD906B /* UIDevice-Capabilities.m */,
+				237AB00B187C2B1A00BD906B /* UIDevice-Hardware.h */,
+				237AB00C187C2B1A00BD906B /* UIDevice-Hardware.m */,
+			);
+			name = UIDevice;
+			sourceTree = "<group>";
+		};
+		23A6DE561875145800FB9C34 = {
+			isa = PBXGroup;
+			children = (
+				23A6DE641875145800FB9C34 /* w3bridge */,
+				23A6DE781875145800FB9C34 /* w3bridgeTests */,
+				23C455A1187D351B00DCEF3C /* www */,
+				23A6DE611875145800FB9C34 /* Frameworks */,
+				23A6DE601875145800FB9C34 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		23A6DE601875145800FB9C34 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				23A6DE5F1875145800FB9C34 /* libw3bridge-Device.a */,
+				23A6DE6F1875145800FB9C34 /* w3bridgeTests.xctest */,
+				237AB036187C2EE200BD906B /* libw3bridge-Simulator.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		23A6DE611875145800FB9C34 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				237AB067187C415100BD906B /* PSUIKit.framework */,
+				237AB068187C415100BD906B /* w3action.framework */,
+				23A6DE621875145800FB9C34 /* Foundation.framework */,
+				23A6DE701875145800FB9C34 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		23A6DE641875145800FB9C34 /* w3bridge */ = {
+			isa = PBXGroup;
+			children = (
+				232C8B931875298A00319D34 /* Classes */,
+				23A6DE651875145800FB9C34 /* Supporting Files */,
+			);
+			path = w3bridge;
+			sourceTree = "<group>";
+		};
+		23A6DE651875145800FB9C34 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				23A6DE661875145800FB9C34 /* w3bridge-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		23A6DE781875145800FB9C34 /* w3bridgeTests */ = {
+			isa = PBXGroup;
+			children = (
+				23A6DE7E1875145800FB9C34 /* w3bridgeTests.m */,
+				23A6DE791875145800FB9C34 /* Supporting Files */,
+			);
+			path = w3bridgeTests;
+			sourceTree = "<group>";
+		};
+		23A6DE791875145800FB9C34 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				23A6DE7A1875145800FB9C34 /* w3bridgeTests-Info.plist */,
+				23A6DE7B1875145800FB9C34 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		23C455A1187D351B00DCEF3C /* www */ = {
+			isa = PBXGroup;
+			children = (
+				23C455A2187D351B00DCEF3C /* w3bridge-1.0.0.js */,
+				23C455A3187D351B00DCEF3C /* w3bridge-1.0.0.min.js */,
+				23C455A4187D351B00DCEF3C /* w3bridge.plist */,
+			);
+			path = www;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		237AB01D187C2EE200BD906B /* w3bridge-Simulator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 237AB033187C2EE200BD906B /* Build configuration list for PBXNativeTarget "w3bridge-Simulator" */;
+			buildPhases = (
+				237AB01E187C2EE200BD906B /* Sources */,
+				237AB02E187C2EE200BD906B /* Frameworks */,
+				237AB032187C2EE200BD906B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "w3bridge-Simulator";
+			productName = w3bridge;
+			productReference = 237AB036187C2EE200BD906B /* libw3bridge-Simulator.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		23A6DE5E1875145800FB9C34 /* w3bridge-Device */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 23A6DE821875145800FB9C34 /* Build configuration list for PBXNativeTarget "w3bridge-Device" */;
+			buildPhases = (
+				23A6DE5B1875145800FB9C34 /* Sources */,
+				23A6DE5C1875145800FB9C34 /* Frameworks */,
+				23A6DE5D1875145800FB9C34 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "w3bridge-Device";
+			productName = w3bridge;
+			productReference = 23A6DE5F1875145800FB9C34 /* libw3bridge-Device.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		23A6DE6E1875145800FB9C34 /* w3bridgeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 23A6DE851875145800FB9C34 /* Build configuration list for PBXNativeTarget "w3bridgeTests" */;
+			buildPhases = (
+				23A6DE6B1875145800FB9C34 /* Sources */,
+				23A6DE6C1875145800FB9C34 /* Frameworks */,
+				23A6DE6D1875145800FB9C34 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				23A6DE761875145800FB9C34 /* PBXTargetDependency */,
+			);
+			name = w3bridgeTests;
+			productName = w3bridgeTests;
+			productReference = 23A6DE6F1875145800FB9C34 /* w3bridgeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		23A6DE571875145800FB9C34 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "KH Kim";
+			};
+			buildConfigurationList = 23A6DE5A1875145800FB9C34 /* Build configuration list for PBXProject "w3bridge" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 23A6DE561875145800FB9C34;
+			productRefGroup = 23A6DE601875145800FB9C34 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				23A6DE5E1875145800FB9C34 /* w3bridge-Device */,
+				237AB01D187C2EE200BD906B /* w3bridge-Simulator */,
+				23A6DE6E1875145800FB9C34 /* w3bridgeTests */,
+				237AB037187C2FE700BD906B /* w3bridge-Framework */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		23A6DE6D1875145800FB9C34 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23A6DE7D1875145800FB9C34 /* InfoPlist.strings in Resources */,
+				23C455AB187D351B00DCEF3C /* w3bridge.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		237AB03B187C2FF000BD906B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SIMULATOR_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}-Simulator.a\" &&\nDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}-Device.a\" &&\nUNIVERSAL_LIBRARY_DIR=\"/Users/Shared/Frameworks\" &&\nUNIVERSAL_LIBRARY_PATH=\"${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_NAME}\" &&\nFRAMEWORK=\"${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_NAME}.framework\" &&\n\n# Create framework directory structure.\nrm -rf \"${FRAMEWORK}\" &&\nmkdir -p \"${UNIVERSAL_LIBRARY_DIR}\" &&\nmkdir -p \"${FRAMEWORK}/Headers\" &&\n\n# Generate universal binary for the device and simulator.\nlipo \"${SIMULATOR_LIBRARY_PATH}\" \"${DEVICE_LIBRARY_PATH}\" -create -output \"${UNIVERSAL_LIBRARY_PATH}\" &&\n\n# Move files to appropriate locations in framework paths.\nmv \"${UNIVERSAL_LIBRARY_PATH}\" \"${FRAMEWORK}\" &&\n\n# Copy header files from project\ncd \"${SRCROOT}/${PRODUCT_NAME}/Classes/\" &&\nfind . -name '*.h' | cpio -pdm \"${FRAMEWORK}/Headers\"\n\ncp -r \"${SRCROOT}/www\" \"${FRAMEWORK}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		237AB01E187C2EE200BD906B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				237AB01F187C2EE200BD906B /* BridgeExternalInterface.m in Sources */,
+				237AB020187C2EE200BD906B /* BridgeNotification.m in Sources */,
+				237AB021187C2EE200BD906B /* w3bridge.m in Sources */,
+				237AB022187C2EE200BD906B /* UIDevice-Capabilities.m in Sources */,
+				237AB023187C2EE200BD906B /* UILayerBridgeWebViewController.m in Sources */,
+				237AB024187C2EE200BD906B /* BridgeView.m in Sources */,
+				237AB025187C2EE200BD906B /* UIDevice-Hardware.m in Sources */,
+				237AB026187C2EE200BD906B /* CDVDebugConsole.m in Sources */,
+				237AB027187C2EE200BD906B /* NSDictionary+Extensions.m in Sources */,
+				237AB028187C2EE200BD906B /* UIBridgeWebViewController.m in Sources */,
+				237AB029187C2EE200BD906B /* CDVPluginResult.m in Sources */,
+				237AB02B187C2EE200BD906B /* CDVPlugin.m in Sources */,
+				237AB02C187C2EE200BD906B /* SimpleBridgeWebViewController.m in Sources */,
+				237AB02D187C2EE200BD906B /* CDVInvokedUrlCommand.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23A6DE5B1875145800FB9C34 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				232C8BAD1875298A00319D34 /* BridgeExternalInterface.m in Sources */,
+				232C8BAF1875298A00319D34 /* BridgeNotification.m in Sources */,
+				232C8BC11875298A00319D34 /* w3bridge.m in Sources */,
+				237AB011187C2B1A00BD906B /* UIDevice-Capabilities.m in Sources */,
+				232C8BBF1875298A00319D34 /* UILayerBridgeWebViewController.m in Sources */,
+				232C8BB11875298A00319D34 /* BridgeView.m in Sources */,
+				237AB013187C2B1A00BD906B /* UIDevice-Hardware.m in Sources */,
+				232C8BB31875298A00319D34 /* CDVDebugConsole.m in Sources */,
+				237AB01B187C2C5400BD906B /* NSDictionary+Extensions.m in Sources */,
+				232C8BBD1875298A00319D34 /* UIBridgeWebViewController.m in Sources */,
+				232C8BB91875298A00319D34 /* CDVPluginResult.m in Sources */,
+				232C8BB71875298A00319D34 /* CDVPlugin.m in Sources */,
+				232C8BBB1875298A00319D34 /* SimpleBridgeWebViewController.m in Sources */,
+				232C8BB51875298A00319D34 /* CDVInvokedUrlCommand.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23A6DE6B1875145800FB9C34 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				232C8BBE1875298A00319D34 /* UIBridgeWebViewController.m in Sources */,
+				23A6DE7F1875145800FB9C34 /* w3bridgeTests.m in Sources */,
+				232C8BBC1875298A00319D34 /* SimpleBridgeWebViewController.m in Sources */,
+				232C8BB81875298A00319D34 /* CDVPlugin.m in Sources */,
+				232C8BB41875298A00319D34 /* CDVDebugConsole.m in Sources */,
+				232C8BB61875298A00319D34 /* CDVInvokedUrlCommand.m in Sources */,
+				237AB01C187C2C5400BD906B /* NSDictionary+Extensions.m in Sources */,
+				232C8BB21875298A00319D34 /* BridgeView.m in Sources */,
+				232C8BB01875298A00319D34 /* BridgeNotification.m in Sources */,
+				23C455AA187D351B00DCEF3C /* w3bridge-1.0.0.min.js in Sources */,
+				232C8BC21875298A00319D34 /* w3bridge.m in Sources */,
+				237AB012187C2B1A00BD906B /* UIDevice-Capabilities.m in Sources */,
+				232C8BAE1875298A00319D34 /* BridgeExternalInterface.m in Sources */,
+				232C8BC01875298A00319D34 /* UILayerBridgeWebViewController.m in Sources */,
+				23C455A7187D351B00DCEF3C /* w3bridge-1.0.0.js in Sources */,
+				232C8BBA1875298A00319D34 /* CDVPluginResult.m in Sources */,
+				237AB014187C2B1A00BD906B /* UIDevice-Hardware.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		23A6DE761875145800FB9C34 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 23A6DE5E1875145800FB9C34 /* w3bridge-Device */;
+			targetProxy = 23A6DE751875145800FB9C34 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		23A6DE7B1875145800FB9C34 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				23A6DE7C1875145800FB9C34 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		237AB034187C2EE200BD906B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				DSTROOT = /tmp/w3bridge.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/lib",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "w3bridge/w3bridge-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "w3bridge-Simulator";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "armv7 armv7s armv6";
+			};
+			name = Debug;
+		};
+		237AB035187C2EE200BD906B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				DSTROOT = /tmp/w3bridge.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/lib",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "w3bridge/w3bridge-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "w3bridge-Simulator";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "armv7 armv7s armv6";
+			};
+			name = Release;
+		};
+		237AB039187C2FE700BD906B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = w3bridge;
+			};
+			name = Debug;
+		};
+		237AB03A187C2FE700BD906B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = w3bridge;
+			};
+			name = Release;
+		};
+		23A6DE801875145800FB9C34 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		23A6DE811875145800FB9C34 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		23A6DE831875145800FB9C34 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				DSTROOT = /tmp/w3bridge.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(SRCROOT)/lib",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "w3bridge/w3bridge-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "armv7 armv7s armv6";
+			};
+			name = Debug;
+		};
+		23A6DE841875145800FB9C34 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				DSTROOT = /tmp/w3bridge.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(SRCROOT)/lib",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "w3bridge/w3bridge-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "armv7 armv7s armv6";
+			};
+			name = Release;
+		};
+		23A6DE861875145800FB9C34 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"/Users/pisces/workspace/pisces/ios/frameworks/w3bridge/w3bridge-master",
+					/Users/Shared/Frameworks/w3bridge.framework/lib,
+					"/Users/pisces/workspace/pisces/ios/frameworks/w3bridge/w3bridge-master/lib",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "w3bridge/w3bridge-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "w3bridgeTests/w3bridgeTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		23A6DE871875145800FB9C34 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"/Users/pisces/workspace/pisces/ios/frameworks/w3bridge/w3bridge-master",
+					/Users/Shared/Frameworks/w3bridge.framework/lib,
+					"/Users/pisces/workspace/pisces/ios/frameworks/w3bridge/w3bridge-master/lib",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "w3bridge/w3bridge-Prefix.pch";
+				INFOPLIST_FILE = "w3bridgeTests/w3bridgeTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		237AB033187C2EE200BD906B /* Build configuration list for PBXNativeTarget "w3bridge-Simulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				237AB034187C2EE200BD906B /* Debug */,
+				237AB035187C2EE200BD906B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		237AB038187C2FE700BD906B /* Build configuration list for PBXAggregateTarget "w3bridge-Framework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				237AB039187C2FE700BD906B /* Debug */,
+				237AB03A187C2FE700BD906B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		23A6DE5A1875145800FB9C34 /* Build configuration list for PBXProject "w3bridge" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				23A6DE801875145800FB9C34 /* Debug */,
+				23A6DE811875145800FB9C34 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		23A6DE821875145800FB9C34 /* Build configuration list for PBXNativeTarget "w3bridge-Device" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				23A6DE831875145800FB9C34 /* Debug */,
+				23A6DE841875145800FB9C34 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		23A6DE851875145800FB9C34 /* Build configuration list for PBXNativeTarget "w3bridgeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				23A6DE861875145800FB9C34 /* Debug */,
+				23A6DE871875145800FB9C34 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 23A6DE571875145800FB9C34 /* Project object */;
+}
