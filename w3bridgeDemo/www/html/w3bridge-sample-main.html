@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="initial-scale=1,maximum-scale=2,user-scalable=yes" />
+    <title>gbridgeTest</title>
+    
+    <style type="text/css">
+    	body {padding:0;margin:0;width:100%;height:100%;}
+    	ul {list-style:none;padding:0 0 20px 0;margin:0;}
+    	ul li {margin-left:20px;}
+    </style>
+</head>
+
+<body onload="onBodyLoad();">
+<h1 id="test-label">GBRIDGE TEST</h1>
+<ul>
+	<li><button onclick="openAsPush();" style="width:120px;height:30px;margin-top:30px;">open as push</button></li>
+	<li><button onclick="openAsPop();" style="width:120px;height:30px;margin-top:30px;">open as pop</button></li>
+	<li><button onclick="openReplyEditor();" style="width:120px;height:30px;margin-top:30px;">open reply editor</button></li>
+	<li><button onclick="openImagePicker();" style="width:120px;height:30px;margin-top:30px;">open image picker</button></li>
+	<li><button onclick="openWebViewIncludesTextView();" style="width:120px;height:30px;margin-top:30px;">open webview includes textview</button></li>
+	<li><button onclick="postNotification();" style="width:120px;height:30px;margin-top:30px;">post notification</button></li>
+	<li><button onclick="launch();" style="width:120px;height:30px;margin-top:30px;">launch</button></li>
+	<li><button onclick="multiplePopUpView();" style="width:120px;height:30px;margin-top:30px;">multiple popup view</button></li>
+	<li><button onclick="openGolfzon();" style="width:120px;height:30px;margin-top:30px;">골프존</button></li>
+	<li><button onclick="openLayerBridgeWebView();" style="width:120px;height:30px;margin-top:30px;">open layer bridge webview</button></li>
+</ul>
+
+<script type="text/javascript">
+		//navigator.isTest = true;
+</script>
+		
+<script type="text/javascript" src="../frontends/gbridge/gbridge-1.1.0.min.js?ver=201301221628"></script>
+<script type="text/javascript" src="../frontends/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+	
+	//--------------------------------------------------------------------------
+	//Methods
+	//--------------------------------------------------------------------------
+
+    function launch(){
+    	navigator.bridge.gzapp.launch("nametag", {seq: 100});
+    }
+    
+    function multiplePopUpView(){
+    	navigator.bridge.view.open("http://mui.spazon.com/resources/scripts/test/gbridgeTest.html", "pop");
+    }
+    
+    function openAsPush(){
+    	navigator.bridge.view.open("http://mui.spazon.com/resources/scripts/test/gbridgeTestStep1.html", "push", {closeEnabled: 0});
+    }
+    
+    function openAsPop(){
+    	navigator.bridge.view.open("http://mui.spazon.com/resources/scripts/test/gbridgeTestStep1.html", "pop");
+    }
+    
+    function openLayerBridgeWebView(){
+    	navigator.bridge.view.openLayerBridgeWebView("http://mui.spazon.com/resources/scripts/test/gbridgeLayerBridgeWebViewTest.html", {width: 300, height: 400, modal: 1});
+    }
+    
+    function openGolfzon(){
+    	window.location.href = "gzgolfzonapp://debugconsole";
+    }
+    
+    function openReplyEditor(){
+    	/*
+    	param info
+	    	messageSeq		Integer	
+	    	masterSeq		Integer	
+	    	usrNoRef	부모 댓글 usrNo	Integer	
+	    	publicAuth		Integer	
+	    	replyContent		String	
+	    	replyRef	부모 댓글 replySeq	Integer	
+	    	usrNickNmRef	
+    	*/
+    	var param = {messageSeq: 0, masterSeq: 0, userNoRef: 0, publicAuth: 0, replyRef: 0, usrNickNmRef: ""};
+    	navigator.bridge.gzapp.openReplyEditor("replySuccessCallBack", "replyCloseCallBack", param);
+    }
+    
+    function openImagePicker(){
+    	navigator.bridge.view.open("http://mui.spazon.com/resources/scripts/test/openImagePickerTest.html", "push", {useReloadDisplay: 0});
+    }
+    
+    function openWebViewIncludesTextView(){
+    	navigator.bridge.view.open("http://mui.spazon.com/resources/scripts/test/includesTextViewTest.html", "push");
+    }
+    
+    function postNotification(){
+    	navigator.bridge.notification.postNotification("init", {});
+    }
+
+	//--------------------------------------------------------------------------
+	//  Event handlers
+	//--------------------------------------------------------------------------
+	
+	function onBodyLoad(){
+		document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    function onDeviceReady(){
+    	debugconsoleTest();
+    	externalInterfaceCallTest();
+    	externalInterfaceAddCallbackTest();
+    	notificationTest();
+    }
+
+	//--------------------------------------------------------------------------
+	//  Test Functions
+	//--------------------------------------------------------------------------
+	
+	function debugconsoleTest(){
+    	console.log(DeviceInfo);
+	}
+
+	function externalInterfaceCallTest(){
+    	navigator.bridge.externalInterface.call("alert", {message: "mesage", title: "ext call"}, function(result){
+    		console.log("result -> " + result);
+    	}, function(error){
+    		console.log("error -> " + error);
+    	});
+    	
+
+    	navigator.bridge.externalInterface.call("alert", {message: "mesage", title: "ext call"}, successHandler, function(error){
+    		console.log("error -> " + error);
+    	});
+	}
+	
+	function successHandler(result)
+	{
+		console.log("successHandler");
+	}
+	
+	function externalInterfaceAddCallbackTest(){
+		navigator.bridge.externalInterface.addCallback("rightBarButtonClick", function(result){
+    		console.log("called rightBarButtonClick callback function");
+		});
+	}
+
+	function notificationTest(){
+    	navigator.bridge.notification.addObserver("select", "selectHandler");
+    	navigator.bridge.notification.addObserver("viewWillAppear", "viewWillAppear");
+    	navigator.bridge.notification.addObserver("viewWillDisappear", "viewWillDisappear");
+	}
+  
+	//--------------------------------------------------------------------------
+	//  Callback Functions
+	//--------------------------------------------------------------------------
+  
+    function replySuccessCallBack(){
+    	console.log("replySuccessCallBack");
+    }
+    
+    function replyCloseCallBack(){
+    	console.log("replyCloseCallBack");
+    }
+
+    function selectHandler(){
+    	console.log("selectHandler");
+    }
+    
+    function viewWillAppear(){
+    	console.log("viewWillAppear");
+    }
+
+    function viewWillDisappear(){
+    	console.log("viewWillDisappear");
+    }
+</script>
+</body>
+</html>
