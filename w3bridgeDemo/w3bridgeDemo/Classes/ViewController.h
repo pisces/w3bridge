@@ -10,5 +10,4 @@
 #import <w3bridge/w3bridge.h>
 
 @interface ViewController : UIBridgeWebViewController
-
 @end
