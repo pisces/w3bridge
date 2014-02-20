@@ -51,9 +51,6 @@ This framework control the native web view and included web page each other.
 ```
 ### Implementation of html web page
 #### w3bridge-sample-main.html
-<p align="left" >
-<img src="https://raw.github.com/pisces/w3bridge/master/w3bridgeDemo/screenshots/screenshot01.png" width="320" height="568"/>
-</p>
 ```html
 <!DOCTYPE html>
 <html>
@@ -80,13 +77,13 @@ This framework control the native web view and included web page each other.
 		
 <script type="text/javascript" src="http://pisces.jdsn.net/w3bridgeDemo/w3bridge-1.0.0.min.js"></script>
 <script type="text/javascript">
+    
+    var urlOfP1 = "http://pisces.jdsn.net/w3bridgeDemo/html/w3bridge-sample-p1.html";
+    var urlOfLayer = "http://pisces.jdsn.net/w3bridgeDemo/html/w3bridge-sample-layer.html";
 	
 	//--------------------------------------------------------------------------
 	// Methods
 	//--------------------------------------------------------------------------
-    
-    var urlOfP1 = "http://pisces.jdsn.net/w3bridgeDemo/html/w3bridge-sample-p1.html";
-    var urlOfLayer = "http://pisces.jdsn.net/w3bridgeDemo/html/w3bridge-sample-layer.html";
     
     function multiplePopUpView(){
     	navigator.bridge.view.open(urlOfP1, "pop");
@@ -180,3 +177,8 @@ This framework control the native web view and included web page each other.
 </body>
 </html>
 ```
+#### Result
+<p align="left" >
+<img src="https://raw.github.com/pisces/w3bridge/master/w3bridgeDemo/screenshots/screenshot01.png" width="320" height="568" border="1"/>
+<img src="https://raw.github.com/pisces/w3bridge/master/w3bridgeDemo/screenshots/screenshot05.png" border="1"/>
+</p>
