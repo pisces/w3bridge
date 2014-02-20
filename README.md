@@ -3,8 +3,7 @@ It provides bridge web view that make the web page looks like native view.
 This framework control the native web view and included web page each other.
 
 ## Usage
-### Implementation
-#### Inheritance
+### Implementation inheritance
 ```objective-c
 #import <UIKit/UIKit.h>
 #import <w3bridge/w3bridge.h>
@@ -17,18 +16,35 @@ This framework control the native web view and included web page each other.
 #define URLOfSample @"http://pisces.jdsn.net/w3bridgeDemo/html/w3bridge-sample-main.html"
 
 @implementation ViewController
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.destination = [NSURL URLWithString:URLOfSample];
 }
+@end
+```
+### Implementation compose
+```objective-c
+#import <UIKit/UIKit.h>
+#import <w3bridge/w3bridge.h>
 
-- (void)didReceiveMemoryWarning
+@interface ViewController : UIViewController
+@end
+
+#import "ViewController.h"
+
+#define URLOfSample @"http://pisces.jdsn.net/w3bridgeDemo/html/w3bridge-sample-main.html"
+
+@implementation ViewController
+- (void)viewDidLoad
 {
-    [super didReceiveMemoryWarning];
+    [super viewDidLoad];
+    
+    UIBridgeWebViewController *controller = [[UIBridgeWebViewController alloc] init];
+    controller.destination = [NSURL URLWithString:URLOfSample];
+    
+    [self.navigationController pushViewController:controller animated:YES];
 }
-
 @end
 ```
