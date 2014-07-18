@@ -35,6 +35,6 @@ BOOL LayerOptionEquals(LayerOption layerOption1, LayerOption layerOption2);
 
 @interface UILayerBridgeWebViewController : SimpleBridgeWebViewController
 @property (nonatomic) LayerOption layerOption;
-@property (nonatomic, readonly) UIView *modalView;
+@property (nonatomic, readonly, strong) UIView *modalView;
 - (void)showInView:(UIView *)view;
 @end

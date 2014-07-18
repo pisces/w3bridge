@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface UINavigationController (org_apache_PSUIKit_UINavigationController)
-@property (nonatomic, readonly) UIViewController *previousViewController;
-@property (nonatomic, readonly) NSString *previousTitle;
+@property (nonatomic, readonly, strong) UIViewController *previousViewController;
+@property (nonatomic, readonly, strong) NSString *previousTitle;
 - (void)customize;
 - (void)customize:(UIInterfaceOrientation)toInterfaceOrientation;
 @end

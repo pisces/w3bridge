@@ -412,11 +412,11 @@
     {
         loadFromInternal = YES;
         NSMutableURLRequest *request = copiedRequest ? copiedRequest : [NSMutableURLRequest requestWithURL:_destination cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-        NSDictionary *header = [HTTPActionManager sharedInstance].header;
-        if (header)
+        NSDictionary *headers = [HTTPActionManager sharedInstance].headers;
+        if (headers)
         {
-            for (NSString *key in header)
-                [request setValue:[header objectForKey:key] forHTTPHeaderField:key];
+            for (NSString *key in headers)
+                [request setValue:[headers objectForKey:key] forHTTPHeaderField:key];
         }
         
         [_webView stopLoading];

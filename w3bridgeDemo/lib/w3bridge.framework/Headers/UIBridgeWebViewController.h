@@ -48,7 +48,7 @@
 @property (nonatomic) int interfaceOrientationState;
 @property (nonatomic) CGFloat progressInterval;
 @property (nonatomic) LeftBarButtonItemType leftBarButtonItemType;
-@property (nonatomic, retain) NSString *leftBarButtonItemText;
+@property (nonatomic, strong) NSString *leftBarButtonItemText;
 - (void)openLayerBridgeWebViewWithURL:(NSString *)url layerOption:(LayerOption)layerOption;
 - (void)setRightBarButtonItemWithText:(NSString *)text buttonClickCallBack:(NSString *)buttonClickCallBack;
 @end

@@ -32,5 +32,5 @@ typedef int LineDrawPosition;
 
 @interface UILinedBackgroundView : UIView
 @property (nonatomic) LineDrawPosition lineDrawPosition;
-@property (nonatomic, retain) NSArray *seperatorColors;
+@property (nonatomic, strong) NSArray *seperatorColors;
 @end

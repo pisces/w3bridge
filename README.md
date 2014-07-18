@@ -178,7 +178,7 @@ This framework control the native web view and included web page each other.
 </html>
 ```
 #### Result
-<p align="left" >
-<img src="https://raw.github.com/pisces/w3bridge/master/w3bridgeDemo/screenshots/screenshot01.png" width="320" height="568" border="1"/>
-<img src="https://raw.github.com/pisces/w3bridge/master/w3bridgeDemo/screenshots/screenshot05.png" border="1"/>
+<p valign="top">
+<img src="https://raw.github.com/pisces/w3bridge/master/w3bridgeDemo/screenshots/screenshot01.png" width="320" height="568"/>
+<img src="https://raw.github.com/pisces/w3bridge/master/w3bridgeDemo/screenshots/screenshot05.png" width="524" height="274"/>
 </p>

@@ -57,7 +57,7 @@ typedef int BridgeViewType;
 @property (nonatomic) BOOL scrollEnabled;
 @property (nonatomic) int interfaceOrientationState;
 @property (nonatomic) UIModalTransitionStyle modalTransitionStyle;
-@property (nonatomic, retain) NSString *leftBarButtonItemText;
-@property (nonatomic, retain) NSString *title;
-@property (nonatomic, retain) NSURL *destination;
+@property (nonatomic, strong) NSString *leftBarButtonItemText;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSURL *destination;
 @end

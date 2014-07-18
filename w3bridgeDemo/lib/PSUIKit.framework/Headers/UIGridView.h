@@ -35,9 +35,9 @@ enum {
 typedef int UIGridViewItemAlign;
 
 @interface UIGridView : UIView <UIGestureRecognizerDelegate>
-@property (nonatomic, retain) IBOutlet id<UIGridViewDataSource> dataSource;
-@property (nonatomic, retain) IBOutlet id<UIGridViewDelegate, UIScrollViewDelegate> delegate;
-@property (nonatomic, readonly) UIScrollView *scrollView;
+@property (nonatomic, weak) IBOutlet id<UIGridViewDataSource> dataSource;
+@property (nonatomic, weak) IBOutlet id<UIGridViewDelegate, UIScrollViewDelegate> delegate;
+@property (nonatomic, readonly, strong) UIScrollView *scrollView;
 @property (nonatomic) UIGridViewItemAlign itemAlign;
 @property (nonatomic) int columnCount;
 @property (nonatomic) int rowCount;
