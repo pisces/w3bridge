@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:w3bridge/w3bridge.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:w3bridgeDemo/w3bridgeDemo.xcodeproj">
+   </FileRef>
+</Workspace>

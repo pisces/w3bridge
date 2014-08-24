@@ -30,7 +30,7 @@
 #import "PSUIKit.h"
 
 @interface UINavigationController (org_apache_PSUIKit_PSUINavigationController)
-@property (nonatomic, retain) UIThemeBase *theme;
+@property (nonatomic, strong) UIThemeBase *theme;
 @end
 
 @interface PSUINavigationController : UINavigationController
