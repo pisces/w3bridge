@@ -86,6 +86,8 @@
 
 - (void)invalidateProperties
 {
+    [super invalidateProperties];
+    
     _isFirstLoad = YES;
     _scrollEnabled = YES;
     callbackQueue = [[NSMutableArray alloc] init];
