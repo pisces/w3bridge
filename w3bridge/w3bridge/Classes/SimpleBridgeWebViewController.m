@@ -36,7 +36,6 @@
     BOOL destinationChanged;
     BOOL loadFromInternal;
     BOOL scrollEnabledChanged;
-    BOOL viewDidAppeared;
     BOOL webViewSynthesized;
     NSString *cachedPureURLString;
     NSMutableArray *callbackQueue;
@@ -154,8 +153,6 @@
 {
     [super viewDidAppear:animated];
     
-    viewDidAppeared = YES;
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:CDVPluginViewDidAppearNotification object:nil];
     
     if (!self.viewPushed && (self.isFirstLoad || self.reloadable))
@@ -216,8 +213,7 @@
 
 - (void)addCallbackId:(NSString *)callbackId withName:(NSString *)name
 {
-    NSDictionary *dic = @{@"callbackId": callbackId, @"name": name};
-    [callbackQueue addObject:dic];
+    [callbackQueue addObject:@{@"callbackId": callbackId, @"name": name}];
 }
 
 - (void)callbackWithName:(NSString *)name withResult:(NSDictionary *)result
@@ -537,6 +533,7 @@
     BOOL isRetina = [[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0;
     CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
     NSString *uuidString = (NSString *) CFBridgingRelease(CFUUIDCreateString(kCFAllocatorDefault, uuid));
+    
     [devProps setObject:[device model] forKey:@"platform"];
     [devProps setObject:[NSNumber numberWithInt:[device platformType]] forKey:@"platformType"];
     [devProps setObject:[device platformString] forKey:@"platformString"];
@@ -547,11 +544,14 @@
     [devProps setObject:APPLICATION_VERSION forKey:@"appVersion"];
     [devProps setObject:[NSNumber numberWithBool:isRetina] forKey:@"isRetina"];
     [devProps setObject:[NSNumber numberWithInt:[self freeMemory]] forKey:@"freeMemory"];
+    
     CFRelease(uuid);
+    
     return devProps;
 }
 
-- (natural_t)freeMemory {
+- (natural_t)freeMemory
+{
     mach_port_t host_port;
     mach_msg_type_number_t host_size;
     vm_size_t pagesize;
@@ -565,12 +565,14 @@
     }
     /* Stats in bytes */
     natural_t mem_free = vm_stat.free_count * pagesize;
+    
     return mem_free;
 }
 
 - (id)getCommandInstance:(NSString *)pluginName
 {
     NSString* className = [_pluginsMap objectForKey:[pluginName lowercaseString]];
+    
     if (className == nil)
         return nil;
     
@@ -673,6 +675,8 @@
 
 - (void)updateWithReachability:(Reachability *)aReachability
 {
+    [super updateWithReachability:aReachability];
+    
     if (self.noreachable)
         [self load];
 }
