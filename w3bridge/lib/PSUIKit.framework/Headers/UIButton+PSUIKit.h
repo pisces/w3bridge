@@ -7,7 +7,7 @@
 //
 
 /*
- Copyright 2013 KH Kim
+ Copyright 2013 ~ 2014 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@
 #import "UIViewController+PSUIKit.h"
 
 @interface UIButton (org_apache_PSUIKit_UIButton)
-@property (nonatomic, readonly, retain) NSMutableDictionary *resourceDictionary;
+@property (nonatomic, readonly, strong) NSMutableDictionary *resourceDictionary;
 - (void)setBackgroundImage:(UIImage *)image forState:(UIControlState)state forViewMetrics:(UIViewMatrics)viewMetrics;
 - (void)setTitleColor:(UIColor *)color forState:(UIControlState)state forViewMetrics:(UIViewMatrics)viewMetrics;
 - (void)updateView;

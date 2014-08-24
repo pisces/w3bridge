@@ -7,7 +7,7 @@
 //
 
 /*
- Copyright 2013 KH Kim
+ Copyright 2013 ~ 2014 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -22,16 +22,12 @@
  limitations under the License.
  */
 
-#import <UIKit/UIKit.h>
+#import "PSUIView.h"
 #import "GraphicsLayout.h"
 
-@interface UIBadge : UIView
-
-@property(nonatomic, retain) NSString *text;
+@interface UIBadge : PSUIView
+@property(nonatomic, strong) NSString *text;
 @property(nonatomic, readonly) UILabel *textLabel;
 @property(nonatomic, readonly) UIImageView *imageView;
-
 - (id)initWithBackgroundImage:(UIImage *)image maxSize:(CGSize)_maxSize minSize:(CGSize)_minSize padding:(CGPadding)_padding;
-- (void)updateDisplayList;
-
 @end

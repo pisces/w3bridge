@@ -7,7 +7,7 @@
 //
 
 /*
- Copyright 2013 KH Kim
+ Copyright 2013 ~ 2014 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -32,9 +32,10 @@
 
 @interface UIViewController (org_apache_PSUIKit_UIViewController)
 @property (nonatomic, retain) UIViewController *relativeController;
-+ (UIViewController *)controllerWithViewName:(NSString *)viewName;
-+ (UIViewController *)controllerWithViewName:(NSString *)viewName bundle:(NSBundle *)bundle;
-+ (UIViewController *)controllerWithViewName:(NSString *)viewName suffix:(char *)suffix bundle:(NSBundle *)bundle;
++ (instancetype)controller;
++ (instancetype)controllerWithViewName:(NSString *)viewName;
++ (instancetype)controllerWithViewName:(NSString *)viewName bundle:(NSBundle *)bundle;
++ (instancetype)controllerWithViewName:(NSString *)viewName suffix:(char *)suffix bundle:(NSBundle *)bundle;
 - (void)close;
 - (void)closeAnimated:(BOOL)animated;
 - (void)closeAnimated:(BOOL)animated completion:(void (^)(void))completion;

@@ -7,7 +7,7 @@
 //
 
 /*
- Copyright 2013 KH Kim
+ Copyright 2013 ~ 2014 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -48,7 +48,7 @@
 @property (nonatomic) int interfaceOrientationState;
 @property (nonatomic) CGFloat progressInterval;
 @property (nonatomic) LeftBarButtonItemType leftBarButtonItemType;
-@property (nonatomic, retain) NSString *leftBarButtonItemText;
+@property (nonatomic, strong) NSString *leftBarButtonItemText;
 - (void)openLayerBridgeWebViewWithURL:(NSString *)url layerOption:(LayerOption)layerOption;
 - (void)setRightBarButtonItemWithText:(NSString *)text buttonClickCallBack:(NSString *)buttonClickCallBack;
 @end

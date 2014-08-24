@@ -7,7 +7,7 @@
 //
 
 /*
- Copyright 2013 KH Kim
+ Copyright 2013 ~ 2014 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -32,31 +32,46 @@
 
 @implementation SimpleBridgeWebViewController
 {
-@private BOOL loadFromInternal;
-@private BOOL viewDidAppeared;
-@private BOOL webViewSynthesized;
-@private NSString *cachedPureURLString;
-@private NSMutableArray *callbackQueue;
-@private NSMutableArray *notificationObjects;
-@private NSURLRequest *copiedRequest;
+@private
+    BOOL destinationChanged;
+    BOOL loadFromInternal;
+    BOOL scrollEnabledChanged;
+    BOOL viewDidAppeared;
+    BOOL webViewSynthesized;
+    NSString *cachedPureURLString;
+    NSMutableArray *callbackQueue;
+    NSMutableArray *notificationObjects;
+    NSURLRequest *copiedRequest;
 }
 
-@synthesize isFirstLoad = _isFirstLoad;
-@synthesize receiveShouldStartLoading = _receiveShouldStartLoading;
-@synthesize pluginObjects = _pluginObjects;
-@synthesize pluginsMap = _pluginsMap;
-@synthesize settings = _settings;
-@synthesize sessionKey = _sessionKey;
-@synthesize commandDelegate = _commandDelegate;
-@synthesize destination = _destination;
-@synthesize scrollViewOnWebView = _scrollViewOnWebView;
-@synthesize scrollEnabled = _scrollEnabled;
-@synthesize noreachable, reloadable, viewPushed;
-@synthesize webView = _webView;
+// ================================================================================================
+//  Overridden: PSUIViewController
+// ================================================================================================
 
-// ================================================================================================
-//  View Cycle
-// ================================================================================================
+#pragma mark - View cycle
+
+- (void)commitProperties
+{
+    if (destinationChanged)
+    {
+        destinationChanged = NO;
+        cachedPureURLString = nil;
+        copiedRequest = nil;
+        
+        [self load];
+    }
+    
+    if (scrollEnabledChanged)
+    {
+        scrollEnabledChanged = NO;
+        
+        for (UIView * subView in _webView.subviews)
+        {
+            if ([subView isKindOfClass:[UIScrollView class]])
+                ((UIScrollView *) subView).scrollEnabled = _scrollEnabled;
+        }
+    }
+}
 
 - (void)dealloc
 {
@@ -70,19 +85,17 @@
     [super closeAnimated:animated completion:completion];
 }
 
-- (void)loadView
+- (void)invalidateProperties
 {
-    [super loadView];
-    
     _isFirstLoad = YES;
     _scrollEnabled = YES;
     callbackQueue = [[NSMutableArray alloc] init];
     notificationObjects = [[NSMutableArray alloc] init];
 }
 
-- (void)viewDidLoad
+- (void)loadView
 {
-    [super viewDidLoad];
+    [super loadView];
     
     [self setCookieAcceptPolicy];
     
@@ -93,6 +106,7 @@
     self.extendedLayoutIncludesOpaqueBars = YES;
     
     webViewSynthesized = _webView != nil;
+    
     if (!_webView)
     {
         _webView = [[UIWebView alloc] init];
@@ -133,7 +147,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRetryFailedRequest:) name:didRetryFailedRequestNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     
-    noreachable = [[ReachabilityViewManager sharedInstance] noreachable:self.view];
+    _noreachable = [[ReachabilityViewManager sharedInstance] noreachable:self.view];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -144,10 +158,10 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:CDVPluginViewDidAppearNotification object:nil];
     
-    if (!viewPushed && (_isFirstLoad || reloadable))
+    if (!self.viewPushed && (self.isFirstLoad || self.reloadable))
         [self load];
     
-    viewPushed = NO;
+    _viewPushed = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -356,7 +370,6 @@
     _pluginsMap = nil;
     _settings = nil;
     _sessionKey = nil;
-    _commandDelegate = nil;
     _destination = nil;
     _scrollViewOnWebView = nil;
     _webView.delegate = nil;
@@ -405,7 +418,7 @@
 
 - (void)load
 {
-    if ((noreachable = [[ReachabilityViewManager sharedInstance] noreachable:self.view]))
+    if ((self.noreachable = [[ReachabilityViewManager sharedInstance] noreachable:self.view]))
         return;
     
     if (_destination != nil && _webView)
@@ -660,7 +673,7 @@
 
 - (void)updateWithReachability:(Reachability *)aReachability
 {
-    if (noreachable)
+    if (self.noreachable)
         [self load];
 }
 
@@ -674,14 +687,9 @@
         return;
     
     _destination = destination;
+    destinationChanged = YES;
     
-    if (viewDidAppeared)
-    {
-        cachedPureURLString = nil;
-        copiedRequest = nil;
-        
-        [self load];
-    }
+    [self invalidateProperties];
 }
 
 - (void)setScrollEnabled:(BOOL)scrollEnabled
@@ -690,11 +698,9 @@
         return;
     
     _scrollEnabled = scrollEnabled;
+    scrollEnabledChanged = YES;
     
-    for (UIView * subView in _webView.subviews) {
-        if ([subView isKindOfClass:[UIScrollView class]])
-            ((UIScrollView *) subView).scrollEnabled = _scrollEnabled;
-    }
+    [self invalidateProperties];
 }
 
 // ================================================================================================

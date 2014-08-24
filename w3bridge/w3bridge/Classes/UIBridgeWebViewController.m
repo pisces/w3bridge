@@ -7,7 +7,7 @@
 //
 
 /*
- Copyright 2013 KH Kim
+ Copyright 2013 ~ 2014 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -69,9 +69,9 @@
     return self.isFirstLoad ? YES : _closeEnabled;
 }
 
-- (void)viewDidLoad
+- (void)loadView
 {   
-    [super viewDidLoad];
+    [super loadView];
     
     self.view.layer.rasterizationScale = [UIScreen mainScreen].scale;
     self.view.layer.shouldRasterize = YES;

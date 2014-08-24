@@ -7,7 +7,7 @@
 //
 
 /*
- Copyright 2013 KH Kim
+ Copyright 2013 ~ 2014 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -25,5 +25,4 @@
 #import "UIBadge.h"
 #import "UIButtonBar.h"
 #import "UIGridView.h"
-#import "UILinedBackgroundView.h"
 #import "UIToastView.h"

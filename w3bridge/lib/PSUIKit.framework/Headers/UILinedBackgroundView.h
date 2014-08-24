@@ -7,7 +7,7 @@
 //
 
 /*
- Copyright 2013 KH Kim
+ Copyright 2013 ~ 2014 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "GraphicsLayout.h"
 
 enum {
     LineDrawPositionBottom = 1<<0,
@@ -32,5 +33,7 @@ typedef int LineDrawPosition;
 
 @interface UILinedBackgroundView : UIView
 @property (nonatomic) LineDrawPosition lineDrawPosition;
-@property (nonatomic, retain) NSArray *seperatorColors;
+@property (nonatomic, strong) NSArray *seperatorColors;
+@property (nonatomic, assign) CGPadding linePadding;
+@property (nonatomic, assign) CGFloat lineHeight;
 @end

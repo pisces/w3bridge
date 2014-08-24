@@ -7,7 +7,7 @@
 //
 
 /*
- Copyright 2013 KH Kim
+ Copyright 2013 ~ 2014 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -24,9 +24,10 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "GraphicsLayout.h"
-#import "UIGridViewDataSource.h"
-#import "UIGridViewDelegate.h"
 #import "UIGridViewCell.h"
+
+@protocol UIGridViewDataSource;
+@protocol UIGridViewDelegate;
 
 enum {
     UIGridViewItemAlignVertical = 0,
@@ -35,8 +36,8 @@ enum {
 typedef int UIGridViewItemAlign;
 
 @interface UIGridView : UIView <UIGestureRecognizerDelegate>
-@property (nonatomic, retain) IBOutlet id<UIGridViewDataSource> dataSource;
-@property (nonatomic, retain) IBOutlet id<UIGridViewDelegate, UIScrollViewDelegate> delegate;
+@property (nonatomic, weak) IBOutlet id<UIGridViewDataSource> dataSource;
+@property (nonatomic, weak) IBOutlet id<UIGridViewDelegate, UIScrollViewDelegate> delegate;
 @property (nonatomic, readonly) UIScrollView *scrollView;
 @property (nonatomic) UIGridViewItemAlign itemAlign;
 @property (nonatomic) int columnCount;
@@ -47,4 +48,47 @@ typedef int UIGridViewItemAlign;
 - (void)initProperties;
 - (void)reloadData;
 - (void)removeSelectionWithIndexPathWillBeSelect:(NSIndexPath *)indexPath;
+@end
+
+@protocol UIGridViewDataSource <NSObject>
+@required
+- (NSInteger)sectionCountInGridView:(UIGridView *)gridView;
+
+@required
+- (NSInteger)gridView:(UIGridView *)gridView itemCountInSection:(NSInteger)section;
+
+@required
+- (UIGridViewCell *)gridView:(UIGridView *)gridView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+
+@optional
+- (UIView *)gridView:(UIGridView *)gridView headerViewInSection:(NSInteger)section;
+
+@optional
+- (UIView *)gridView:(UIGridView *)gridView footerViewInSection:(NSInteger)section;
+
+@optional
+- (CGFloat)gridView:(UIGridView *)gridView headerHeightInSection:(NSInteger)section;
+
+@optional
+- (CGFloat)gridView:(UIGridView *)gridView headerWidthInSection:(NSInteger)section;
+
+@optional
+- (CGFloat)gridView:(UIGridView *)gridView footerHeightInSection:(NSInteger)section;
+
+@optional
+- (CGFloat)gridView:(UIGridView *)gridView footerWidthInSection:(NSInteger)section;
+@end
+
+@protocol UIGridViewDelegate <NSObject>
+@optional
+- (void)gridView:(UIGridView *)gridView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+
+@optional
+- (void)gridView:(UIGridView *)gridView willDisplayCell:(UIGridViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
+
+@optional
+- (void)gridView:(UIGridView *)gridView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section;
+
+@optional
+- (void)gridView:(UIGridView *)gridView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section;
 @end

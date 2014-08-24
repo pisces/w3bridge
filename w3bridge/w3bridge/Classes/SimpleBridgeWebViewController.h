@@ -7,7 +7,7 @@
 //
 
 /*
- Copyright 2013 KH Kim
+ Copyright 2013 ~ 2014 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -46,21 +46,21 @@
 - (BOOL)webView:(id)sender runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(CGRect *)frame;
 @end
 
-@interface SimpleBridgeWebViewController : UIViewController <UIWebViewDelegate, BridgeExternalInterfaceDelegate, CDVCommandDelegate, BridgeNotificationDelegate>
+@interface SimpleBridgeWebViewController : PSUIViewController <UIWebViewDelegate, BridgeExternalInterfaceDelegate, CDVCommandDelegate, BridgeNotificationDelegate>
 @property (nonatomic, readonly) BOOL isFirstLoad;
 @property (nonatomic) BOOL noreachable;
 @property (nonatomic) BOOL reloadable;
+@property (nonatomic) BOOL scrollEnabled;
 @property (nonatomic) BOOL viewPushed;
 @property (nonatomic, readonly) BOOL receiveShouldStartLoading;
-@property (nonatomic, readonly, retain) NSMutableDictionary* pluginObjects;
-@property (nonatomic, readonly, retain) NSDictionary* pluginsMap;
-@property (nonatomic, readonly, retain) NSDictionary* settings;
 @property (nonatomic, readonly, copy)   NSString* sessionKey;
-@property (nonatomic, readwrite, retain) id<CDVCommandDelegate> commandDelegate;
+@property (nonatomic, readonly) NSMutableDictionary* pluginObjects;
+@property (nonatomic, readonly) NSDictionary* pluginsMap;
+@property (nonatomic, readonly) NSDictionary* settings;
+@property (nonatomic, strong) NSURL *destination;
 @property (nonatomic, readonly) UIScrollView *scrollViewOnWebView;
-@property (nonatomic, retain) IBOutlet UIWebView *webView;
-@property (nonatomic, retain) NSURL *destination;
-@property (nonatomic) BOOL scrollEnabled;
+@property (nonatomic, strong) IBOutlet UIWebView *webView;
+@property (nonatomic, readwrite, weak) id<CDVCommandDelegate> commandDelegate;
 - (BOOL)canReceiveNotificationSelfOnly:(NSString *)name;
 - (void)clear;
 - (NSString *)executeJSFunc:(NSString *)functionName withObject:(NSDictionary *)object;

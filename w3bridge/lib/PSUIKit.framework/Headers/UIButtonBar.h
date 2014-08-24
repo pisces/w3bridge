@@ -7,7 +7,7 @@
 //
 
 /*
- Copyright 2013 KH Kim
+ Copyright 2013 ~ 2014 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -22,19 +22,19 @@
  limitations under the License.
  */
 
-#import <UIKit/UIKit.h>
+#import "PSUIView.h"
 #import "GraphicsLayout.h"
 #import "UIView+PSUIKit.h"
 #import "UIButtonBarDelegate.h"
 
-@interface UIButtonBar : UIView
+@interface UIButtonBar : PSUIView
 @property (nonatomic) int numOfButtons;
 @property (nonatomic) CGFloat horizontalGap;
 @property (nonatomic) CGPadding padding;
 @property (nonatomic, readonly) NSMutableArray *buttons;
 @property (nonatomic, readonly) CGFloat buttonWidth;
 @property (nonatomic, readonly) CGFloat buttonHeight;
-@property (nonatomic, retain) IBOutlet id<UIButtonBarDelegate> delegate;
+@property (nonatomic, weak) IBOutlet id<UIButtonBarDelegate> delegate;
 @property (nonatomic, readonly) UIButton *selectedChild;
 @property (nonatomic) int selectedIndex;
 @property (nonatomic) BOOL toggle;

@@ -7,7 +7,7 @@
 //
 
 /*
- Copyright 2013 KH Kim
+ Copyright 2013 ~ 2014 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -31,11 +31,11 @@
 @property (nonatomic) CGFloat reloadBoundsHeight;
 @property (nonatomic) CGPoint contentOffset;
 @property (nonatomic) BOOL updating;
-@property (nonatomic, retain) NSDate *updateDate;
-@property (nonatomic, retain) UIView *backgroundView;
-@property (nonatomic, retain) UIScrollView *target;
-@property (nonatomic, readonly, retain) IBOutlet UIActivityIndicatorView *activitiIndicatorView;
-@property (nonatomic, readonly, retain) IBOutlet UIImageView *arrowImageView;
-@property (nonatomic, readonly, retain) IBOutlet UILabel *titleLabel;
-@property (nonatomic, readonly, retain) IBOutlet UILabel *updateLabel;
+@property (nonatomic, strong) NSDate *updateDate;
+@property (nonatomic, strong) UIView *backgroundView;
+@property (nonatomic, weak) UIScrollView *target;
+@property (nonatomic, readonly, strong) IBOutlet UIActivityIndicatorView *activitiIndicatorView;
+@property (nonatomic, readonly, weak) IBOutlet UIImageView *arrowImageView;
+@property (nonatomic, readonly, weak) IBOutlet UILabel *titleLabel;
+@property (nonatomic, readonly, weak) IBOutlet UILabel *updateLabel;
 @end

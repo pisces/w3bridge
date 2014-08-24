@@ -7,7 +7,7 @@
 //
 
 /*
- Copyright 2013 KH Kim
+ Copyright 2013 ~ 2014 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -30,9 +30,9 @@
 @property (nonatomic) BOOL visibility;
 @property (nonatomic) CGPadding padding;
 @property (nonatomic) NSTimeInterval hideTimeInterval;
-@property (nonatomic, retain) UIColor *backgroundColor;
-@property (nonatomic, retain) UIView *backgroundView;
-@property (nonatomic, retain) UIImage *backgroundImage;
+@property (nonatomic, strong) UIColor *backgroundColor;
+@property (nonatomic, strong) UIView *backgroundView;
+@property (nonatomic, strong) UIImage *backgroundImage;
 @property (nonatomic, readonly) UILabel *textLabel;
 - (void)hide;
 - (void)hideWithAnimated:(BOOL)animated;
