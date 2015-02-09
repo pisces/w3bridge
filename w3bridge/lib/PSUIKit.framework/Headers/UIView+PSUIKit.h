@@ -7,7 +7,7 @@
 //
 
 /*
- Copyright 2013 ~ 2014 KH Kim
+ Copyright 2013 ~ 2015 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -34,10 +34,14 @@ typedef Byte UIViewMatrics;
 
 @interface UIView (org_apache_PSUIKit_UIView)
 @property (nonatomic) BOOL bubble;
-@property CGFloat x;
-@property CGFloat y;
-@property CGFloat width;
-@property CGFloat height;
+@property (nonatomic) CGFloat x;
+@property (nonatomic) CGFloat y;
+@property (nonatomic) CGFloat width;
+@property (nonatomic) CGFloat height;
+@property (nonatomic, readonly) CGFloat right;
+@property (nonatomic, readonly) CGFloat bottom;
+@property (nonatomic, assign) CGPoint origin;
+@property (nonatomic, assign) CGSize size;
 @property (nonatomic, readonly) UIImage *image;
 + (instancetype)nibBasedInstance;
 + (instancetype)nibBasedInstanceWithBundle:(NSBundle *)bundle;

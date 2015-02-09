@@ -43,8 +43,8 @@
 		232C8BC01875298A00319D34 /* UILayerBridgeWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BAA1875298A00319D34 /* UILayerBridgeWebViewController.m */; };
 		232C8BC11875298A00319D34 /* w3bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BAC1875298A00319D34 /* w3bridge.m */; };
 		232C8BC21875298A00319D34 /* w3bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BAC1875298A00319D34 /* w3bridge.m */; };
-		237AB011187C2B1A00BD906B /* UIDevice-Capabilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 237AB00A187C2B1A00BD906B /* UIDevice-Capabilities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		237AB012187C2B1A00BD906B /* UIDevice-Capabilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 237AB00A187C2B1A00BD906B /* UIDevice-Capabilities.m */; };
+		235D836D1A8899B900262BCF /* w3bridge.strings in Resources */ = {isa = PBXBuildFile; fileRef = 235D836B1A8899B900262BCF /* w3bridge.strings */; };
+		235D836F1A8899C000262BCF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 235D83671A8898AB00262BCF /* Info.plist */; };
 		237AB013187C2B1A00BD906B /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 237AB00C187C2B1A00BD906B /* UIDevice-Hardware.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		237AB014187C2B1A00BD906B /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 237AB00C187C2B1A00BD906B /* UIDevice-Hardware.m */; };
 		237AB01B187C2C5400BD906B /* NSDictionary+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 237AB01A187C2C5400BD906B /* NSDictionary+Extensions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -52,7 +52,6 @@
 		237AB01F187C2EE200BD906B /* BridgeExternalInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8B951875298A00319D34 /* BridgeExternalInterface.m */; };
 		237AB020187C2EE200BD906B /* BridgeNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8B981875298A00319D34 /* BridgeNotification.m */; };
 		237AB021187C2EE200BD906B /* w3bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BAC1875298A00319D34 /* w3bridge.m */; };
-		237AB022187C2EE200BD906B /* UIDevice-Capabilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 237AB00A187C2B1A00BD906B /* UIDevice-Capabilities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		237AB023187C2EE200BD906B /* UILayerBridgeWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8BAA1875298A00319D34 /* UILayerBridgeWebViewController.m */; };
 		237AB024187C2EE200BD906B /* BridgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C8B9B1875298A00319D34 /* BridgeView.m */; };
 		237AB025187C2EE200BD906B /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 237AB00C187C2B1A00BD906B /* UIDevice-Hardware.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -138,8 +137,10 @@
 		232C8BAA1875298A00319D34 /* UILayerBridgeWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILayerBridgeWebViewController.m; sourceTree = "<group>"; };
 		232C8BAB1875298A00319D34 /* w3bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = w3bridge.h; sourceTree = "<group>"; };
 		232C8BAC1875298A00319D34 /* w3bridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = w3bridge.m; sourceTree = "<group>"; };
-		237AB009187C2B1A00BD906B /* UIDevice-Capabilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice-Capabilities.h"; sourceTree = "<group>"; };
-		237AB00A187C2B1A00BD906B /* UIDevice-Capabilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice-Capabilities.m"; sourceTree = "<group>"; };
+		235D83641A8898AB00262BCF /* w3bridge-Bundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "w3bridge-Bundle.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		235D83671A8898AB00262BCF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		235D836C1A8899B900262BCF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/w3bridge.strings; sourceTree = "<group>"; };
+		235D836E1A8899C000262BCF /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/w3bridge.strings; sourceTree = "<group>"; };
 		237AB00B187C2B1A00BD906B /* UIDevice-Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice-Hardware.h"; sourceTree = "<group>"; };
 		237AB00C187C2B1A00BD906B /* UIDevice-Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice-Hardware.m"; sourceTree = "<group>"; };
 		237AB019187C2C5400BD906B /* NSDictionary+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Extensions.h"; sourceTree = "<group>"; };
@@ -161,6 +162,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		235D83611A8898AB00262BCF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		237AB02E187C2EE200BD906B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -255,11 +263,26 @@
 			name = controllers;
 			sourceTree = "<group>";
 		};
+		235D83651A8898AB00262BCF /* w3bridge-Bundle */ = {
+			isa = PBXGroup;
+			children = (
+				235D83661A8898AB00262BCF /* Supporting Files */,
+			);
+			path = "w3bridge-Bundle";
+			sourceTree = "<group>";
+		};
+		235D83661A8898AB00262BCF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				235D836B1A8899B900262BCF /* w3bridge.strings */,
+				235D83671A8898AB00262BCF /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		237AB008187C2B0B00BD906B /* UIDevice */ = {
 			isa = PBXGroup;
 			children = (
-				237AB009187C2B1A00BD906B /* UIDevice-Capabilities.h */,
-				237AB00A187C2B1A00BD906B /* UIDevice-Capabilities.m */,
 				237AB00B187C2B1A00BD906B /* UIDevice-Hardware.h */,
 				237AB00C187C2B1A00BD906B /* UIDevice-Hardware.m */,
 			);
@@ -272,6 +295,7 @@
 				23A6DE641875145800FB9C34 /* w3bridge */,
 				23A6DE781875145800FB9C34 /* w3bridgeTests */,
 				23C455A1187D351B00DCEF3C /* www */,
+				235D83651A8898AB00262BCF /* w3bridge-Bundle */,
 				23A6DE611875145800FB9C34 /* Frameworks */,
 				23A6DE601875145800FB9C34 /* Products */,
 			);
@@ -283,6 +307,7 @@
 				23A6DE5F1875145800FB9C34 /* libw3bridge-Device.a */,
 				23A6DE6F1875145800FB9C34 /* w3bridgeTests.xctest */,
 				237AB036187C2EE200BD906B /* libw3bridge-Simulator.a */,
+				235D83641A8898AB00262BCF /* w3bridge-Bundle.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -346,6 +371,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		235D83631A8898AB00262BCF /* w3bridge-Bundle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 235D83681A8898AB00262BCF /* Build configuration list for PBXNativeTarget "w3bridge-Bundle" */;
+			buildPhases = (
+				235D83601A8898AB00262BCF /* Sources */,
+				235D83611A8898AB00262BCF /* Frameworks */,
+				235D83621A8898AB00262BCF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "w3bridge-Bundle";
+			productName = "w3bridge-Bundle";
+			productReference = 235D83641A8898AB00262BCF /* w3bridge-Bundle.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		237AB01D187C2EE200BD906B /* w3bridge-Simulator */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 237AB033187C2EE200BD906B /* Build configuration list for PBXNativeTarget "w3bridge-Simulator" */;
@@ -406,6 +448,11 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "KH Kim";
+				TargetAttributes = {
+					235D83631A8898AB00262BCF = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
 			};
 			buildConfigurationList = 23A6DE5A1875145800FB9C34 /* Build configuration list for PBXProject "w3bridge" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -413,6 +460,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				ko,
 			);
 			mainGroup = 23A6DE561875145800FB9C34;
 			productRefGroup = 23A6DE601875145800FB9C34 /* Products */;
@@ -423,11 +471,21 @@
 				237AB01D187C2EE200BD906B /* w3bridge-Simulator */,
 				23A6DE6E1875145800FB9C34 /* w3bridgeTests */,
 				237AB037187C2FE700BD906B /* w3bridge-Framework */,
+				235D83631A8898AB00262BCF /* w3bridge-Bundle */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		235D83621A8898AB00262BCF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				235D836F1A8899C000262BCF /* Info.plist in Resources */,
+				235D836D1A8899B900262BCF /* w3bridge.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		23A6DE6D1875145800FB9C34 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -451,11 +509,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "SIMULATOR_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}-Simulator.a\" &&\nDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}-Device.a\" &&\nUNIVERSAL_LIBRARY_DIR=\"/Users/Shared/Frameworks\" &&\nUNIVERSAL_LIBRARY_PATH=\"${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_NAME}\" &&\nFRAMEWORK=\"${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_NAME}.framework\" &&\n\n# Create framework directory structure.\nrm -rf \"${FRAMEWORK}\" &&\nmkdir -p \"${UNIVERSAL_LIBRARY_DIR}\" &&\nmkdir -p \"${FRAMEWORK}/Headers\" &&\n\n# Generate universal binary for the device and simulator.\nlipo \"${SIMULATOR_LIBRARY_PATH}\" \"${DEVICE_LIBRARY_PATH}\" -create -output \"${UNIVERSAL_LIBRARY_PATH}\" &&\n\n# Move files to appropriate locations in framework paths.\nmv \"${UNIVERSAL_LIBRARY_PATH}\" \"${FRAMEWORK}\" &&\n\n# Copy header files from project\ncd \"${SRCROOT}/${PRODUCT_NAME}/Classes/\" &&\nfind . -name '*.h' | cpio -pdm \"${FRAMEWORK}/Headers\"\n\ncp -r \"${SRCROOT}/www\" \"${FRAMEWORK}\"";
+			shellScript = "SIMULATOR_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}-Simulator.a\" &&\nDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}-Device.a\" &&\nBUNDLE_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}-Bundle.bundle\" &&\nUNIVERSAL_LIBRARY_DIR=\"/Users/Shared/Frameworks\" &&\nUNIVERSAL_LIBRARY_PATH=\"${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_NAME}\" &&\nFRAMEWORK=\"${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_NAME}.framework\" &&\n\n# Create framework directory structure.\nrm -rf \"${FRAMEWORK}\" &&\nmkdir -p \"${UNIVERSAL_LIBRARY_DIR}\" &&\nmkdir -p \"${FRAMEWORK}/Headers\" &&\n\n# Generate universal binary for the device and simulator.\nlipo \"${SIMULATOR_LIBRARY_PATH}\" \"${DEVICE_LIBRARY_PATH}\" -create -output \"${UNIVERSAL_LIBRARY_PATH}\" &&\n\n# Move files to appropriate locations in framework paths.\nmv \"${UNIVERSAL_LIBRARY_PATH}\" \"${FRAMEWORK}\" &&\n\n# Copy header files from project\ncd \"${SRCROOT}/${PRODUCT_NAME}/Classes/\" &&\nfind . -name '*.h' | cpio -pdm \"${FRAMEWORK}/Headers\"\n\ncp -r \"${SRCROOT}/www\" \"${FRAMEWORK}\" &&\ncp -r \"${BUNDLE_PATH}\" \"${FRAMEWORK}\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		235D83601A8898AB00262BCF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		237AB01E187C2EE200BD906B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -463,7 +528,6 @@
 				237AB01F187C2EE200BD906B /* BridgeExternalInterface.m in Sources */,
 				237AB020187C2EE200BD906B /* BridgeNotification.m in Sources */,
 				237AB021187C2EE200BD906B /* w3bridge.m in Sources */,
-				237AB022187C2EE200BD906B /* UIDevice-Capabilities.m in Sources */,
 				237AB023187C2EE200BD906B /* UILayerBridgeWebViewController.m in Sources */,
 				237AB024187C2EE200BD906B /* BridgeView.m in Sources */,
 				237AB025187C2EE200BD906B /* UIDevice-Hardware.m in Sources */,
@@ -484,7 +548,6 @@
 				232C8BAD1875298A00319D34 /* BridgeExternalInterface.m in Sources */,
 				232C8BAF1875298A00319D34 /* BridgeNotification.m in Sources */,
 				232C8BC11875298A00319D34 /* w3bridge.m in Sources */,
-				237AB011187C2B1A00BD906B /* UIDevice-Capabilities.m in Sources */,
 				232C8BBF1875298A00319D34 /* UILayerBridgeWebViewController.m in Sources */,
 				232C8BB11875298A00319D34 /* BridgeView.m in Sources */,
 				237AB013187C2B1A00BD906B /* UIDevice-Hardware.m in Sources */,
@@ -513,7 +576,6 @@
 				232C8BB01875298A00319D34 /* BridgeNotification.m in Sources */,
 				23C455AA187D351B00DCEF3C /* w3bridge-1.0.0.min.js in Sources */,
 				232C8BC21875298A00319D34 /* w3bridge.m in Sources */,
-				237AB012187C2B1A00BD906B /* UIDevice-Capabilities.m in Sources */,
 				232C8BAE1875298A00319D34 /* BridgeExternalInterface.m in Sources */,
 				232C8BC01875298A00319D34 /* UILayerBridgeWebViewController.m in Sources */,
 				23C455A7187D351B00DCEF3C /* w3bridge-1.0.0.js in Sources */,
@@ -533,6 +595,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		235D836B1A8899B900262BCF /* w3bridge.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				235D836C1A8899B900262BCF /* en */,
+				235D836E1A8899C000262BCF /* ko */,
+			);
+			name = w3bridge.strings;
+			sourceTree = "<group>";
+		};
 		23A6DE7B1875145800FB9C34 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -544,6 +615,47 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		235D83691A8898AB00262BCF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "w3bridge-Bundle/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos8.1;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		235D836A1A8898AB00262BCF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "w3bridge-Bundle/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos8.1;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 		237AB034187C2EE200BD906B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -559,7 +671,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "w3bridge-Simulator";
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "armv7 armv7s armv6";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
@@ -578,7 +690,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "w3bridge-Simulator";
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "armv7 armv7s armv6";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
 		};
@@ -680,7 +792,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "armv7 armv7s armv6";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
@@ -699,7 +811,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "armv7 armv7s armv6";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
 		};
@@ -748,6 +860,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		235D83681A8898AB00262BCF /* Build configuration list for PBXNativeTarget "w3bridge-Bundle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				235D83691A8898AB00262BCF /* Debug */,
+				235D836A1A8898AB00262BCF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		237AB033187C2EE200BD906B /* Build configuration list for PBXNativeTarget "w3bridge-Simulator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

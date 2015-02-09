@@ -7,7 +7,7 @@
 //
 
 /*
- Copyright 2013 ~ 2014 KH Kim
+ Copyright 2013 ~ 2015 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -22,7 +22,15 @@
  limitations under the License.
  */
 
-#import "UIBadge.h"
-#import "UIButtonBar.h"
-#import "UIGridView.h"
-#import "UIToastView.h"
+#ifndef PSUIKit_controls_h
+#define PSUIKit_controls_h
+
+#import "PSAttributedDivisionLabel.h"
+#import "PSBadge.h"
+#import "PSButtonBar.h"
+#import "PSDatePickerActionSheet.h"
+#import "PSGridView.h"
+#import "PSLinedBackgroundView.h"
+#import "PSToastView.h"
+
+#endif

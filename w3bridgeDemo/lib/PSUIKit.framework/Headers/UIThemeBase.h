@@ -7,7 +7,7 @@
 //
 
 /*
- Copyright 2013 KH Kim
+ Copyright 2013 ~ 2015 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "NSObject+PSUIKit.h"
 #import "UIButton+PSUIKit.h"
 #import "UINavigationController+PSUIKit.h"
 #import "UIViewController+PSUIKit.h"
@@ -40,15 +41,17 @@
 - (UIBarButtonItem *)homeBarButtonItemWithTarget:(id)target action:(SEL)action;
 - (UIBarButtonItem *)leftBarButtonItemWithTitle:(NSString *)title target:(id)target action:(SEL)action;
 - (UIBarButtonItem *)rightBarButtonItemWithTitle:(NSString *)title target:(id)target action:(SEL)action;
-- (UIStatusBarStyle)statusBarStyle;
+
+@optional
+- (CGFloat)navigationBarBackgroundAlpha;
 @end
 
 @protocol UIThemeClient
-@property (nonatomic, retain) id<UIThemeProtocol> theme;
+@property (nonatomic, strong) id<UIThemeProtocol> theme;
 @end
 
 @interface UIApplication (UIThemeBase)
-@property (nonatomic, retain) id<UIThemeProtocol> theme;
+@property (nonatomic, strong) id<UIThemeProtocol> theme;
 @end
 
 @interface UIViewController (UIThemeBase)
@@ -59,8 +62,17 @@
 - (UIBarButtonItem *)setBackBarButtonItemWithTitle:(NSString *)title withTheme:(id<UIThemeProtocol>)theme;
 @end
 
-@interface UIThemeBase : NSObject <UIThemeProtocol>
-+ (UIThemeBase *)sharedInstance;
+@interface ImageNameObject : NSObject
+@property (nonatomic, strong) NSString *imageName;
+@property (nonatomic, strong) NSString *hightedImageName;
++ (ImageNameObject *)objectWithImageName:(NSString *)imageName hightedImageName:(NSString *)hightedImageName;
+@end
+
+@protocol UIThemeBaseProtected
+- (UIBarButtonItem *)barButtonItemWithObject:(ImageNameObject *)object target:(id)target action:(SEL)action;
+@end
+
+@interface UIThemeBase : NSObject <UIThemeProtocol, UIThemeBaseProtected>
 - (UIButton *)navigationButton:(NSString *)title imageName:(NSString *)imageName imageNameForLandscape:(NSString *)imageNameForLandscape textColor:(UIColor *)textColor target:(id)target action:(SEL)action;
 - (void)updateView:(UIButton *)button taget:(id)target;
 @end

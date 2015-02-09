@@ -7,7 +7,7 @@
 //
 
 /*
- Copyright 2013 KH Kim
+ Copyright 2013 ~ 2015 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "PSUIKit.h"
 
 #ifndef GUIKit_GraphicsLayout_h
 #define GUIKit_GraphicsLayout_h
@@ -36,6 +35,8 @@ typedef struct {
 } CGPadding;
 
 CGPadding CGPaddingMake(unsigned int left, unsigned int top, unsigned int right, unsigned int bottom);
+CGPadding CGPaddingMakeHorizontal(unsigned int left, unsigned int right);
+CGPadding CGPaddingMakeVertical(unsigned int top, unsigned int bottom);
 BOOL CGPaddingEquals(CGPadding padding1, CGPadding padding2);
 BOOL CGPaddingZero(CGPadding padding);
 

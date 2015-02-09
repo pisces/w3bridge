@@ -7,7 +7,7 @@
 //
 
 /*
- Copyright 2013 KH Kim
+ Copyright 2013 ~ 2015 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -24,14 +24,32 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import <objc/runtime.h>
 
-typedef enum {
+enum {
 	UIViewMatricsNormal,
 	UIViewMatricsLanscape
-} UIViewMatrics;
+};
+typedef Byte UIViewMatrics;
 
 @interface UIView (org_apache_PSUIKit_UIView)
-- (void)commitProperties;
+@property (nonatomic) BOOL bubble;
+@property (nonatomic) CGFloat x;
+@property (nonatomic) CGFloat y;
+@property (nonatomic) CGFloat width;
+@property (nonatomic) CGFloat height;
+@property (nonatomic, readonly) CGFloat right;
+@property (nonatomic, readonly) CGFloat bottom;
+@property (nonatomic, assign) CGPoint origin;
+@property (nonatomic, assign) CGSize size;
+@property (nonatomic, readonly) UIImage *image;
++ (instancetype)nibBasedInstance;
++ (instancetype)nibBasedInstanceWithBundle:(NSBundle *)bundle;
+- (id)initWithColor:(UIColor *)color withFrame:(CGRect)frame;
 - (void)drawGradientRect:(CGFloat[])colors;
-- (void)invalidateProperties;
+- (void)removeAllSubviews;
+- (void)setX:(CGFloat)x y:(CGFloat)y;
+- (void)setX:(CGFloat)x y:(CGFloat)y width:(CGFloat)width;
+- (void)setX:(CGFloat)x y:(CGFloat)y width:(CGFloat)width height:(CGFloat)height;
+- (void)showGuideLines;
 @end

@@ -3,11 +3,12 @@
 //  w3bridge
 //
 //  Created by KH Kim on 2013. 12. 31..
+//  Modified by KH Kim on 2015. 2. 9..
 //  Copyright (c) 2013 KH Kim. All rights reserved.
 //
 
 /*
- Copyright 2013 KH Kim
+ Copyright 2013 ~ 2015 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -23,7 +24,6 @@
  */
 
 #import <UIKit/UIKit.h>
-#import <PSUIKit/PSUIRefreshViewController.h>
 #import <PSUIKit/UIThemeDefaultStyle.h>
 #import "SimpleBridgeWebViewController.h"
 #import "UILayerBridgeWebViewController.h"
@@ -49,6 +49,7 @@
 @property (nonatomic) CGFloat progressInterval;
 @property (nonatomic) LeftBarButtonItemType leftBarButtonItemType;
 @property (nonatomic, strong) NSString *leftBarButtonItemText;
+@property (nonatomic, readonly) UIRefreshControl *refreshControl;
 - (void)openLayerBridgeWebViewWithURL:(NSString *)url layerOption:(LayerOption)layerOption;
 - (void)setRightBarButtonItemWithText:(NSString *)text buttonClickCallBack:(NSString *)buttonClickCallBack;
 @end

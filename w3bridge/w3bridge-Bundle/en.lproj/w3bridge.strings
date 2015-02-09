@@ -1,0 +1,14 @@
+/* 
+  w3bridge.strings
+  w3bridge
+
+  Created by KH Kim on 2015. 2. 9..
+  Copyright (c) 2015년 KH Kim. All rights reserved.
+*/
+
+"cancel" = "cancel";
+"ok" = "ok";
+"exception-retry-noreachable" = "Retry";
+"exception-desc-noreachable" = "The network status of the device you are using is not recommended";
+"exception-title-noreachable" = "Network connection is not smooth.";
+"loading" = "loading";

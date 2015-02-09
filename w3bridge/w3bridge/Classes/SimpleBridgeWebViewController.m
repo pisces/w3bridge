@@ -3,11 +3,12 @@
 //  w3bridge
 //
 //  Created by KH Kim on 2013. 12. 31..
+//  Modified by KH Kim on 2015. 2. 9..
 //  Copyright (c) 2013 KH Kim. All rights reserved.
 //
 
 /*
- Copyright 2013 ~ 2014 KH Kim
+ Copyright 2013 ~ 2015 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -23,17 +24,21 @@
  */
 
 #import "SimpleBridgeWebViewController.h"
+#import "w3bridge.h"
+
+NSString *const webViewDidFailLoadWithErrorNotification = @"webViewDidFailLoadWithErrorNotification";
+NSString *const webViewDidFinishLoadNotification = @"webViewDidFinishLoadNotification";
+NSString *const webViewDidStartLoadNotification = @"webViewDidStartLoadNotification";
 
 // ================================================================================================
 //
-//  SimpleBridgeWebViewController Implementation
+//  Implementation: SimpleBridgeWebViewController
 //
 // ================================================================================================
 
 @implementation SimpleBridgeWebViewController
 {
 @private
-    BOOL destinationChanged;
     BOOL loadFromInternal;
     BOOL scrollEnabledChanged;
     BOOL webViewSynthesized;
@@ -47,49 +52,36 @@
 //  Overridden: PSUIViewController
 // ================================================================================================
 
-#pragma mark - View cycle
+#pragma mark - Overridden: PSUIViewController
+
+- (BOOL)closeAnimated:(BOOL)animated completion:(void (^)(void))completion
+{
+    [self clear];
+    
+    return [super closeAnimated:animated completion:completion];
+}
 
 - (void)commitProperties
 {
-    if (destinationChanged)
-    {
-        destinationChanged = NO;
-        cachedPureURLString = nil;
-        copiedRequest = nil;
-        
-        [self load];
-    }
-    
     if (scrollEnabledChanged)
     {
         scrollEnabledChanged = NO;
-        
-        for (UIView * subView in _webView.subviews)
-        {
-            if ([subView isKindOfClass:[UIScrollView class]])
-                ((UIScrollView *) subView).scrollEnabled = _scrollEnabled;
-        }
+        self.scrollViewOnWebView.scrollEnabled = self.scrollEnabled;
     }
 }
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:CDVPluginViewDidUnloadNotification object:nil];
     [self clear];
 }
 
-- (void)closeAnimated:(BOOL)animated completion:(void (^)(void))completion
+- (void)initProperties
 {
-    [self clear];
+    [super initProperties];
     
-    [super closeAnimated:animated completion:completion];
-}
-
-- (void)invalidateProperties
-{
-    [super invalidateProperties];
-    
+    self.scrollEnabled = YES;
     _isFirstLoad = YES;
-    _scrollEnabled = YES;
     callbackQueue = [[NSMutableArray alloc] init];
     notificationObjects = [[NSMutableArray alloc] init];
 }
@@ -98,42 +90,21 @@
 {
     [super loadView];
     
+    _commandDelegate = self;
+    webViewSynthesized = _webView != nil;
+    
+    if (!_sessionKey)
+        _sessionKey = [NSString stringWithFormat:@"%d", arc4random()];
+    
+    [self setUpSubviews];
+    [self setPropertiesFromPlist];
     [self setCookieAcceptPolicy];
     
     if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
-    self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.edgesForExtendedLayout = UIRectEdgeNone;
     
     if ([self respondsToSelector:@selector(setExtendedLayoutIncludesOpaqueBars:)])
-    self.extendedLayoutIncludesOpaqueBars = YES;
-    
-    webViewSynthesized = _webView != nil;
-    
-    if (!_webView)
-    {
-        _webView = [[UIWebView alloc] init];
-        _webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        _webView.backgroundColor = [UIColor whiteColor];
-        _webView.scalesPageToFit = YES;
-        _webView.delegate = self;
-        
-        [self.view addSubview:_webView];
-    }
-    
-    for (UIView * subView in _webView.subviews) {
-        if ([subView isKindOfClass:[UIScrollView class]])
-            _scrollViewOnWebView = (UIScrollView *) subView;
-    }
-    
-    for(UIView *wview in [[_webView.subviews objectAtIndex:0] subviews]) {
-        if([wview isKindOfClass:[UIImageView class]]) { wview.hidden = YES; }
-    }
-    
-    if (_sessionKey == nil)
-        _sessionKey = [NSString stringWithFormat:@"%d", arc4random()];
-    
-    [self setPropertiesFromPlist];
-    
-	_commandDelegate = self;
+        self.extendedLayoutIncludesOpaqueBars = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -143,12 +114,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:CDVPluginViewWillAppearNotification object:nil];
     
     if (!webViewSynthesized)
-        _webView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRetryFailedRequest:) name:didRetryFailedRequestNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
-    
-    _noreachable = [[ReachabilityViewManager sharedInstance] noreachable:self.view];
+        _webView.frame = self.view.bounds;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -168,9 +134,6 @@
     [super viewWillDisappear:animated];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:CDVPluginViewWillDisappearNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:didRetryFailedRequestNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
-    [[ReachabilityViewManager sharedInstance] clear];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -180,13 +143,6 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:CDVPluginViewDidDisappearNotification object:nil];
     
     copiedRequest = nil;
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:CDVPluginViewDidUnloadNotification object:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -209,110 +165,48 @@
     return UIInterfaceOrientationPortrait;
 }
 
-// ================================================================================================
-//  Delegate
-// ================================================================================================
-
-- (void)addCallbackId:(NSString *)callbackId withName:(NSString *)name
+- (void)updateWithReachability:(Reachability *)aReachability
 {
-    [callbackQueue addObject:@{@"callbackId": callbackId, @"name": name}];
-}
-
-- (void)callbackWithName:(NSString *)name withResult:(NSDictionary *)result
-{
-    for (NSDictionary *dic in callbackQueue)
-    {
-        NSString *callbackName = [dic objectForKey:@"name"];
-        if ([name isEqualToString:callbackName])
-        {
-            NSString *callbackId = [dic objectForKey:@"callbackId"];
-            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:result];
-            [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"setTimeout(function() { %@; }, 0);", [pluginResult toSuccessCallbackString:callbackId]]];
-        }
-    }
-}
-
-- (NSDictionary *)executeExternalInterfaceWithName:(NSString *)name withOptions:(NSDictionary *)options
-{
-    return nil;
-}
-
-- (BOOL)webView:(UIWebView *)theWebView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    if ([request.URL.scheme isEqualToString:@"gap"])
-    {
-        [self flushCommandQueue];
-        return NO;
-	}
+    [super updateWithReachability:aReachability];
     
-    if (![self allowedURLScheme:request.URL.scheme])
-    {
-        if ([[UIApplication sharedApplication] canOpenURL:request.URL])
-            [[UIApplication sharedApplication] openURL:request.URL];
-        return NO;
-    }
-    
-    if ([self allowedPassingURLWithRequest:request navigationType:navigationType])
-        return  YES;
-    
-    if ([self allowedURLScheme:request.URL.scheme])
-    {
-        BOOL _loadFromInternal = loadFromInternal;
-        loadFromInternal = NO;
-        
-        if (!_loadFromInternal)
-        {
-            _receiveShouldStartLoading = YES;
-            copiedRequest = request;
-            _destination = request.URL;
-            
-            [self load];
-            return NO;
-        }
-    }
-    
-    cachedPureURLString = [self pureURLStringWithURL:request.URL];
-    return YES;
-}
-
-#pragma mark UIWebViewDelegate
-
-- (void)webViewDidStartLoad:(UIWebView *)theWebView
-{
-    copiedRequest = nil;
-    
-    [callbackQueue removeAllObjects];
-    [self removeNotifications];
-    [[NSNotificationCenter defaultCenter] postNotificationName:webViewDidStartLoadNotification object:self];
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)theWebView
-{
-    copiedRequest = nil;
-    
-    NSString *sessionKeyScript = [NSString stringWithFormat:@"Cordova.sessionKey = \"%@\";", _sessionKey];
-    [theWebView stringByEvaluatingJavaScriptFromString:sessionKeyScript];
-	
-    NSDictionary *deviceProperties = [self deviceProperties];
-    NSMutableString *result = [[NSMutableString alloc] initWithFormat:@"DeviceInfo = %@;", [deviceProperties JSONString]];
-    [theWebView stringByEvaluatingJavaScriptFromString:result];
-    [[NSNotificationCenter defaultCenter] postNotificationName:webViewDidFinishLoadNotification object:self];
-    _isFirstLoad = NO;
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
-    copiedRequest = nil;
-    
-#if DEBUG
-    NSLog(@"Failed to load webpage with error: %@", error);
-#endif
-    [[NSNotificationCenter defaultCenter] postNotificationName:webViewDidFailLoadWithErrorNotification object:self];
+    if (self.isNotReachableBefore)
+        [self load];
 }
 
 // ================================================================================================
 //  Public
 // ================================================================================================
+
+#pragma mark - Public getter/setter
+
+- (void)setDestination:(NSURL *)destination
+{
+    if ([destination isEqual:_destination])
+        return;
+    
+    _destination = destination;
+    
+    if (self.isViewAppeared)
+    {
+        cachedPureURLString = nil;
+        copiedRequest = nil;
+        
+        [self load];
+    }
+}
+
+- (void)setScrollEnabled:(BOOL)scrollEnabled
+{
+    if (scrollEnabled == _scrollEnabled)
+        return;
+    
+    _scrollEnabled = scrollEnabled;
+    scrollEnabledChanged = YES;
+    
+    [self invalidateProperties];
+}
+
+#pragma mark - Public methods
 
 - (void)addNotification:(BridgeNotification *)notification
 {
@@ -385,7 +279,7 @@
     return nil;
 }
 
-- (int)executeQueuedCommands
+- (NSInteger)executeQueuedCommands
 {
     NSString* queuedCommandsJSON = [_webView stringByEvaluatingJavaScriptFromString:@"Cordova.getAndClearQueuedCommands()"];
     NSArray* queuedCommands = [queuedCommandsJSON objectFromJSONString];
@@ -406,7 +300,7 @@
 {
     [_webView stringByEvaluatingJavaScriptFromString:@"Cordova.commandQueueFlushing = true"];
 	
-    int numExecutedCommands = 0;
+    NSInteger numExecutedCommands = 0;
     do {
         numExecutedCommands = [self executeQueuedCommands];
     } while (numExecutedCommands != 0);
@@ -416,14 +310,15 @@
 
 - (void)load
 {
-    if ((self.noreachable = [[ReachabilityViewManager sharedInstance] noreachable:self.view]))
+    if ([self.exceptionViewController checkVisibility])
         return;
     
-    if (_destination != nil && _webView)
+    if (_destination && _webView)
     {
         loadFromInternal = YES;
-        NSMutableURLRequest *request = copiedRequest ? copiedRequest : [NSMutableURLRequest requestWithURL:_destination cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+        NSMutableURLRequest *request = copiedRequest ? (NSMutableURLRequest *) copiedRequest : [NSMutableURLRequest requestWithURL:_destination cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
         NSDictionary *headers = [HTTPActionManager sharedInstance].headers;
+        
         if (headers)
         {
             for (NSString *key in headers)
@@ -458,8 +353,10 @@
 }
 
 // ================================================================================================
-//  Internal
+//  Private
 // ================================================================================================
+
+#pragma mark - Private methods
 
 - (BOOL)allowedPassingURLWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
@@ -526,26 +423,25 @@
     return retVal;
 }
 
-#pragma mark CordovaCommands
+#pragma mark - CordovaCommands
 
-- (NSDictionary*)deviceProperties
+- (NSDictionary *)deviceProperties
 {
     UIDevice *device = [UIDevice currentDevice];
     NSMutableDictionary *devProps = [NSMutableDictionary dictionary];
-    BOOL isRetina = [[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0;
     CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
     NSString *uuidString = (NSString *) CFBridgingRelease(CFUUIDCreateString(kCFAllocatorDefault, uuid));
     
     [devProps setObject:[device model] forKey:@"platform"];
-    [devProps setObject:[NSNumber numberWithInt:[device platformType]] forKey:@"platformType"];
-    [devProps setObject:[device platformString] forKey:@"platformString"];
+    [devProps setObject:@([device deviceFamily]) forKey:@"platformType"];
+    [devProps setObject:[device modelName] forKey:@"platformString"];
     [devProps setObject:[device systemVersion] forKey:@"version"];
     [devProps setObject:uuidString forKey:@"uuid"];
     [devProps setObject:[device name] forKey:@"name"];
     [devProps setObject:[[NSBundle mainBundle] bundleIdentifier] forKey:@"appId"];
     [devProps setObject:APPLICATION_VERSION forKey:@"appVersion"];
-    [devProps setObject:[NSNumber numberWithBool:isRetina] forKey:@"isRetina"];
-    [devProps setObject:[NSNumber numberWithInt:[self freeMemory]] forKey:@"freeMemory"];
+    [devProps setObject:@(IS_RETINA) forKey:@"isRetina"];
+    [devProps setObject:@([self freeMemory]) forKey:@"freeMemory"];
     
     CFRelease(uuid);
     
@@ -566,7 +462,7 @@
         return 0;
     }
     /* Stats in bytes */
-    natural_t mem_free = vm_stat.free_count * pagesize;
+    natural_t mem_free = (natural_t) (vm_stat.free_count * pagesize);
     
     return mem_free;
 }
@@ -666,6 +562,38 @@
     _pluginsMap = [pluginsDict dictionaryWithLowercaseKeys];
 }
 
+- (void)setUpSubviews
+{
+    if (!_webView)
+    {
+        _webView = [[UIWebView alloc] init];
+        _webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _webView.backgroundColor = [UIColor whiteColor];
+        _webView.scalesPageToFit = YES;
+        _webView.delegate = self;
+        
+        [self.view addSubview:_webView];
+    }
+    
+    for (UIView *subView in _webView.subviews)
+    {
+        if ([subView isKindOfClass:[UIScrollView class]])
+            _scrollViewOnWebView = (UIScrollView *) subView;
+    }
+    
+    for (UIView *wview in [[_webView.subviews objectAtIndex:0] subviews])
+    {
+        if([wview isKindOfClass:[UIImageView class]])
+            wview.hidden = YES;
+    }
+    
+    _exceptionViewController = [[PSExceptionViewController alloc] initWithSuperview:self.view];
+    _exceptionViewController.buttonTitleText = [w3bridge localizedStringWithKey:@"exception-retry-noreachable"];
+    _exceptionViewController.descriptionText = [w3bridge localizedStringWithKey:@"exception-desc-noreachable"];
+    _exceptionViewController.titleText = [w3bridge localizedStringWithKey:@"exception-title-noreachable"];
+    _exceptionViewController.delegate = self;
+}
+
 - (void)stopNotificationReceive
 {
     for (NSDictionary *item in notificationObjects)
@@ -675,53 +603,127 @@
     }
 }
 
-- (void)updateWithReachability:(Reachability *)aReachability
+#pragma mark - UIWebView delegate
+
+- (BOOL)webView:(UIWebView *)theWebView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    [super updateWithReachability:aReachability];
+    if ([request.URL.scheme isEqualToString:@"gap"])
+    {
+        [self flushCommandQueue];
+        return NO;
+    }
     
-    if (self.noreachable)
-        [self load];
+    if (![self allowedURLScheme:request.URL.scheme])
+    {
+        if ([[UIApplication sharedApplication] canOpenURL:request.URL])
+            [[UIApplication sharedApplication] openURL:request.URL];
+        return NO;
+    }
+    
+    if ([self allowedPassingURLWithRequest:request navigationType:navigationType])
+        return  YES;
+    
+    if ([self allowedURLScheme:request.URL.scheme])
+    {
+        BOOL _loadFromInternal = loadFromInternal;
+        loadFromInternal = NO;
+        
+        if (!_loadFromInternal)
+        {
+            _receiveShouldStartLoading = YES;
+            copiedRequest = request;
+            _destination = request.URL;
+            
+            [self load];
+            return NO;
+        }
+    }
+    
+    cachedPureURLString = [self pureURLStringWithURL:request.URL];
+    return YES;
 }
 
-// ================================================================================================
-//  Setters
-// ================================================================================================
-
-- (void)setDestination:(NSURL *)destination
+- (void)webViewDidStartLoad:(UIWebView *)theWebView
 {
-    if ([destination isEqual:_destination])
-        return;
+    copiedRequest = nil;
     
-    _destination = destination;
-    destinationChanged = YES;
-    
-    [self invalidateProperties];
+    [callbackQueue removeAllObjects];
+    [self removeNotifications];
+    [[NSNotificationCenter defaultCenter] postNotificationName:webViewDidStartLoadNotification object:self];
 }
 
-- (void)setScrollEnabled:(BOOL)scrollEnabled
+- (void)webViewDidFinishLoad:(UIWebView *)theWebView
 {
-    if (scrollEnabled == _scrollEnabled)
-        return;
+    copiedRequest = nil;
+    _isFirstLoad = NO;
     
-    _scrollEnabled = scrollEnabled;
-    scrollEnabledChanged = YES;
-    
-    [self invalidateProperties];
+    @try {
+        NSDictionary *deviceProperties = [self deviceProperties];
+        NSMutableString *result = [[NSMutableString alloc] initWithFormat:@"DeviceInfo = %@;", [deviceProperties JSONString]];
+        NSString *sessionKeyScript = [NSString stringWithFormat:@"Cordova.sessionKey = \"%@\";", _sessionKey];
+        
+        [theWebView stringByEvaluatingJavaScriptFromString:sessionKeyScript];
+        [theWebView stringByEvaluatingJavaScriptFromString:result];
+        [[NSNotificationCenter defaultCenter] postNotificationName:webViewDidFinishLoadNotification object:self];
+    }
+    @catch (NSException *exception) {
+#if DEBUG
+        NSLog(@"deviceProperties error: %@", exception);
+#endif
+    }
+    @finally {
+    }
 }
 
-// ================================================================================================
-//  Selectors
-// ================================================================================================
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    copiedRequest = nil;
+    _isFirstLoad = NO;
+#if DEBUG
+    NSLog(@"Failed to load webpage with error: %@", error);
+#endif
+    [[NSNotificationCenter defaultCenter] postNotificationName:webViewDidFailLoadWithErrorNotification object:self];
+}
 
-- (void)didRetryFailedRequest:(NSNotification *)notification
+#pragma mark - BridgeExternalInterface delegate
+
+- (void)addCallbackId:(NSString *)callbackId withName:(NSString *)name
+{
+    [callbackQueue addObject:@{@"callbackId": callbackId, @"name": name}];
+}
+
+- (void)callbackWithName:(NSString *)name withResult:(NSDictionary *)result
+{
+    for (NSDictionary *dic in callbackQueue)
+    {
+        NSString *callbackName = [dic objectForKey:@"name"];
+        if ([name isEqualToString:callbackName])
+        {
+            NSString *callbackId = [dic objectForKey:@"callbackId"];
+            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:result];
+            [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"setTimeout(function() { %@; }, 0);", [pluginResult toSuccessCallbackString:callbackId]]];
+        }
+    }
+}
+
+- (NSDictionary *)executeExternalInterfaceWithName:(NSString *)name withOptions:(NSDictionary *)options
+{
+    return nil;
+}
+
+#pragma mark - PSExceptionViewController delegate
+
+- (BOOL)exceptionViewShouldShowWithController:(PSExceptionViewController *)controller
+{
+    return self.isNotReachable;
+}
+
+- (void)controller:(PSExceptionViewController *)controller buttonClicked:(id)sender
 {
     [self load];
 }
 
-- (void)reachabilityChanged:(NSNotification *)notification
-{
-    [self updateWithReachability:[notification.userInfo objectForKey:@"object"]];
-}
+#pragma mark - Notification selector
 
 - (void)receiveNotification:(NSNotification *)notification
 {
@@ -747,23 +749,24 @@
 
 // ================================================================================================
 //
-//  UIWebView Category
+//  Category: UIWebView (org_apache_w3bridge_UIWebView)
 //
 // ================================================================================================
 
 static BOOL diagStat = NO;
 
-@implementation UIWebView (WebUI)
+@implementation UIWebView (org_apache_w3bridge_UIWebView)
 
 - (void)webView:(UIWebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(CGRect *)frame
 {
-    UIAlertView *alertDiag = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"확인" otherButtonTitles:nil];
+    UIAlertView *alertDiag = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:[w3bridge localizedStringWithKey:@"ok"] otherButtonTitles:nil];
     [alertDiag show];
 }
 
 - (BOOL)webView:(id)sender runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(CGRect *)frame
 {
-    UIAlertView *confirmDiag = [[UIAlertView alloc] initWithTitle:nil message:message delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+    UIAlertView *confirmDiag = [[UIAlertView alloc] initWithTitle:nil message:message delegate:self cancelButtonTitle:[w3bridge localizedStringWithKey:@"cancel"] otherButtonTitles:[w3bridge localizedStringWithKey:@"ok"], nil];
+    
     [confirmDiag show];
     
     while (confirmDiag.hidden == NO)
@@ -777,4 +780,5 @@ static BOOL diagStat = NO;
     alertView.hidden = YES;
     diagStat = buttonIndex == 1;
 }
+
 @end

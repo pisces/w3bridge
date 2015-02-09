@@ -3,11 +3,12 @@
 //  PSUIKit
 //
 //  Created by KH Kim on 2013. 12. 31..
+//  Modified by KH Kim on 2015. 2. 6..
 //  Copyright (c) 2013 KH Kim. All rights reserved.
 //
 
 /*
- Copyright 2013 KH Kim
+ Copyright 2013 ~ 2015 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -22,8 +23,7 @@
  limitations under the License.
  */
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+#import "base.h"
 
 typedef NS_ENUM(int, ActivityIndicatorLayoutStyle) {
     ActivityIndicatorLayoutStyleCenter,

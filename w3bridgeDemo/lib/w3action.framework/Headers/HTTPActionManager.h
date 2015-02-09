@@ -3,11 +3,12 @@
 //  w3action
 //
 //  Created by KH Kim on 2013. 12. 30..
+//  Modified by KH Kim on 15. 2. 5..
 //  Copyright (c) 2013 KH Kim. All rights reserved.
 //
 
 /*
- Copyright 2013 KH Kim
+ Copyright 2013~2015 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -43,7 +44,7 @@
 #define HTTP_METHOD_GET @"GET"
 #define HTTP_METHOD_POST @"POST"
 
-enum HTTPStatusCode {
+enum {
     HTTPStatusCodeOK = 200,
     HTTPStatusCodeCachedOk = 304,
     HTTPStatusCodeBadRequest = 400,
@@ -53,14 +54,15 @@ enum HTTPStatusCode {
     HTTPStatusCodeBadGateway = 502,
     HTTPStatusCodeServiceUnavailable = 503
 };
+typedef NSInteger HTTPStatusCode;
 
 // ================================================================================================
 //  NSURLObject
 // ================================================================================================
 
 @interface NSURLObject : NSObject
-@property (nonatomic, retain) NSURLRequest *request;
-@property (nonatomic, retain) NSHTTPURLResponse *response;
+@property (nonatomic, strong) NSURLRequest *request;
+@property (nonatomic, strong) NSHTTPURLResponse *response;
 + (NSURLObject *)objectWithRequest:(NSURLRequest *)request response:(NSHTTPURLResponse *)response;
 @end
 

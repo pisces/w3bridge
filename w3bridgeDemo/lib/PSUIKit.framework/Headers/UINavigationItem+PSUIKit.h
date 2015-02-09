@@ -7,7 +7,7 @@
 //
 
 /*
- Copyright 2013 KH Kim
+ Copyright 2013 ~ 2015 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -24,9 +24,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    BarButtonItemPositionLeft = 1,
+    BarButtonItemPositionRight = 2
+} BarButtonItemPosition;
+
 @interface UINavigationItem (org_apache_PSUIKit_UINavigationItem)
 - (UIBarButtonItem *)getLeftBarButtonItem;
 - (UIBarButtonItem *)getRightBarButtonItem;
+- (void)addActivitiIndicatorBarButtonItemWithPosition:(BarButtonItemPosition)position;
 - (void)addLeftBarButtonItem:(UIBarButtonItem *)leftBarButtonItem;
 - (void)addRightBarButtonItem:(UIBarButtonItem *)rightBarButtonItem;
 - (void)removeLeftBarButtonItem;

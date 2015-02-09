@@ -74,14 +74,16 @@
 	BOOL ok = (argc >= expectedCount); // allow for optional arguments
 	
 	if (!ok) {
-		NSString* errorString = [NSString stringWithFormat:@"Incorrect no. of arguments for plugin: was %d, expected %d", argc, expectedCount];
+		NSString* errorString = [NSString stringWithFormat:@"Incorrect no. of arguments for plugin: was %tu, expected %zd", argc, expectedCount];
 		if (callbackId) {
 			NSString* callbackId = [arguments objectAtIndex:0];
 			CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:errorString];
 			[self writeJavascript:[pluginResult toErrorCallbackString:callbackId]];
 		} else {
-			NSString* fileName = [[[NSString alloc] initWithBytes:callerFileName length:strlen(callerFileName) encoding:NSUTF8StringEncoding] lastPathComponent];
+#if DEBUG
+            NSString *fileName = [[[NSString alloc] initWithBytes:callerFileName length:strlen(callerFileName) encoding:NSUTF8StringEncoding] lastPathComponent];
             NSLog(@"%@::%s - Error: %@", fileName, callerFunctionName, errorString);
+#endif
 		}
 	}
 	

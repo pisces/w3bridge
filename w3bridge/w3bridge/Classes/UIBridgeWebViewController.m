@@ -3,11 +3,12 @@
 //  w3bridge
 //
 //  Created by KH Kim on 2013. 12. 31..
+//  Modified by KH Kim on 2015. 2. 9..
 //  Copyright (c) 2013 KH Kim. All rights reserved.
 //
 
 /*
- Copyright 2013 ~ 2014 KH Kim
+ Copyright 2013 ~ 2015 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -23,39 +24,57 @@
  */
 
 #import "UIBridgeWebViewController.h"
+#import "w3bridge.h"
 
 // ================================================================================================
 //
-//  Implementation
+//  Implementation: UIBridgeWebViewController
 //
 // ================================================================================================
-
-#define NumLinesMax 3
 
 @implementation UIBridgeWebViewController
 {
 @private
+    BOOL refreshEnabledChanged;
+    BOOL refreshing;
     NSString *rightBarButtonClickCallBack;
-    NSDate *updateDate;
-    PSUIRefreshViewController *refreshViewController;
 }
 
 // ================================================================================================
-//  View Cycle
+//  Overridden: SimpleBridgeWebViewController
 // ================================================================================================
+
+#pragma mark - Overridden: SimpleBridgeWebViewController
+
+- (BOOL)canReceiveNotificationSelfOnly:(NSString *)name
+{
+    return [name isEqualToString:shouldAutorotateNotification] || [name isEqualToString:textViewBlurNotification] ||
+    [name isEqualToString:textViewFocusNotification] || [name isEqualToString:viewDidAppearNotification] ||
+    [name isEqualToString:viewDidDisappearNotification] || [name isEqualToString:viewWillAppearNotification] ||
+    [name isEqualToString:viewWillDisappearNotification] || [name isEqualToString:willCloseViewNotification] ||
+    [name isEqualToString:didClickLeftBarButtonItemNotification] || [name isEqualToString:didClickRightBarButtonItemNotification];
+}
 
 - (void)clear
 {
     [super clear];
     
+    [self.refreshControl removeTarget:self action:@selector(load) forControlEvents:UIControlEventValueChanged];
     [self.navigationItem removeLeftBarButtonItem];
     [self.navigationItem removeRightBarButtonItem];
     
-    [refreshViewController.view removeFromSuperview];
-    
     rightBarButtonClickCallBack = nil;
-    updateDate = nil;
-    refreshViewController = nil;
+}
+
+- (void)commitProperties
+{
+    [super commitProperties];
+    
+    if (self.refreshEnabled)
+    {
+        refreshEnabledChanged = NO;
+        self.refreshControl.enabled = self.refreshEnabled;
+    }
 }
 
 - (BOOL)hidesBottomBarWhenPushed
@@ -63,25 +82,37 @@
     return _hidesBottomBarWhenPushed;
 }
 
-- (BOOL)navigationShouldPopOnBackButton
+- (void)initProperties
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:didClickLeftBarButtonItemNotification object:self];
-    return self.isFirstLoad ? YES : _closeEnabled;
+    [super initProperties];
+    
+    self.reloadable = NO;
+    self.refreshEnabled = YES;
+    _hidesBottomBarWhenPushed = NO;
+    _closeEnabled = YES;
+    _showModalWhenFirstLoading = YES;
+    _useDocumentTitle = YES;
+    _leftBarButtonItemType = LeftBarButtonItemTypeNone;
 }
 
 - (void)loadView
 {   
     [super loadView];
     
-    self.view.layer.rasterizationScale = [UIScreen mainScreen].scale;
-    self.view.layer.shouldRasterize = YES;
-    
-    if (_useDocumentTitle)
+    if (self.useDocumentTitle)
         self.title = nil;
     
-    self.useRefreshDisplay = YES;
+    _refreshControl = [[UIRefreshControl alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 50)];
     
+    [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
+    [self.scrollViewOnWebView addSubview:self.refreshControl];
     [self setLeftBarButtonItem];
+}
+
+- (BOOL)navigationShouldPopOnBackButton
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:didClickLeftBarButtonItemNotification object:self];
+    return self.isFirstLoad ? YES : self.closeEnabled;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -119,21 +150,21 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:interfaceOrientation] forKey:@"interfaceOrientation"];
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:@(interfaceOrientation) forKey:@"interfaceOrientation"];
     [[NSNotificationCenter defaultCenter] postNotificationName:shouldAutorotateNotification object:self userInfo:userInfo];
     
-    if (_interfaceOrientationState == 1)
+    if (self.interfaceOrientationState == 1)
         return interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown;
-    else if (_interfaceOrientationState == 2)
+    else if (self.interfaceOrientationState == 2)
         return interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight;
     return interfaceOrientation == UIInterfaceOrientationPortrait;
 }
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    if (_interfaceOrientationState == 1)
+    if (self.interfaceOrientationState == 1)
         return UIInterfaceOrientationMaskAllButUpsideDown;
-    if (_interfaceOrientationState == 2)
+    if (self.interfaceOrientationState == 2)
         return UIInterfaceOrientationMaskLandscape;
     return UIInterfaceOrientationMaskPortrait;
 }
@@ -142,16 +173,15 @@
 {
     NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:self.interfaceOrientation] forKey:@"interfaceOrientation"];
     [[NSNotificationCenter defaultCenter] postNotificationName:shouldAutorotateNotification object:self userInfo:userInfo];
-    return _interfaceOrientationState > 0;
+    return self.interfaceOrientationState > 0;
 }
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
 {
-    if (_interfaceOrientationState == 1)
-    {
+    if (self.interfaceOrientationState == 1)
         return self.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown ? UIInterfaceOrientationPortrait : self.interfaceOrientation;
-    }
-    else if (_interfaceOrientationState == 2)
+    
+    if (self.interfaceOrientationState == 2)
     {
         if (self.interfaceOrientation == UIInterfaceOrientationPortrait)
             return UIInterfaceOrientationLandscapeRight;
@@ -169,133 +199,69 @@
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
 }
 
-// ================================================================================================
-//  Overridden: SimpleBridgeWebViewController
-// ================================================================================================
+#pragma mark -
 
-- (id)init
+- (void)webViewDidStartLoad:(UIWebView *)theWebView
 {
-    self = [super init];
-    if (self)
-        [self initProperties];
-    return self;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    if (self)
-        [self initProperties];
-    return self;
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self)
-        [self initProperties];
-    return self;
-}
-
-// ================================================================================================
-//  Delegate
-// ================================================================================================
-
-#pragma mark - Scroll view delegate
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if (_refreshEnabled)
-        refreshViewController.contentOffset = scrollView.contentOffset;
-    
-    [ActivityIndicatorManager layout:self.scrollViewOnWebView];
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)aScrollView willDecelerate:(BOOL)decelerate
-{
-    if (self.isFirstLoad || self.receiveShouldStartLoading || !_refreshEnabled ||
-        !refreshViewController.target || refreshViewController.updating ||
-        aScrollView.contentOffset.y > refreshViewController.reloadBoundsHeight*-1)
-        return;
-    
-    refreshViewController.updating = YES;
-    [self.webView reload];
-}
-
-#pragma mark UIWebViewDelegate
-
-- (void)webViewDidStartLoad:(UIWebView*)theWebView 
-{
-    if (refreshViewController.updating)
-        return;
-    
     [super webViewDidStartLoad:theWebView];
     
-    if (self.isFirstLoad)
+    if (refreshing)
+        return;
+    
+    if (self.isFirstLoad && self.showModalWhenFirstLoading)
     {
-        if (_showModalWhenFirstLoading)
-        {
-            [ActivityIndicatorManager activate:self.scrollViewOnWebView message:@"불러오는 중" modal:YES];
-            [ActivityIndicatorManager layout:self.scrollViewOnWebView layoutStyle:ActivityIndicatorLayoutStyleTop];
-            
-        }
-        else
-        {
-            [ActivityIndicatorManager activate:self.scrollViewOnWebView modal:NO];
-        }
+        [ActivityIndicatorManager activate:self.scrollViewOnWebView message:[w3bridge localizedStringWithKey:@"loading"] modal:YES];
+        [ActivityIndicatorManager layout:self.scrollViewOnWebView layoutStyle:ActivityIndicatorLayoutStyleTop];
     }
     else
     {
-        if (!refreshViewController.updating)
-            [ActivityIndicatorManager activate:self.scrollViewOnWebView modal:NO];
+        [ActivityIndicatorManager activate:self.scrollViewOnWebView modal:NO];
     }
 }
 
-- (void)webViewDidFinishLoad:(UIWebView*)theWebView 
+- (void)webViewDidFinishLoad:(UIWebView *)theWebView
 {
     [super webViewDidFinishLoad:theWebView];
     
-    updateDate = [NSDate date];
-    
-    if (_refreshEnabled)
-    {
-        refreshViewController.updateDate = updateDate;
-        refreshViewController.updating = NO;
-        refreshViewController.view.hidden = NO;
-    }
-    
+    [self.refreshControl endRefreshing];
     [ActivityIndicatorManager deactivate:self.scrollViewOnWebView];
     
     NSString *title = [theWebView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    if (_useDocumentTitle && title && title.length > 0)
+    
+    if (self.useDocumentTitle && title.hasValue)
         self.title = title;
+    
+    refreshing = NO;
 }
 
-- (void)webView:(UIWebView*)webView didFailLoadWithError:(NSError*)error 
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError*)error
 {
     [super webView:webView didFailLoadWithError:error];
     
-    if (_refreshEnabled)
-    {
-        refreshViewController.updating = NO;
-        refreshViewController.view.hidden = NO;
-    }
-    
+    [self.refreshControl endRefreshing];
     [ActivityIndicatorManager deactivate:self.scrollViewOnWebView];
+    
+    refreshing = NO;
 }
 
 // ================================================================================================
 //  Public
 // ================================================================================================
 
-- (BOOL)canReceiveNotificationSelfOnly:(NSString *)name
+#pragma mark - Public getter/setter
+
+- (void)setRefreshEnabled:(BOOL)refreshEnabled
 {
-    return [name isEqualToString:shouldAutorotateNotification] || [name isEqualToString:textViewBlurNotification] ||
-    [name isEqualToString:textViewFocusNotification] || [name isEqualToString:viewDidAppearNotification] ||
-    [name isEqualToString:viewDidDisappearNotification] || [name isEqualToString:viewWillAppearNotification] ||
-    [name isEqualToString:viewWillDisappearNotification] || [name isEqualToString:willCloseViewNotification] ||
-    [name isEqualToString:didClickLeftBarButtonItemNotification] || [name isEqualToString:didClickRightBarButtonItemNotification];
+    if (refreshEnabled == _refreshEnabled)
+        return;
+    
+    _refreshEnabled = refreshEnabled;
+    refreshEnabledChanged = YES;
+    
+    [self invalidateProperties];
 }
+
+#pragma mark - Public methods
 
 - (void)openLayerBridgeWebViewWithURL:(NSString *)url layerOption :(LayerOption)layerOption
 {
@@ -319,93 +285,19 @@
 }
 
 // ================================================================================================
-//  Internal
+//  Private
 // ================================================================================================
 
-- (void)initProperties
+#pragma mark - UIRefreshcontrol selector
+
+- (void)refresh
 {
-    self.reloadable = NO;
-    self.scrollEnabled = YES;
-    _hidesBottomBarWhenPushed = NO;
-    _closeEnabled = YES;
-    _refreshEnabled = YES;
-    _showModalWhenFirstLoading = YES;
-    _useDocumentTitle = YES;
-    _leftBarButtonItemType = LeftBarButtonItemTypeNone;
+    refreshing = YES;
+    
+    [self load];
 }
 
-- (void)setLeftBarButtonItem
-{
-    UIBarButtonItem *leftBarButtonItem;
-    
-    if ([self.navigationController respondsToSelector:@selector(previousTitle)] && self.navigationController.previousTitle)
-    {
-        leftBarButtonItem = [self.navigationController.theme backBarButtonItemWithTitle:_leftBarButtonItemText ? _leftBarButtonItemText : @"이전" target:self action:@selector(leftBarButtonItemClicked)];
-        
-        if ([[UIDevice currentDevice].systemVersion floatValue] >= 7.0)
-            self.navigationController.previousViewController.navigationItem.backBarButtonItem = leftBarButtonItem;
-        else
-            [self.navigationItem addLeftBarButtonItem:leftBarButtonItem];
-    }
-    else if (_leftBarButtonItemType != LeftBarButtonItemTypeNone)
-    {
-        if (_leftBarButtonItemType == LeftBarButtonItemTypeHome)
-            leftBarButtonItem = [self.navigationController.theme homeBarButtonItemWithTarget:self action:@selector(leftBarButtonItemClicked)];
-        else if (_leftBarButtonItemType == LeftBarButtonItemTypeClose)
-            leftBarButtonItem = [self.navigationController.theme closeBarButtonItemWithTarget:self action:@selector(leftBarButtonItemClicked)];
-        else if (_leftBarButtonItemType == LeftBarButtonItemTypeCustom)
-            leftBarButtonItem = [self.navigationController.theme leftBarButtonItemWithTitle:_leftBarButtonItemText target:self action:@selector(leftBarButtonItemClicked)];
-        
-        [self.navigationItem addLeftBarButtonItem:leftBarButtonItem];
-    }
-}
-
-// ================================================================================================
-//  Setters
-// ================================================================================================
-
-- (void)setRefreshEnabled:(BOOL)refreshEnabled
-{
-    if (refreshEnabled == _refreshEnabled)
-        return;
-    
-    _refreshEnabled = refreshEnabled;
-    
-    if (!_refreshEnabled)
-        self.useRefreshDisplay = NO;
-}
-
-- (void)setUseRefreshDisplay:(BOOL)useRefreshDisplay
-{
-    if (useRefreshDisplay == _useRefreshDisplay)
-        return;
-    
-    _useRefreshDisplay = useRefreshDisplay;
-    
-    if (_useRefreshDisplay)
-    {
-        if (_refreshEnabled)
-        {
-            refreshViewController = [[PSUIRefreshViewController alloc] init];
-            refreshViewController.target = self.scrollViewOnWebView;
-            refreshViewController.updateDate = updateDate;
-            self.scrollViewOnWebView.delegate = self;
-        }
-    }
-    else
-    {
-        self.scrollViewOnWebView.delegate = nil;
-        refreshViewController.view.hidden = YES;
-        refreshViewController.updating = NO;
-        
-        [refreshViewController.view removeFromSuperview];
-        refreshViewController = nil;
-    }
-}
-
-// ================================================================================================
-//  Selectors
-// ================================================================================================
+#pragma mark - Navigation item selector
 
 - (void)leftBarButtonItemClicked
 {
@@ -423,4 +315,5 @@
         [self.webView stringByEvaluatingJavaScriptFromString:query];
     }
 }
+
 @end

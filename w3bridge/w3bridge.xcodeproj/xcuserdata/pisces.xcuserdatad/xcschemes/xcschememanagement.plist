@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>w3bridge-Bundle.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 		<key>w3bridge-Device.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -27,6 +32,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>235D83631A8898AB00262BCF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>237AB01D187C2EE200BD906B</key>
 		<dict>
 			<key>primary</key>

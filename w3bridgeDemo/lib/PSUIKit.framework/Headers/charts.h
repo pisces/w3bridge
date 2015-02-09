@@ -7,7 +7,7 @@
 //
 
 /*
- Copyright 2013 KH Kim
+ Copyright 2013 ~ 2015 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -22,4 +22,9 @@
  limitations under the License.
  */
 
+#ifndef PSUIKit_charts_h
+#define PSUIKit_charts_h
+
 #import "PentagonChart.h"
+
+#endif

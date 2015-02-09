@@ -7,7 +7,7 @@
 //
 
 /*
- Copyright 2013 ~ 2014 KH Kim
+ Copyright 2013 ~ 2015 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -169,7 +169,7 @@
 
 - (void)popUpWithNavigation:(UIViewController *)targetController modalTransitionStyle:(UIModalTransitionStyle)modalTransitionStyle
 {
-    UINavigationController *navigationController = [[PSUINavigationController alloc] initWithRootViewController:targetController];
+    UINavigationController *navigationController = [[PSNavigationController alloc] initWithRootViewController:targetController];
     navigationController.modalPresentationStyle = UIModalPresentationCurrentContext;
     navigationController.modalTransitionStyle = modalTransitionStyle;
     

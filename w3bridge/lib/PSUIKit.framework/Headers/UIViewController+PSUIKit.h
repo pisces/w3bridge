@@ -7,7 +7,7 @@
 //
 
 /*
- Copyright 2013 ~ 2014 KH Kim
+ Copyright 2013 ~ 2015 KH Kim
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -31,14 +31,18 @@
 #define willCloseViewNotification @"willCloseViewNotification"
 
 @interface UIViewController (org_apache_PSUIKit_UIViewController)
-@property (nonatomic, retain) UIViewController *relativeController;
+@property (nonatomic, strong) UIViewController *relativeController;
+@property (nonatomic, readonly) CGRect statusBarFrame;
+@property (nonatomic, readonly) UIWindow *topWindow;
 + (instancetype)controller;
++ (instancetype)controllerWithBundle:(NSBundle *)bundle;
 + (instancetype)controllerWithViewName:(NSString *)viewName;
 + (instancetype)controllerWithViewName:(NSString *)viewName bundle:(NSBundle *)bundle;
 + (instancetype)controllerWithViewName:(NSString *)viewName suffix:(char *)suffix bundle:(NSBundle *)bundle;
-- (void)close;
-- (void)closeAnimated:(BOOL)animated;
-- (void)closeAnimated:(BOOL)animated completion:(void (^)(void))completion;
+- (BOOL)close;
+- (BOOL)closeAnimated:(BOOL)animated;
+- (BOOL)closeAnimated:(BOOL)animated completion:(void (^)(void))completion;
+- (void)dismissAllModalController;
 - (UIViewController *)topMostController;
 - (UIViewController *)topViewControllerWithRootViewController:(UIViewController*)rootViewController;
 - (void)updateBarButtonItems:(UIInterfaceOrientation)interfaceOrientation;
