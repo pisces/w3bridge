@@ -28,17 +28,15 @@
 #import "SimpleBridgeWebViewController.h"
 #import "UILayerBridgeWebViewController.h"
 
-#define didClickLeftBarButtonItemNotification @"didClickLeftBarButtonItem"
-#define didClickRightBarButtonItemNotification @"didClickRightBarButtonItem"
-#define shouldAutorotateNotification @"shouldAutorotate"
-#define textViewBlurNotification @"textViewBlur"
-#define textViewFocusNotification @"textViewFocus"
-#define viewDidAppearNotification @"viewDidAppear"
-#define viewDidDisappearNotification @"viewWillAppear"
-#define viewWillAppearNotification @"viewWillAppear"
-#define viewWillDisappearNotification @"viewWillDisappear"
+extern NSString *const didClickLeftBarButtonItemNotification;
+extern NSString *const didClickRightBarButtonItemNotification;
+extern NSString *const shouldAutorotateNotification;
+extern NSString *const viewDidAppearNotification;
+extern NSString *const viewDidDisappearNotification;
+extern NSString *const viewWillAppearNotification;
+extern NSString *const viewWillDisappearNotification;
 
-@interface UIBridgeWebViewController : SimpleBridgeWebViewController <UIScrollViewDelegate>
+@interface UIBridgeWebViewController : SimpleBridgeWebViewController
 @property (nonatomic) BOOL closeEnabled;
 @property (nonatomic) BOOL hidesBottomBarWhenPushed;
 @property (nonatomic) BOOL showModalWhenFirstLoading;
@@ -50,6 +48,11 @@
 @property (nonatomic) LeftBarButtonItemType leftBarButtonItemType;
 @property (nonatomic, strong) NSString *leftBarButtonItemText;
 @property (nonatomic, readonly) UIRefreshControl *refreshControl;
+- (void)addRightBarButtonItemWithText:(NSString *)text imageName:(NSString *)imageName callbackFunctionName:(NSString *)callbackFunctionName;
 - (void)openLayerBridgeWebViewWithURL:(NSString *)url layerOption:(LayerOption)layerOption;
-- (void)setRightBarButtonItemWithText:(NSString *)text buttonClickCallBack:(NSString *)buttonClickCallBack;
+@end
+
+@interface BarButtonItemHandlerObject : NSObject
++ (BarButtonItemHandlerObject *)objectWithFunctionName:(NSString *)functionName;
+@property (nonatomic, strong) NSString *functionName;
 @end

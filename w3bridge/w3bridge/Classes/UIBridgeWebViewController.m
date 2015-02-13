@@ -26,6 +26,14 @@
 #import "UIBridgeWebViewController.h"
 #import "w3bridge.h"
 
+NSString *const didClickLeftBarButtonItemNotification = @"didClickLeftBarButtonItemNotification";
+NSString *const didClickRightBarButtonItemNotification = @"didClickRightBarButtonItemNotification";
+NSString *const shouldAutorotateNotification = @"shouldAutorotateNotification";
+NSString *const viewDidAppearNotification = @"viewDidAppearNotification";
+NSString *const viewDidDisappearNotification = @"viewDidDisappearNotification";
+NSString *const viewWillAppearNotification = @"viewWillAppearNotification";
+NSString *const viewWillDisappearNotification = @"viewWillDisappearNotification";
+
 // ================================================================================================
 //
 //  Implementation: UIBridgeWebViewController
@@ -37,7 +45,7 @@
 @private
     BOOL refreshEnabledChanged;
     BOOL refreshing;
-    NSString *rightBarButtonClickCallBack;
+    NSMutableDictionary *barButtonItemHandlerObjectDic;
 }
 
 // ================================================================================================
@@ -48,8 +56,7 @@
 
 - (BOOL)canReceiveNotificationSelfOnly:(NSString *)name
 {
-    return [name isEqualToString:shouldAutorotateNotification] || [name isEqualToString:textViewBlurNotification] ||
-    [name isEqualToString:textViewFocusNotification] || [name isEqualToString:viewDidAppearNotification] ||
+    return [name isEqualToString:shouldAutorotateNotification] || [name isEqualToString:viewDidAppearNotification] ||
     [name isEqualToString:viewDidDisappearNotification] || [name isEqualToString:viewWillAppearNotification] ||
     [name isEqualToString:viewWillDisappearNotification] || [name isEqualToString:willCloseViewNotification] ||
     [name isEqualToString:didClickLeftBarButtonItemNotification] || [name isEqualToString:didClickRightBarButtonItemNotification];
@@ -62,8 +69,7 @@
     [self.refreshControl removeTarget:self action:@selector(load) forControlEvents:UIControlEventValueChanged];
     [self.navigationItem removeLeftBarButtonItem];
     [self.navigationItem removeRightBarButtonItem];
-    
-    rightBarButtonClickCallBack = nil;
+    [barButtonItemHandlerObjectDic removeAllObjects];
 }
 
 - (void)commitProperties
@@ -88,6 +94,8 @@
     
     self.reloadable = NO;
     self.refreshEnabled = YES;
+    self.navigationTheme = [[UIThemeBase alloc] init];
+    barButtonItemHandlerObjectDic = [NSMutableDictionary dictionary];
     _hidesBottomBarWhenPushed = NO;
     _closeEnabled = YES;
     _showModalWhenFirstLoading = YES;
@@ -111,8 +119,31 @@
 
 - (BOOL)navigationShouldPopOnBackButton
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:didClickLeftBarButtonItemNotification object:self];
+    if (!self.closeEnabled)
+        [[NSNotificationCenter defaultCenter] postNotificationName:didClickLeftBarButtonItemNotification object:self];
+    
     return self.isFirstLoad ? YES : self.closeEnabled;
+}
+
+- (void)setLeftBarButtonItem
+{
+    if ([self.navigationController respondsToSelector:@selector(previousTitle)] && self.navigationController.previousTitle)
+    {
+        [self setBackBarButtonItemWithTitle:self.leftBarButtonItemText ? self.leftBarButtonItemText : @"" withTheme:self.navigationTheme];
+    }
+    else if (self.navigationTheme && self.leftBarButtonItemType != LeftBarButtonItemTypeNone)
+    {
+        UIBarButtonItem *otherItem;
+        
+        if (self.leftBarButtonItemType == LeftBarButtonItemTypeHome)
+            otherItem = [self.navigationTheme homeBarButtonItemWithTarget:self action:@selector(leftBarButtonItemClicked)];
+        else if (self.leftBarButtonItemType == LeftBarButtonItemTypeClose)
+            otherItem = [self.navigationTheme closeBarButtonItemWithTarget:self action:@selector(leftBarButtonItemClicked)];
+        else if (self.leftBarButtonItemType == LeftBarButtonItemTypeCustom)
+            otherItem = [self.navigationTheme leftBarButtonItemWithTitle:_leftBarButtonItemText target:self action:@selector(leftBarButtonItemClicked)];
+        
+        [self.navigationItem addLeftBarButtonItem:otherItem];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -263,6 +294,16 @@
 
 #pragma mark - Public methods
 
+- (void)addRightBarButtonItemWithText:(NSString *)text imageName:(NSString *)imageName callbackFunctionName:(NSString *)callbackFunctionName
+{
+    UIBarButtonItem *rightBarButtonItem = [self.navigationController.theme rightBarButtonItemWithTitle:text target:self action:@selector(rightBarButtonItemClicked:)];
+    BarButtonItemHandlerObject *object = [BarButtonItemHandlerObject objectWithFunctionName:callbackFunctionName];
+    NSNumber *key = @(rightBarButtonItem.hash);
+    
+    [barButtonItemHandlerObjectDic setObject:object forKey:key];
+    [self.navigationItem addRightBarButtonItem:rightBarButtonItem];
+}
+
 - (void)openLayerBridgeWebViewWithURL:(NSString *)url layerOption :(LayerOption)layerOption
 {
     UILayerBridgeWebViewController *controller = [[UILayerBridgeWebViewController alloc] init];
@@ -270,18 +311,7 @@
     controller.destination = [NSURL URLWithString:url];
     
     [controller showInView:self.view.window];
-}
-
-- (void)setRightBarButtonItemWithText:(NSString *)text buttonClickCallBack:(NSString *)buttonClickCallBack
-{
-    rightBarButtonClickCallBack = buttonClickCallBack;
-    UIBarButtonItem *rightBarButtonItem = [self.navigationController.theme rightBarButtonItemWithTitle:text target:self action:@selector(rightBarButtonItemClicked)];
-    
-    [self.navigationItem addRightBarButtonItem:rightBarButtonItem];
-    [self.navigationItem getRightBarButtonItem].customView.alpha = 0;
-    [UIView animateWithDuration:0.4 animations:^(void){
-        [self.navigationItem getRightBarButtonItem].customView.alpha = 1;
-    }];
+    [self addChildViewController:controller];
 }
 
 // ================================================================================================
@@ -305,15 +335,30 @@
         [self close];
 }
 
-- (void)rightBarButtonItemClicked
+- (void)rightBarButtonItemClicked:(UIBarButtonItem *)sender
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:didClickRightBarButtonItemNotification object:self];
     
-    if (rightBarButtonClickCallBack)
-    {
-        NSString *query = [rightBarButtonClickCallBack stringByAppendingFormat:@"();"];
-        [self.webView stringByEvaluatingJavaScriptFromString:query];
-    }
+    NSNumber *key = @(sender.hash);
+    BarButtonItemHandlerObject *object = barButtonItemHandlerObjectDic[key];
+    
+    if (object.functionName)
+        [self.webView stringByEvaluatingJavaScriptFromString:[object.functionName stringByAppendingFormat:@"();"]];
 }
 
+@end
+
+// ================================================================================================
+//
+//  Implementation: BarButtonItemHandlerObject
+//
+// ================================================================================================
+
+@implementation BarButtonItemHandlerObject
++ (BarButtonItemHandlerObject *)objectWithFunctionName:(NSString *)functionName
+{
+    BarButtonItemHandlerObject *object = [[BarButtonItemHandlerObject alloc] init];
+    object.functionName = functionName;
+    return object;
+}
 @end

@@ -29,7 +29,7 @@
 #import "UINavigationController+PSUIKit.h"
 #import "UIViewController+PSUIKit.h"
 
-@protocol UIThemeProtocol
+@protocol UIThemeProtocol <NSObject>
 @required
 - (UIBarButtonItem *)backBarButtonItemWithTitle:(NSString *)title target:(id)target action:(SEL)action;
 - (UIImage *)navigationBarBackgroundImage:(UIInterfaceOrientation)interfaceOrientation;

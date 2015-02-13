@@ -26,6 +26,7 @@
 #import <objc/runtime.h>
 #import "UIButton+PSUIKit.h"
 #import "UINavigationItem+PSUIKit.h"
+#import "UIViewController+BackButtonHandler.h"
 
 #define didCloseViewNotification @"didCloseViewNotification"
 #define willCloseViewNotification @"willCloseViewNotification"

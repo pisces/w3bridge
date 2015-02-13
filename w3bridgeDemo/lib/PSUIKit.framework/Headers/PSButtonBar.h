@@ -28,12 +28,27 @@
 #import "UIView+PSUIKit.h"
 
 enum {
-    UIButtonBarAlignmentHorizontal = 1<<0,
-    UIButtonBarAlignmentVertical = 1<<1
+    PSButtonBarAlignmentHorizontal = 1<<0,
+    PSButtonBarAlignmentVertical = 1<<1
 };
-typedef Byte UIButtonBarAlignment;
+typedef Byte PSButtonBarAlignment;
 
-@protocol UIButtonBarDelegate;
+@class PSButtonBar;
+
+@protocol PSButtonBarDelegate <NSObject>
+- (void)buttonBar:(PSButtonBar*)buttonBar buttonRender:(UIButton *)button buttonIndex:(NSUInteger)buttonIndex;
+@optional
+- (void)buttonBar:(PSButtonBar*)buttonBar buttonClicked:(UIButton *)button buttonIndex:(NSUInteger)buttonIndex;
+- (void)buttonBar:(PSButtonBar*)buttonBar buttonResized:(UIButton *)button buttonIndex:(NSUInteger)buttonIndex;
+- (void)buttonBar:(PSButtonBar*)buttonBar buttonSelected:(UIButton *)button buttonIndex:(NSUInteger)buttonIndex;
+@end
+
+@interface PSButtonBarDelegateObject : NSObject <PSButtonBarDelegate>
+typedef void (^PSButtonBarDelegateBlock)(UIButton *button, NSUInteger buttonIndex);
+- (id)initWithRender:(PSButtonBarDelegateBlock)render clicked:(PSButtonBarDelegateBlock)clicked resized:(PSButtonBarDelegateBlock)resized selected:(PSButtonBarDelegateBlock)selected;
+- (void)clear;
+- (void)render:(PSButtonBarDelegateBlock)render clicked:(PSButtonBarDelegateBlock)clicked resized:(PSButtonBarDelegateBlock)resized selected:(PSButtonBarDelegateBlock)selected;
+@end
 
 @interface PSButtonBar : PSView
 @property (nonatomic) BOOL toggle;
@@ -48,31 +63,17 @@ typedef Byte UIButtonBarAlignment;
 @property (nonatomic) UIButtonType buttonType;
 @property (nonatomic) CGPadding padding;
 @property (nonatomic) CGPadding seperatorPadding;
-@property (nonatomic) UIButtonBarAlignment alignment;
+@property (nonatomic) PSButtonBarAlignment alignment;
 @property (nonatomic, readonly) NSMutableArray *buttons;
 @property (nonatomic, readonly) UIButton *selectedChild;
 @property (nonatomic, strong) UIColor *seperatorColor;
-@property (nonatomic, weak) IBOutlet id<UIButtonBarDelegate> delegate;
+@property (nonatomic, strong) PSButtonBarDelegateObject *delegateObject;
+@property (nonatomic, weak) IBOutlet id<PSButtonBarDelegate> delegate;
 - (NSUInteger)buttonIndex:(UIButton *)button;
 - (void)deselect;
 @end
 
-@protocol UIButtonBarDelegate <NSObject>
-- (void)buttonBar:(PSButtonBar*)buttonBar buttonRender:(UIButton *)button buttonIndex:(NSUInteger)buttonIndex;
-@optional
-- (void)buttonBar:(PSButtonBar*)buttonBar buttonClicked:(UIButton *)button buttonIndex:(NSUInteger)buttonIndex;
-- (void)buttonBar:(PSButtonBar*)buttonBar buttonResized:(UIButton *)button buttonIndex:(NSUInteger)buttonIndex;
-- (void)buttonBar:(PSButtonBar*)buttonBar buttonSelected:(UIButton *)button buttonIndex:(NSUInteger)buttonIndex;
-@end
-
-@interface UIButtonBarDelegateObject : NSObject <UIButtonBarDelegate>
-typedef void (^UIButtonBarDelegateBlock)(UIButton *button, NSUInteger buttonIndex);
-- (id)initWithRender:(UIButtonBarDelegateBlock)render clicked:(UIButtonBarDelegateBlock)clicked resized:(UIButtonBarDelegateBlock)resized selected:(UIButtonBarDelegateBlock)selected;
-- (void)clear;
-- (void)render:(UIButtonBarDelegateBlock)render clicked:(UIButtonBarDelegateBlock)clicked resized:(UIButtonBarDelegateBlock)resized selected:(UIButtonBarDelegateBlock)selected;
-@end
-
-@interface UIButtonBarSeperatorView : PSView
+@interface PSButtonBarSeperatorView : PSView
 @property (nonatomic) NSUInteger columnCount;
 @property (nonatomic) NSUInteger rowCount;
 @property (nonatomic) CGPadding padding;

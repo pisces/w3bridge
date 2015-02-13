@@ -4,6 +4,7 @@
 //
 //  Created by KH Kim on 2013. 12. 31..
 //  Modified by KH Kim on 2015. 2. 6..
+//  Modified by KH Kim on 2015. 2. 11..
 //  Copyright (c) 2013 KH Kim. All rights reserved.
 //
 
@@ -38,4 +39,5 @@
 @interface PSUIKit : NSObject
 + (NSBundle *)bundle;
 + (NSString *)imageName:(NSString *)name;
++ (NSString *)localizedStringWithKey:(NSString *)key;
 @end

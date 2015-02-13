@@ -25,6 +25,7 @@
 
 #import "PSView.h"
 #import "GraphicsLayout.h"
+#import "UIView+PSUIKit.h"
 
 @interface PSBadge : PSView
 @property(nonatomic, strong) NSString *text;

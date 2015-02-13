@@ -3,6 +3,7 @@
 //  w3bridge
 //
 //  Created by KH Kim on 2013. 12. 31..
+//  Modified by KH Kim on 2015. 2. 11..
 //  Copyright (c) 2013 KH Kim. All rights reserved.
 //
 
@@ -40,72 +41,61 @@ BOOL LayerOptionEquals(LayerOption layerOption1, LayerOption layerOption2)
 }
 
 // ================================================================================================
-//  UILayerPopUpBridgeWebViewController Implementation
+//
+//  Implementation: UILayerPopUpBridgeWebViewController
+//
 // ================================================================================================
 
 @implementation UILayerBridgeWebViewController
 {
 @private
     BOOL layerOptionChanged;
-    BOOL viewAppeared;
     UITapGestureRecognizer *viewGestureRecognizer;
     UIView *targetView;
 }
 
 // ================================================================================================
-//  View Cycle
+//  Overridden: SimpleBridgeWebViewController
 // ================================================================================================
+
+#pragma mark - Overridden: SimpleBridgeWebViewController
+
+- (void)commitProperties
+{
+    [super commitProperties];
+    
+    if (layerOptionChanged)
+    {
+        layerOptionChanged = NO;
+        
+        [self layoutSubviews];
+    }
+}
+
+- (void)clear
+{
+    [super clear];
+    
+    [self.modalView removeFromSuperview];
+    [self.view removeFromSuperview];
+    [self removeFromParentViewController];
+    [self removeViewGestureRecognizer];
+}
 
 - (void)dealloc
 {
-    [self removeSelf];
 }
 
-- (void)viewDidLoad
+- (void)layoutSubviews
 {
-    [super viewDidLoad];
-    
-    [self.webView removeFromSuperview];
-    
-    self.view = self.webView;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    viewAppeared = YES;
-    
-    [self layoutView];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    
-    viewAppeared = NO;
+    self.view.frame = CGRectMake((targetView.width - self.layerOption.width)/2, (targetView.height - self.layerOption.height)/2, self.layerOption.width, self.layerOption.height);
 }
 
 // ================================================================================================
 //  Public
 // ================================================================================================
 
-- (BOOL)closeAnimated:(BOOL)animated completion:(void (^)(void))completion
-{
-    [self removeSelf];
-    
-    return [super closeAnimated:animated completion:completion];
-}
+#pragma mark - Public getter/setter
 
 - (void)setLayerOption:(LayerOption)layerOption
 {
@@ -115,8 +105,10 @@ BOOL LayerOptionEquals(LayerOption layerOption1, LayerOption layerOption2)
     _layerOption = layerOption;
     layerOptionChanged = YES;
     
-    [self layerOptionChanged];
+    [self invalidateProperties];
 }
+
+#pragma mark - Public methods
 
 - (void)showInView:(UIView *)view
 {
@@ -127,25 +119,26 @@ BOOL LayerOptionEquals(LayerOption layerOption1, LayerOption layerOption2)
     
     if (targetView)
     {
-        if (_layerOption.modal)
+        if (self.layerOption.modal)
         {
             _modalView = [[UIView alloc] init];
             _modalView.alpha = 0;
+            _modalView.autoresizingMask = UIViewAutoresizingFlexibleAll;
             _modalView.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
-            _modalView.frame = CGRectMake(0, 0, targetView.frame.size.width, targetView.frame.size.height);
+            _modalView.frame = targetView.bounds;
+            
             viewGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped)];
             
-            [view addSubview:_modalView];
-            [_modalView addGestureRecognizer:viewGestureRecognizer];
+            [targetView addSubview:self.modalView];
+            [self.modalView addGestureRecognizer:viewGestureRecognizer];
         }
         
         self.view.alpha = 0;
         
-        [self layoutView];
-        [view addSubview:self.view];
+        [targetView addSubview:self.view];
         
-        [UIView animateWithDuration:0.3 delay:0 options:7 << 16 animations:^(void){
-            _modalView.alpha = 1;
+        [UIView animateWithDuration:0.3 delay:0 options:animationOptions animations:^(void){
+            self.modalView.alpha = 1;
             self.view.alpha = 1;
         } completion:^(BOOL finished){
         }];
@@ -153,47 +146,24 @@ BOOL LayerOptionEquals(LayerOption layerOption1, LayerOption layerOption2)
 }
 
 // ================================================================================================
-//  Internal
+//  Private
 // ================================================================================================
 
-- (void)layerOptionChanged
-{
-    if (viewAppeared && layerOptionChanged)
-    {
-        layerOptionChanged = NO;
-        
-        [self layoutView];
-    }
-}
-
-- (void)layoutView
-{
-    self.view.frame = CGRectMake((targetView.frame.size.width - _layerOption.width)/2, (targetView.frame.size.height - _layerOption.height)/2, _layerOption.width, _layerOption.height);
-}
-
-- (void)removeSelf
-{
-    [_modalView removeFromSuperview];
-    [self.view removeFromSuperview];
-    [self removeViewGestureRecognizer];
-    
-    targetView = nil;
-    _modalView = nil;
-}
+#pragma mark - Private methods
 
 - (void)removeViewGestureRecognizer
 {
-    [_modalView removeGestureRecognizer:viewGestureRecognizer];
+    [self.modalView removeGestureRecognizer:viewGestureRecognizer];
     [viewGestureRecognizer removeTarget:self action:@selector(viewTapped)];
+    
     viewGestureRecognizer = nil;
 }
 
-// ================================================================================================
-//  Selector
-// ================================================================================================
+#pragma mark - UITapGestureRecognizer selector
 
 - (void)viewTapped
 {
     [self closeAnimated:NO];
 }
+
 @end

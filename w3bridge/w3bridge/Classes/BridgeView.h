@@ -3,6 +3,8 @@
 //  w3bridge
 //
 //  Created by KH Kim on 2013. 12. 31..
+//  Modified by KH Kim on 2015. 2. 13..
+//      "addRightBarButtonItem" method added
 //  Copyright (c) 2013 KH Kim. All rights reserved.
 //
 
@@ -29,6 +31,7 @@
 #define bridgeViewFrameSizeChangedNotification @"bridgeViewFrameSizeChangedNotification"
 
 @interface BridgeView : CDVPlugin
+- (void)addRightBarButtonItem:(NSArray *)arguments withDict:(NSMutableDictionary*)options;
 - (void)close:(NSArray *)arguments withDict:(NSMutableDictionary*)options;
 - (void)hideActivityIndicatorView:(NSArray *)arguments withDict:(NSMutableDictionary*)options;
 - (void)openBrowser:(NSArray *)arguments withDict:(NSMutableDictionary*)options;
@@ -37,7 +40,6 @@
 - (void)popToRootView:(NSArray *)arguments withDict:(NSMutableDictionary*)options;
 - (void)pushWithURL:(NSArray *)arguments withDict:(NSMutableDictionary*)options;
 - (void)setProperty:(NSArray *)arguments withDict:(NSMutableDictionary*)options;
-- (void)setRightBarButtonItem:(NSArray *)arguments withDict:(NSMutableDictionary*)options;
 - (void)setSize:(NSArray *)arguments withDict:(NSMutableDictionary*)options;
 - (void)setTitle:(NSArray *)arguments withDict:(NSMutableDictionary*)options;
 - (void)showActivityIndicatorView:(NSArray *)arguments withDict:(NSMutableDictionary*)options;

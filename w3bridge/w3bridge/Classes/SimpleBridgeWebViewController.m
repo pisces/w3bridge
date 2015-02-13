@@ -41,7 +41,6 @@ NSString *const webViewDidStartLoadNotification = @"webViewDidStartLoadNotificat
 @private
     BOOL loadFromInternal;
     BOOL scrollEnabledChanged;
-    BOOL webViewSynthesized;
     NSString *cachedPureURLString;
     NSMutableArray *callbackQueue;
     NSMutableArray *notificationObjects;
@@ -49,7 +48,7 @@ NSString *const webViewDidStartLoadNotification = @"webViewDidStartLoadNotificat
 }
 
 // ================================================================================================
-//  Overridden: PSUIViewController
+//  Overridden: PSViewController
 // ================================================================================================
 
 #pragma mark - Overridden: PSUIViewController
@@ -63,6 +62,8 @@ NSString *const webViewDidStartLoadNotification = @"webViewDidStartLoadNotificat
 
 - (void)commitProperties
 {
+    [super commitProperties];
+    
     if (scrollEnabledChanged)
     {
         scrollEnabledChanged = NO;
@@ -81,30 +82,27 @@ NSString *const webViewDidStartLoadNotification = @"webViewDidStartLoadNotificat
     [super initProperties];
     
     self.scrollEnabled = YES;
-    _isFirstLoad = YES;
     callbackQueue = [[NSMutableArray alloc] init];
     notificationObjects = [[NSMutableArray alloc] init];
+    _isFirstLoad = YES;
+    _commandDelegate = self;
+    _sessionKey = [NSString stringWithFormat:@"%d", arc4random()];
+    
+    [self setPropertiesFromPlist];
+    [self setCookieAcceptPolicy];
 }
 
 - (void)loadView
 {
     [super loadView];
     
-    _commandDelegate = self;
-    webViewSynthesized = _webView != nil;
-    
-    if (!_sessionKey)
-        _sessionKey = [NSString stringWithFormat:@"%d", arc4random()];
-    
-    [self setUpSubviews];
-    [self setPropertiesFromPlist];
-    [self setCookieAcceptPolicy];
-    
     if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     
     if ([self respondsToSelector:@selector(setExtendedLayoutIncludesOpaqueBars:)])
         self.extendedLayoutIncludesOpaqueBars = YES;
+    
+    [self setUpSubviews];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -112,9 +110,6 @@ NSString *const webViewDidStartLoadNotification = @"webViewDidStartLoadNotificat
     [super viewWillAppear:animated];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:CDVPluginViewWillAppearNotification object:nil];
-    
-    if (!webViewSynthesized)
-        _webView.frame = self.view.bounds;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -251,8 +246,8 @@ NSString *const webViewDidStartLoadNotification = @"webViewDidStartLoadNotificat
     [callbackQueue removeAllObjects];
     [self removeNotifications];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [_webView loadHTMLString:@"" baseURL:nil];
-    [_webView removeFromSuperview];
+    [self.webView loadHTMLString:@"" baseURL:nil];
+    [self.webView removeFromSuperview];
     
     callbackQueue = nil;
     notificationObjects = nil;
@@ -274,6 +269,7 @@ NSString *const webViewDidStartLoadNotification = @"webViewDidStartLoadNotificat
     {
         NSString *objectString = object ? [object JSONString] : @"";
         NSString *script = [functionName stringByAppendingFormat:@"(%@);", objectString];
+        
         return [self.webView stringByEvaluatingJavaScriptFromString:script];
     }
     return nil;
@@ -281,31 +277,32 @@ NSString *const webViewDidStartLoadNotification = @"webViewDidStartLoadNotificat
 
 - (NSInteger)executeQueuedCommands
 {
-    NSString* queuedCommandsJSON = [_webView stringByEvaluatingJavaScriptFromString:@"Cordova.getAndClearQueuedCommands()"];
-    NSArray* queuedCommands = [queuedCommandsJSON objectFromJSONString];
-    for (NSString* commandJson in queuedCommands) {
-        if(![_commandDelegate execute:
-             [CDVInvokedUrlCommand commandFromObject:
-              [commandJson mutableObjectFromJSONString]]])
+    NSString *queuedCommandsJSON = [_webView stringByEvaluatingJavaScriptFromString:@"Cordova.getAndClearQueuedCommands()"];
+    NSArray *queuedCommands = [queuedCommandsJSON objectFromJSONString];
+    
+    for (NSString *commandJson in queuedCommands)
+    {
+        if (![self.commandDelegate execute:[CDVInvokedUrlCommand commandFromObject:[commandJson mutableObjectFromJSONString]]])
 		{
 #if DEBUG
 			NSLog(@"FAILED pluginJSON = %@",commandJson);
 #endif
 		}
     }
+    
     return [queuedCommands count];
 }
 
 - (void)flushCommandQueue
 {
-    [_webView stringByEvaluatingJavaScriptFromString:@"Cordova.commandQueueFlushing = true"];
+    [self.webView stringByEvaluatingJavaScriptFromString:@"Cordova.commandQueueFlushing = true"];
 	
     NSInteger numExecutedCommands = 0;
     do {
         numExecutedCommands = [self executeQueuedCommands];
     } while (numExecutedCommands != 0);
 	
-    [_webView stringByEvaluatingJavaScriptFromString:@"Cordova.commandQueueFlushing = false"];
+    [self.webView stringByEvaluatingJavaScriptFromString:@"Cordova.commandQueueFlushing = false"];
 }
 
 - (void)load
@@ -313,7 +310,7 @@ NSString *const webViewDidStartLoadNotification = @"webViewDidStartLoadNotificat
     if ([self.exceptionViewController checkVisibility])
         return;
     
-    if (_destination && _webView)
+    if (self.destination && self.webView)
     {
         loadFromInternal = YES;
         NSMutableURLRequest *request = copiedRequest ? (NSMutableURLRequest *) copiedRequest : [NSMutableURLRequest requestWithURL:_destination cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
@@ -325,8 +322,8 @@ NSString *const webViewDidStartLoadNotification = @"webViewDidStartLoadNotificat
                 [request setValue:[headers objectForKey:key] forHTTPHeaderField:key];
         }
         
-        [_webView stopLoading];
-        [_webView loadRequest:request];
+        [self.webView stopLoading];
+        [self.webView loadRequest:request];
         
         _receiveShouldStartLoading = NO;
     }
@@ -337,6 +334,7 @@ NSString *const webViewDidStartLoadNotification = @"webViewDidStartLoadNotificat
     NSString *name = [[notification.currentArguments objectAtIndex:1] JSStringValue];
     NSString *callbackString = [[notification.currentArguments objectAtIndex:2] JSStringValue];
     NSString *uniqueKey = [[notification.currentArguments objectAtIndex:3] JSStringValue];
+    
     for (NSDictionary *item in notificationObjects)
     {
         NSString *itemName = [item objectForKey:@"name"];
@@ -367,7 +365,7 @@ NSString *const webViewDidStartLoadNotification = @"webViewDidStartLoadNotificat
     BOOL noChangeURL = (!error && matches && matches.count > 0) && (pureURLString && cachedPureURLString && [pureURLString isEqualToString:cachedPureURLString]);
     BOOL isFrameLoad = ![request.URL.absoluteString isEqual:request.mainDocumentURL.absoluteString];
 #if DEBUG
-    NSLog(@"\nallowedPassingURLWithRequest: URL -> %@\nmainDocumentURL -> %@\nnavigationType -> %d\nisFrameLoad -> %d\nnoChangeUrl -> %d\ncachedPureURLString -> %@\npureURLString -> %@\n", request.URL, request.mainDocumentURL, navigationType, isFrameLoad, noChangeURL, cachedPureURLString, pureURLString);
+    NSLog(@"\nallowedPassingURLWithRequest: URL -> %@\nmainDocumentURL -> %@\nnavigationType -> %tu\nisFrameLoad -> %d\nnoChangeUrl -> %d\ncachedPureURLString -> %@\npureURLString -> %@\n", request.URL, request.mainDocumentURL, navigationType, isFrameLoad, noChangeURL, cachedPureURLString, pureURLString);
 #endif
     if (noChangeURL)
     {
@@ -391,7 +389,7 @@ NSString *const webViewDidStartLoadNotification = @"webViewDidStartLoadNotificat
 #if DEBUG
     NSLog(@"execute command from web -> %@", command.className);
 #endif
-    if (command.className == nil || command.methodName == nil)
+    if (!command.className || !command.methodName)
         return NO;
     
     CDVPlugin* obj = [_commandDelegate getCommandInstance:command.className];
@@ -411,7 +409,8 @@ NSString *const webViewDidStartLoadNotification = @"webViewDidStartLoadNotificat
 #endif
     
     SEL selector = NSSelectorFromString(fullMethodName);
-    if ([obj respondsToSelector:selector]) {
+    if ([obj respondsToSelector:selector])
+    {
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [obj performSelector:selector withObject:command.arguments withObject:command.options];
     } else {
@@ -420,6 +419,7 @@ NSString *const webViewDidStartLoadNotification = @"webViewDidStartLoadNotificat
 #endif
         retVal = NO;
     }
+    
     return retVal;
 }
 
@@ -457,50 +457,52 @@ NSString *const webViewDidStartLoadNotification = @"webViewDidStartLoadNotificat
     host_size = sizeof(vm_statistics_data_t) / sizeof(integer_t);
     host_page_size(host_port, &pagesize);
     vm_statistics_data_t vm_stat;
-    if (host_statistics(host_port, HOST_VM_INFO, (host_info_t)&vm_stat, &host_size) != KERN_SUCCESS) {
+    
+    if (host_statistics(host_port, HOST_VM_INFO, (host_info_t)&vm_stat, &host_size) != KERN_SUCCESS)
+    {
         NSLog(@"Failed to fetch vm statistics");
         return 0;
     }
-    /* Stats in bytes */
-    natural_t mem_free = (natural_t) (vm_stat.free_count * pagesize);
     
-    return mem_free;
+    return (natural_t) (vm_stat.free_count * pagesize);
 }
 
 - (id)getCommandInstance:(NSString *)pluginName
 {
-    NSString* className = [_pluginsMap objectForKey:[pluginName lowercaseString]];
+    NSString *className = [self.pluginsMap objectForKey:[pluginName lowercaseString]];
     
-    if (className == nil)
+    if (!className)
         return nil;
     
-    id obj = [_pluginObjects objectForKey:className];
+    id obj = [self.pluginObjects objectForKey:className];
+    
     if (!obj)
     {
-        NSDictionary* classSettings = [_settings objectForKey:className];
+        NSDictionary* classSettings = [self.settings objectForKey:className];
 		
-        if (classSettings) {
-            obj = [[NSClassFromString(className) alloc] initWithWebView:_webView settings:classSettings];
-        } else {
-            obj = [[NSClassFromString(className) alloc] initWithWebView:_webView];
-        }
+        if (classSettings)
+            obj = [[NSClassFromString(className) alloc] initWithWebView:self.webView settings:classSettings];
+        else
+            obj = [[NSClassFromString(className) alloc] initWithWebView:self.webView];
         
-        if ([obj isKindOfClass:[CDVPlugin class]] && [obj respondsToSelector:@selector(setViewController:)]) {
+        if ([obj isKindOfClass:[CDVPlugin class]] && [obj respondsToSelector:@selector(setViewController:)])
             [obj setViewController:self];
-        }
         
-        if ([obj isKindOfClass:[CDVPlugin class]] && [obj respondsToSelector:@selector(setCommandDelegate:)]) {
-            [obj setCommandDelegate:_commandDelegate];
-        }
+        if ([obj isKindOfClass:[CDVPlugin class]] && [obj respondsToSelector:@selector(setCommandDelegate:)])
+            [obj setCommandDelegate:self.commandDelegate];
         
-        if (obj != nil) {
-            [_pluginObjects setObject:obj forKey:className];
-        } else {
+        if (obj)
+        {
+            [self.pluginObjects setObject:obj forKey:className];
+        }
+        else
+        {
 #if DEBUG
             NSLog(@"CDVPlugin class %@ (pluginName: %@) does not exist.", className, pluginName);
 #endif
         }
     }
+    
     return obj;
 }
 
@@ -531,17 +533,18 @@ NSString *const webViewDidStartLoadNotification = @"webViewDidStartLoadNotificat
 
 - (void)setCookieAcceptPolicy
 {
-    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    [cookieStorage setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
 }
 
 - (void)setPropertiesFromPlist
 {
     _pluginObjects = [[NSMutableDictionary alloc] init];
     
-    NSString* appPlistName = @"w3bridge";
+    NSString *appPlistName = @"w3bridge";
     NSDictionary* bridgePlist = [[NSBundle mainBundle] dictionaryWithPlistName:appPlistName];
-    if (bridgePlist == nil) {
+    
+    if (!bridgePlist)
+    {
 #if DEBUG
         NSLog(@"WARNING: %@.plist is missing.", appPlistName);
 #endif
@@ -550,8 +553,10 @@ NSString *const webViewDidStartLoadNotification = @"webViewDidStartLoadNotificat
     
     _settings = [[NSDictionary alloc] initWithDictionary:bridgePlist];
 	
-    NSDictionary* pluginsDict = [_settings objectForKey:@"Plugins"];
-    if (pluginsDict == nil) {
+    NSDictionary *pluginsDict = [_settings objectForKey:@"Plugins"];
+    
+    if (!pluginsDict)
+    {
 #if DEBUG
         NSString* pluginsKey = @"Plugins";
         NSLog(@"WARNING: %@ key in %@.plist is missing! Cordova will not work, you need to have this key.", pluginsKey, appPlistName);
@@ -571,6 +576,7 @@ NSString *const webViewDidStartLoadNotification = @"webViewDidStartLoadNotificat
         _webView.backgroundColor = [UIColor whiteColor];
         _webView.scalesPageToFit = YES;
         _webView.delegate = self;
+        _webView.frame = self.view.bounds;
         
         [self.view addSubview:_webView];
     }
@@ -583,7 +589,7 @@ NSString *const webViewDidStartLoadNotification = @"webViewDidStartLoadNotificat
     
     for (UIView *wview in [[_webView.subviews objectAtIndex:0] subviews])
     {
-        if([wview isKindOfClass:[UIImageView class]])
+        if ([wview isKindOfClass:[UIImageView class]])
             wview.hidden = YES;
     }
     

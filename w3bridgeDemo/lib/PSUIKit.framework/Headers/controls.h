@@ -25,12 +25,14 @@
 #ifndef PSUIKit_controls_h
 #define PSUIKit_controls_h
 
+#import "PSAlertView.h"
 #import "PSAttributedDivisionLabel.h"
 #import "PSBadge.h"
 #import "PSButtonBar.h"
 #import "PSDatePickerActionSheet.h"
 #import "PSGridView.h"
 #import "PSLinedBackgroundView.h"
+#import "PSPreloader.h"
 #import "PSToastView.h"
 
 #endif

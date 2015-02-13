@@ -509,7 +509,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "SIMULATOR_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}-Simulator.a\" &&\nDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}-Device.a\" &&\nBUNDLE_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}-Bundle.bundle\" &&\nUNIVERSAL_LIBRARY_DIR=\"/Users/Shared/Frameworks\" &&\nUNIVERSAL_LIBRARY_PATH=\"${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_NAME}\" &&\nFRAMEWORK=\"${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_NAME}.framework\" &&\n\n# Create framework directory structure.\nrm -rf \"${FRAMEWORK}\" &&\nmkdir -p \"${UNIVERSAL_LIBRARY_DIR}\" &&\nmkdir -p \"${FRAMEWORK}/Headers\" &&\n\n# Generate universal binary for the device and simulator.\nlipo \"${SIMULATOR_LIBRARY_PATH}\" \"${DEVICE_LIBRARY_PATH}\" -create -output \"${UNIVERSAL_LIBRARY_PATH}\" &&\n\n# Move files to appropriate locations in framework paths.\nmv \"${UNIVERSAL_LIBRARY_PATH}\" \"${FRAMEWORK}\" &&\n\n# Copy header files from project\ncd \"${SRCROOT}/${PRODUCT_NAME}/Classes/\" &&\nfind . -name '*.h' | cpio -pdm \"${FRAMEWORK}/Headers\"\n\ncp -r \"${SRCROOT}/www\" \"${FRAMEWORK}\" &&\ncp -r \"${BUNDLE_PATH}\" \"${FRAMEWORK}\"";
+			shellScript = "SIMULATOR_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}-Simulator.a\" &&\nDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}-Device.a\" &&\nBUNDLE_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}-Bundle.bundle\" &&\nUNIVERSAL_LIBRARY_DIR=\"/Users/Shared/Frameworks\" &&\nUNIVERSAL_LIBRARY_PATH=\"${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_NAME}\" &&\nFRAMEWORK=\"${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_NAME}.framework\" &&\n\n# Create framework directory structure.\nrm -rf \"${FRAMEWORK}\" &&\nmkdir -p \"${UNIVERSAL_LIBRARY_DIR}\" &&\nmkdir -p \"${FRAMEWORK}/Headers\" &&\n\n# Generate universal binary for the device and simulator.\nlipo \"${SIMULATOR_LIBRARY_PATH}\" \"${DEVICE_LIBRARY_PATH}\" -create -output \"${UNIVERSAL_LIBRARY_PATH}\" &&\n\n# Move files to appropriate locations in framework paths.\nmv \"${UNIVERSAL_LIBRARY_PATH}\" \"${FRAMEWORK}\" &&\n\n# Copy header files from project\ncd \"${SRCROOT}/${PRODUCT_NAME}/Classes/\" &&\nfind . -name '*.h' | cpio -pdm \"${FRAMEWORK}/Headers\"\n\ncp -r \"${SRCROOT}/www\" \"${FRAMEWORK}\" &&\ncp -r \"${BUNDLE_PATH}\" \"${UNIVERSAL_LIBRARY_DIR}\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -867,6 +867,7 @@
 				235D836A1A8898AB00262BCF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		237AB033187C2EE200BD906B /* Build configuration list for PBXNativeTarget "w3bridge-Simulator" */ = {
 			isa = XCConfigurationList;

@@ -3,6 +3,8 @@
 //  w3bridge
 //
 //  Created by KH Kim on 2013. 12. 31..
+//  Modified by KH Kim on 2015. 2. 13..
+//      "addRightBarButtonItem" method added
 //  Copyright (c) 2013 KH Kim. All rights reserved.
 //
 
@@ -40,6 +42,8 @@
 //  Overridden: CDVPlugin
 // ================================================================================================
 
+#pragma mark - Overridden: CDVPlugin
+
 - (void)dealloc
 {
     bridgeViewOption = nil;
@@ -48,6 +52,18 @@
 // ================================================================================================
 //  Public
 // ================================================================================================
+
+#pragma mark - Public methods
+
+- (void)addRightBarButtonItem:(NSArray *)arguments withDict:(NSMutableDictionary *)options
+{
+    NSString *text = [[arguments objectAtIndex:1] JSStringValue];
+    NSString *imageName = [[arguments objectAtIndex:2] JSStringValue];
+    NSString *callbackFunctionName = [[arguments objectAtIndex:3] JSStringValue];
+    UIBridgeWebViewController *controller = (UIBridgeWebViewController *) self.viewController;
+    
+    [controller addRightBarButtonItemWithText:text imageName:imageName callbackFunctionName:callbackFunctionName];
+}
 
 - (void)close:(NSArray *)arguments withDict:(NSMutableDictionary*)options
 {
@@ -83,7 +99,7 @@
     }
 }
 
-- (void)popWithURL:(NSArray *)arguments withDict:(NSMutableDictionary*)options
+- (void)popWithURL:(NSArray *)arguments withDict:(NSMutableDictionary *)options
 {
     UIBridgeWebViewController *bridgeController = [[UIBridgeWebViewController alloc] init];
     bridgeController.leftBarButtonItemType = LeftBarButtonItemTypeClose;
@@ -128,14 +144,6 @@
         NSString *key = [name isEqualToString:@"landscape"] ? @"interfaceOrientationState" : name;
         [self.viewController setValue:[options objectForKey:name] forKey:key];
     }
-}
-
-- (void)setRightBarButtonItem:(NSArray *)arguments withDict:(NSMutableDictionary *)options
-{
-    NSString *text = [[arguments objectAtIndex:1] JSStringValue];
-    NSString *buttonClickCallBack = [[arguments objectAtIndex:2] JSStringValue];
-    UIBridgeWebViewController *controller = (UIBridgeWebViewController *) self.viewController;
-    [controller setRightBarButtonItemWithText:text buttonClickCallBack:buttonClickCallBack];
 }
 
 - (void)setSize:(NSArray *)arguments withDict:(NSMutableDictionary *)options

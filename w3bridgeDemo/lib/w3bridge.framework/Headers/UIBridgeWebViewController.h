@@ -38,7 +38,7 @@
 #define viewWillAppearNotification @"viewWillAppear"
 #define viewWillDisappearNotification @"viewWillDisappear"
 
-@interface UIBridgeWebViewController : SimpleBridgeWebViewController <UIScrollViewDelegate>
+@interface UIBridgeWebViewController : SimpleBridgeWebViewController
 @property (nonatomic) BOOL closeEnabled;
 @property (nonatomic) BOOL hidesBottomBarWhenPushed;
 @property (nonatomic) BOOL showModalWhenFirstLoading;

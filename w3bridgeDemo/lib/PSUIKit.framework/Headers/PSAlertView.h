@@ -34,7 +34,7 @@
 
 typedef void (^PSAlertViewDismission)(PSAlertView *alertView, NSInteger buttonIndex, BOOL cancel);
 
-@interface PSAlertView : PSView <UIButtonBarDelegate>
+@interface PSAlertView : PSView <PSButtonBarDelegate>
 @property (nonatomic) CGFloat buttonHeight;
 @property (nonatomic) CGFloat headerViewHeight;
 @property (nonatomic) CGPadding contentPadding;
