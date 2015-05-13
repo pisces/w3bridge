@@ -10,29 +10,29 @@
 	<string>w3bridge</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>C24C074C-58D1-4A8B-9E1F-FBD52746DB55</key>
+		<key>7D1B7B52FE949B5C9A2F7370A2D54E375906B0EF</key>
 		<string>https://github.com/pisces/w3bridge.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>w3bridge.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>C24C074C-58D1-4A8B-9E1F-FBD52746DB55</key>
+		<key>7D1B7B52FE949B5C9A2F7370A2D54E375906B0EF</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/pisces/w3bridge.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>C24C074C-58D1-4A8B-9E1F-FBD52746DB55</string>
+	<string>7D1B7B52FE949B5C9A2F7370A2D54E375906B0EF</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>C24C074C-58D1-4A8B-9E1F-FBD52746DB55</string>
+			<string>7D1B7B52FE949B5C9A2F7370A2D54E375906B0EF</string>
 			<key>IDESourceControlWCCName</key>
 			<string>w3bridge</string>
 		</dict>
